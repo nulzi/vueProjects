@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vanilla</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <header>
+        <h2 class="container">검색</h2>
+      </header>
+
+      <div class="container">
+        <form>
+          <input type="text" name="sbar" placeholder="검색어를 입력하세요" />
+          <button type="reset" class="btn-reset"></button>
+        </form>
+        <div class="content">
+          <ul id="tabs" class="tabs">
+            <li>추천검색어</li>
+            <li>추천검색어</li>
+          </ul>
+          <div id="search-keyword"></div>
+          <div id="search-history"></div>
+          <div id="search-result"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
