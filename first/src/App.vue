@@ -1,29 +1,32 @@
 <template>
-  <!-- <v-app>
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app> -->
-  <div>
-    <h1>{{ title }}</h1>
-    <p>{{ count }}</p>
-    <button @click="count++">add</button>
-    <HomeComponent />
-    <AppStatus />
-  </div>
+  <v-app>
+    <!-- <v-content> -->
+    <div class="content">
+      <User />
+      <!-- </v-content> -->
+    </div>
+  </v-app>
 </template>
 
 <script>
-import HomeComponent from "./Home.vue";
+import User from "./components/User.vue";
 
 export default {
   name: "App",
   components: {
-    HomeComponent,
+    User,
   },
-  data: () => ({
-    title: "안녕하세요",
-    count: 1,
-  }),
+  data: () => ({}),
 };
 </script>
+
+<style>
+/* .v-content {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+} */
+.content {
+  padding: 1% 10%;
+}
+</style>
