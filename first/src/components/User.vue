@@ -5,12 +5,23 @@
     <v-btn @click="changeName()"> 이름 변경 </v-btn>
     <hr />
     <v-layout row wrap>
-      <!-- <v-flex> -->
-      <UserDetail :nameOfChild="name"></UserDetail>
-      <!-- </v-flex> -->
-      <!-- <v-flex> -->
-      <UserEdit />
-      <!-- </v-flex> -->
+      <v-flex xs12 sm6>
+        <UserDetail
+          :_name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+        ></UserDetail>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <UserEdit
+          :_name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+          @child="parents"
+        ></UserEdit>
+      </v-flex>
     </v-layout>
   </div>
 </template>
@@ -27,11 +38,22 @@ export default {
   data() {
     return {
       name: "뷰제이에스",
+      address: "Uiwang",
+      phone: "1234-5678",
+      hasDog: true,
     };
   },
   methods: {
     changeName() {
       this.name = "Nulzi";
+    },
+    parents(user) {
+      //user = {name, address, phone, hasDog}
+      this.name = user.name;
+      this.address = user.address;
+      this.phone = user.phone;
+      this.hasDog = user.hasDog;
+      console.log("부모가 받았어");
     },
   },
 };
