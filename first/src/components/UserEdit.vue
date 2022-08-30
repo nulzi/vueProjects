@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     changeUser() {
-      console.log(this.user);
       this.$emit("child", this.user); //child(this.user)를 부모한테 보내는 것과 비슷하다
+      this.emitter.emit("userWasEdited", new Date());
     },
   },
 };

@@ -27,6 +27,12 @@
           {{ hasDogKr }}
         </v-list-item-content>
       </v-list-item>
+      <v-list-item>
+        <v-list-item-content>수정일자:</v-list-item-content>
+        <v-list-item-content class="align-end">
+          {{ editedDate }}
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </div>
 </template>
@@ -40,7 +46,14 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      editedDate: null,
+    };
+  },
+  created() {
+    this.emitter.on("userWasEdited", (date) => {
+      this.editedDate = date;
+    });
   },
 };
 </script>
