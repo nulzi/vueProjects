@@ -6,7 +6,9 @@
     <hr />
     <v-layout row wrap>
       <!-- <v-flex> -->
-      <UserDetail :nameOfChild="name" />
+      <UserDetail
+        :nameOfChild="{ name: 'Nulzi', familyName: 'Kim' }"
+      ></UserDetail>
       <!-- </v-flex> -->
       <!-- <v-flex> -->
       <UserEdit />

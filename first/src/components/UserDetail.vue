@@ -2,13 +2,14 @@
   <div class="red lighten-3 pa-3">
     <h3>자세한 회원 정보를 확인합니다.</h3>
     <p>상세사항</p>
-    <p>이름: {{ nameOfChild }}</p>
+    <p>이름: {{ nameOfChild.name }}</p>
+    <p>성: {{ nameOfChild.familyName }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["nameOfChild"],
+  props: { nameOfChild: Object },
   data() {
     return {};
   },
