@@ -2,14 +2,71 @@
   <div>
     <h2>주사위 게임</h2>
     <p>사용자: {{ username }}</p>
-    <div class="dicecontainer">
-      <img src="../../assets/dice1.png" alt="dice1" width="50" height="50" />
-      <img src="../../assets/dice1.png" alt="dice2" width="50" height="50" />
-      <img src="../../assets/dice1.png" alt="dice3" width="50" height="50" />
-      <img src="../../assets/dice1.png" alt="dice4" width="50" height="50" />
-      <img src="../../assets/dice1.png" alt="dice5" width="50" height="50" />
+    <div class="menu">
+      <button @click="reset">reset</button>
+      <button
+        @click="rollDice"
+        :disabled="
+          dice1[1] === 0 ||
+          dice2[1] === 0 ||
+          dice3[1] === 0 ||
+          dice4[1] === 0 ||
+          dice5[1] === 0
+        "
+      >
+        전체 굴리기
+      </button>
     </div>
-    <button>주사위 굴리기</button>
+    <div class="dicecontainer">
+      <img
+        :src="require(`../../assets/dice${dice1[0]}.png`)"
+        alt="dice1"
+        width="50"
+        height="50"
+      />
+      <img
+        :src="require(`../../assets/dice${dice2[0]}.png`)"
+        alt="dice2"
+        width="50"
+        height="50"
+      />
+      <img
+        :src="require(`../../assets/dice${dice3[0]}.png`)"
+        alt="dice3"
+        width="50"
+        height="50"
+      />
+      <img
+        :src="require(`../../assets/dice${dice4[0]}.png`)"
+        alt="dice4"
+        width="50"
+        height="50"
+      />
+      <img
+        :src="require(`../../assets/dice${dice5[0]}.png`)"
+        alt="dice5"
+        width="50"
+        height="50"
+      />
+    </div>
+    <div class="btncontainer">
+      <button @click="rollDice1" :disabled="dice1[1] === 0">
+        굴리기:{{ dice1[1] }}
+      </button>
+      <button @click="rollDice2" :disabled="dice2[1] === 0">
+        굴리기:{{ dice2[1] }}
+      </button>
+      <button @click="rollDice3" :disabled="dice3[1] === 0">
+        굴리기:{{ dice3[1] }}
+      </button>
+      <button @click="rollDice4" :disabled="dice4[1] === 0">
+        굴리기:{{ dice4[1] }}
+      </button>
+      <button @click="rollDice5" :disabled="dice5[1] === 0">
+        굴리기:{{ dice5[1] }}
+      </button>
+    </div>
+    <div class="usercontainer"></div>
   </div>
 </template>
 
@@ -18,7 +75,48 @@ export default {
   data() {
     return {
       username: null,
+      dice1: [1, 3],
+      dice2: [1, 3],
+      dice3: [1, 3],
+      dice4: [1, 3],
+      dice5: [1, 3],
     };
+  },
+  methods: {
+    reset() {
+      this.dice1 = [1, 3];
+      this.dice2 = [1, 3];
+      this.dice3 = [1, 3];
+      this.dice4 = [1, 3];
+      this.dice5 = [1, 3];
+    },
+    rollDice() {
+      this.rollDice1();
+      this.rollDice2();
+      this.rollDice3();
+      this.rollDice4();
+      this.rollDice5();
+    },
+    rollDice1() {
+      this.dice1[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.dice1[1] -= 1;
+    },
+    rollDice2() {
+      this.dice2[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.dice2[1] -= 1;
+    },
+    rollDice3() {
+      this.dice3[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.dice3[1] -= 1;
+    },
+    rollDice4() {
+      this.dice4[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.dice4[1] -= 1;
+    },
+    rollDice5() {
+      this.dice5[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.dice5[1] -= 1;
+    },
   },
   created() {
     this.emitter.on("userName", (name) => {
@@ -34,11 +132,23 @@ h2 {
 }
 p {
   margin-top: 0px;
+  margin-bottom: 10px;
+}
+.menu button {
+  margin: 0px 10px;
 }
 .dicecontainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   margin: 10px 0px;
+}
+.btncontainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+}
+.btncontainer button {
+  width: 70px;
 }
 </style>

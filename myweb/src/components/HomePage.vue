@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      page: 0,
+      page: 1,
       year: new Date().getFullYear(),
       month: new Date().getMonth() + 1,
       date: new Date().getDate(),
