@@ -135,11 +135,6 @@ export default {
       this.dice5[1] -= 1;
     },
   },
-  watch: {
-    // dice1() {
-    //   console.log("Dice1 rolled!");
-    // },
-  },
   created() {
     this.emitter.on("userName", (name) => {
       this.username = name;
