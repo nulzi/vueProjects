@@ -90,6 +90,18 @@ export default {
       this.dice4 = [1, 3];
       this.dice5 = [1, 3];
     },
+    diceAnimation(dice) {
+      let count = 0;
+      const timer = setInterval(() => {
+        // console.log("Dice1 rolled!");
+        const randomDiceNum = Math.floor(Math.random() * 6) + 1;
+        dice[0] = randomDiceNum;
+        if (count >= 6) {
+          clearInterval(timer);
+        }
+        count += 1;
+      }, 150);
+    },
     rollDice() {
       this.rollDice1();
       this.rollDice2();
@@ -98,25 +110,35 @@ export default {
       this.rollDice5();
     },
     rollDice1() {
-      this.dice1[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.diceAnimation(this.dice1);
+      // this.dice1[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       this.dice1[1] -= 1;
     },
     rollDice2() {
-      this.dice2[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.diceAnimation(this.dice2);
+      // this.dice2[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       this.dice2[1] -= 1;
     },
     rollDice3() {
-      this.dice3[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.diceAnimation(this.dice3);
+      // this.dice3[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       this.dice3[1] -= 1;
     },
     rollDice4() {
-      this.dice4[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.diceAnimation(this.dice4);
+      // this.dice4[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       this.dice4[1] -= 1;
     },
     rollDice5() {
-      this.dice5[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      this.diceAnimation(this.dice5);
+      // this.dice5[0] = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       this.dice5[1] -= 1;
     },
+  },
+  watch: {
+    // dice1() {
+    //   console.log("Dice1 rolled!");
+    // },
   },
   created() {
     this.emitter.on("userName", (name) => {
@@ -139,6 +161,23 @@ h2 {
 p {
   margin-top: 0px;
   margin-bottom: 10px;
+}
+button {
+  color: #fff;
+  background-color: #161f27;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover {
+  background: #324759;
+}
+button:focus {
+  box-shadow: 0 0 0 2px rgba(0, 150, 191, 0.67);
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 .menu button {
   margin: 0px 10px;
