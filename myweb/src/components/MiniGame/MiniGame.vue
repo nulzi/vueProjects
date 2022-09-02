@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="localcontainer">
     <h2>주사위 게임</h2>
     <p>사용자: {{ username }}</p>
     <div class="menu">
@@ -19,31 +19,31 @@
     </div>
     <div class="dicecontainer">
       <img
-        :src="require(`../../assets/dice${dice1[0]}.png`)"
+        :src="require(`../../assets/img/dice${dice1[0]}.png`)"
         alt="dice1"
         width="50"
         height="50"
       />
       <img
-        :src="require(`../../assets/dice${dice2[0]}.png`)"
+        :src="require(`../../assets/img/dice${dice2[0]}.png`)"
         alt="dice2"
         width="50"
         height="50"
       />
       <img
-        :src="require(`../../assets/dice${dice3[0]}.png`)"
+        :src="require(`../../assets/img/dice${dice3[0]}.png`)"
         alt="dice3"
         width="50"
         height="50"
       />
       <img
-        :src="require(`../../assets/dice${dice4[0]}.png`)"
+        :src="require(`../../assets/img/dice${dice4[0]}.png`)"
         alt="dice4"
         width="50"
         height="50"
       />
       <img
-        :src="require(`../../assets/dice${dice5[0]}.png`)"
+        :src="require(`../../assets/img/dice${dice5[0]}.png`)"
         alt="dice5"
         width="50"
         height="50"
@@ -127,6 +127,12 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
+.localcontainer,
+.menu button,
+.btncontainer button {
+  font-family: "Galmuri14";
+}
 h2 {
   margin-bottom: 0px;
 }
@@ -138,14 +144,13 @@ p {
   margin: 0px 10px;
 }
 .dicecontainer {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
   margin: 10px 0px;
 }
+.dicecontainer,
 .btncontainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  padding: 0px 220px;
   justify-items: center;
 }
 .btncontainer button {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>자기소개서</h1>
+    <h2>자기소개서</h2>
     <ul>
       <li>이름: {{ name }}</li>
       <li>나이: {{ age }}</li>
@@ -25,7 +25,10 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
 li {
   text-align: left;
+  font-family: "Galmuri14";
+  font-size: 25px;
 }
 </style>
