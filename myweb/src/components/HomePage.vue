@@ -8,8 +8,10 @@
       ></NavBar>
     </header>
     <AdPageL class="sidebar-a"></AdPageL>
-    <Main class="main" v-show="page"></Main>
-    <MiniGame class="main" v-show="!page"></MiniGame>
+    <div class="main wrapper">
+      <Main v-show="page"></Main>
+      <MiniGame v-show="!page"></MiniGame>
+    </div>
     <AdPageR class="sidebar-b"></AdPageR>
     <footer class="global-footer">
       <Footer></Footer>
@@ -85,6 +87,10 @@ export default {
   grid-area: main;
   background-color: rgba(211, 211, 211, 0.432);
   margin: 0px 20px;
+}
+.wrapper{
+  display: inline-block;
+  height: auto;
 }
 .sidebar-b {
   display: block;

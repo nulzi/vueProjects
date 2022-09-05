@@ -66,12 +66,19 @@
         굴리기:{{ dice5[1] }}
       </button>
     </div>
-    <div class="usercontainer"></div>
+    <div class="scorewrapper">
+      <ScoreTable></ScoreTable>
+    </div>
   </div>
 </template>
 
 <script>
+import ScoreTable from './ScoreTable1.vue'
+
 export default {
+  components:{
+    ScoreTable,
+  },
   data() {
     return {
       username: null,
@@ -145,6 +152,11 @@ export default {
 
 <style scoped>
 @import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
+.localcontainer{
+  display: inline-block;
+  overflow: hidden;
+  height: 700px;
+}
 .localcontainer,
 .menu button,
 .btncontainer button {
@@ -189,5 +201,15 @@ button:disabled {
 }
 .btncontainer button {
   width: 70px;
+}
+.scorewrapper{
+  position: absolute;
+  left:50%;
+  transform: translate(-50%);
+  margin-top: 50px;
+  background-color: burlywood;
+  width: 320px;
+  height: 433px;
+  padding: 10px;
 }
 </style>
