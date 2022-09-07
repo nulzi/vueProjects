@@ -98,8 +98,9 @@ export default {};
 }
 .navbarcontainer {
   flex-flow: row nowrap;
+  max-width: 1110px;
   padding: 0px 15px;
-  margin: 0px 57px;
+  margin: 0px auto;
 }
 button {
   margin: 5px;

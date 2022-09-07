@@ -1,14 +1,20 @@
 <template>
   <div class="mainpage">
     <Title></Title>
+    <Filter></Filter>
+    <StatTable></StatTable>
   </div>
 </template>
 
 <script>
 import Title from "./main/TitleBar.vue";
+import Filter from './main/FilterBlock.vue'
+import StatTable from './main/StatTableContainer.vue'
 export default {
   components: {
     Title,
+    Filter,
+    StatTable,
   },
 };
 </script>
@@ -16,9 +22,10 @@ export default {
 <style scoped>
 .mainpage {
   background-color: #313236;
-  width: 936px;
+  max-width: 1110px;
   height: 1000px;
   color: rgb(230, 230, 230);
   padding: 0px 15px;
+  justify-self: center;
 }
 </style>
