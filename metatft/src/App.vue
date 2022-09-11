@@ -4,6 +4,7 @@
     <Sidebar class="sidebar-a"></Sidebar>
     <Main class="main"></Main>
     <Sidebar class="sidebar-b"></Sidebar>
+    <Footer class="footer"></Footer>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import Header from "./components/HeaderBar.vue";
 import Sidebar from "./components/SideBar.vue";
 import Main from "./components/MainPage.vue";
+import Footer from "./components/FooterPage.vue";
 
 export default {
   name: "App",
@@ -18,6 +20,7 @@ export default {
     Header,
     Sidebar,
     Main,
+    Footer,
   },
 };
 </script>
