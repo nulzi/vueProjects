@@ -45,7 +45,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    showModal() {
+      console.log("showModal()");
+    },
+  },
+};
 </script>
 
 <style scoped>
