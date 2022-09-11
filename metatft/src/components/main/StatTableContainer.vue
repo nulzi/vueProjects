@@ -105,6 +105,9 @@ export default {};
   background-color: darkcyan;
   margin: 0px 0px 16px 0px;
 }
+table {
+  border-spacing: 0;
+}
 th,
 td {
   padding: 6.4px 9.6px;
