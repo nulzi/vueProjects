@@ -46,12 +46,15 @@ export default {
 }
 .sidebar-a {
   grid-area: a;
+  padding: 15px;
 }
-.main-content {
+.main {
   grid-area: main;
+  padding: 0px 15px;
 }
 .sidebar-b {
   grid-area: b;
+  padding: 15px;
 }
 .footer {
   grid-area: footer;

@@ -12,6 +12,5 @@ export default {};
   max-width: 163px;
   min-width: 0px;
   height: 1000px;
-  padding: 15px;
 }
 </style>

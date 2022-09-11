@@ -25,7 +25,6 @@ export default {
   max-width: 1110px;
   height: 1000px;
   color: rgb(230, 230, 230);
-  padding: 0px 15px;
   justify-self: center;
 }
 </style>
