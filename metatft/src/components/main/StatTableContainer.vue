@@ -43,7 +43,7 @@ export default {};
 .test {
   display: flex;
   background-color: skyblue;
-  max-width: 1110px;
+  max-width: 1140px;
 }
 .test2 {
   display: flex;

@@ -30,6 +30,7 @@ export default {
     height: 32px;
     margin-bottom: 5px;
     justify-content: space-between;
+  max-width: 1140px;
 }
 .test2{
     display: flex;
