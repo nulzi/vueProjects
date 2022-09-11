@@ -24,11 +24,20 @@
           <th><div class="table_frequency">Frequency</div></th>
         </thead>
         <tbody>
-          <td><div>Item</div></td>
-          <td><div>S</div></td>
-          <td><div>3.53</div></td>
-          <td><div>22.9%</div></td>
-          <td><div>24,258 (2.5%)</div></td>
+          <td>
+            <div class="table_item">
+              <img
+                @click="showModal"
+                src="https://cdn.metatft.com/file/metatft/set7/items/2300.png"
+                alt="itemImg"
+              />
+              <div @click="showModal" class="itemName">Scalescorn Emblem</div>
+            </div>
+          </td>
+          <td><div class="table_tier">S</div></td>
+          <td><div class="table_avg">3.53</div></td>
+          <td><div class="table_winrate">22.9%</div></td>
+          <td><div class="table_frequency">24,258 (2.5%)</div></td>
         </tbody>
       </table>
     </div>
@@ -100,16 +109,68 @@ export default {};
   text-align: center;
   font-size: 14px;
 }
-.tes3 {
-  display: flex;
+.test3 {
   background-color: darkcyan;
-  margin: 0px 0px 16px 0px;
+  margin: 0px 0px 1rem 0px;
+  width: 100%;
+  font-size: 13px;
 }
 table {
   border-spacing: 0;
+  width: 100%;
 }
 th,
 td {
-  padding: 6.4px 9.6px;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #313236;
+  border-left: 0;
+  border-right: 0;
+  margin: 0;
+}
+th .table_item {
+  min-width: 170px;
+  max-width: 170px;
+  text-align: left;
+}
+.table_tier {
+  display: flex;
+}
+.table_avg {
+}
+.table_winrate {
+}
+.table_frequency {
+  text-align: right;
+}
+td .table_item {
+  display: flex;
+  align-items: center;
+}
+td .table_item img {
+  margin: 0px 5px 0px 0px;
+  width: 32px;
+  height: 32px;
+}
+td .table_tier {
+  background-color: #ff7e83;
+  color: #111;
+  font-weight: 600;
+  font-size: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  align-items: center;
+  justify-content: center;
+}
+td .table_avg {
+  font-size: 16px;
+  color: rgb(205, 246, 127);
+}
+td .table_winrate {
+  font-size: 14px;
+}
+td .table_frequency {
+  text-align: right;
+  font-size: 14px;
 }
 </style>
