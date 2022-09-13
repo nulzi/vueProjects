@@ -1,4 +1,5 @@
 <template>
+  <Modal></Modal>
   <div class="globalcontainer">
     <Header class="header"></Header>
     <Sidebar class="sidebar-a"></Sidebar>
@@ -13,6 +14,7 @@ import Header from "./components/HeaderBar.vue";
 import Sidebar from "./components/SideBar.vue";
 import Main from "./components/MainPage.vue";
 import Footer from "./components/FooterPage.vue";
+import Modal from './components/ModalPage.vue'
 
 export default {
   name: "App",
@@ -21,6 +23,7 @@ export default {
     Sidebar,
     Main,
     Footer,
+    Modal,
   },
 };
 </script>
