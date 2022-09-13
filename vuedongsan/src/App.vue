@@ -1,4 +1,5 @@
 <template>
+  <!--모달창-->
   <div class="black-bg" v-if="hasopen == 1">
     <div class="white-bg">
       <h4>상세페이지임</h4>
@@ -54,7 +55,7 @@ export default {
   name: "App",
   data() {
     return {
-      hasopen: 0,
+      hasopen: 1,
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
       menu: ["Home", "Shop", "About"],
       num: [0, 0, 0],
@@ -99,6 +100,7 @@ body {
 div {
   box-sizing: border-box;
 }
+/*모달창*/
 .black-bg {
   width: 100%;
   height: 100%;
