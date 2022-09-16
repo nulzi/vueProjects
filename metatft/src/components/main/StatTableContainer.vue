@@ -24,20 +24,18 @@
           <th><div class="table_frequency">Frequency</div></th>
         </thead>
         <tbody>
-          <td>
-            <div class="table_item">
-              <img
-                @click="showModal"
-                src="https://cdn.metatft.com/file/metatft/set7/items/2300.png"
-                alt="itemImg"
-              />
-              <div @click="showModal" class="itemName">Scalescorn Emblem</div>
-            </div>
-          </td>
-          <td><div class="table_tier">S</div></td>
-          <td><div class="table_avg">3.53</div></td>
-          <td><div class="table_winrate">22.9%</div></td>
-          <td><div class="table_frequency">24,258 (2.5%)</div></td>
+          <tr v-for="item in items" :key="item">
+            <td>
+              <div class="table_item">
+                <img @click="showModal" :src="item.src" alt="itemImg" />
+                <div @click="showModal" class="itemName">{{ item.name }}</div>
+              </div>
+            </td>
+            <td><div class="table_tier">S</div></td>
+            <td><div class="table_avg">3.53</div></td>
+            <td><div class="table_winrate">22.9%</div></td>
+            <td><div class="table_frequency">24,258 (2.5%)</div></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -46,9 +44,51 @@
 
 <script>
 export default {
+  data() {
+    return {
+      items: [
+        {
+          name: "Zeke's Herald",
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
+          about:
+            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
+        },
+        {
+          name: "Protector's Vow",
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
+          about:
+            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
+        },
+        {
+          name: 'Shroud of Stillness',
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
+          about:
+            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
+        },
+        {
+          name: 'Sunfire Cape',
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
+          about:
+            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
+        },
+        {
+          name: 'Hand Of Justice',
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
+          about:
+            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
+        },
+        {
+          name: 'Bloodthirster',
+          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
+          about:
+            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
+        },
+      ],
+    };
+  },
   methods: {
     showModal() {
-      console.log("showModal()");
+      console.log('showModal()');
     },
   },
 };
