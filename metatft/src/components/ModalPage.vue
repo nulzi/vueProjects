@@ -1,8 +1,13 @@
 <template>
   <div class="black-bg" v-if="hasopen == 1">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <h4>아이템 설명 페이지임</h4>
+      <div class="container">
+        <div class="img">아이템 이미지</div>
+        <p>아이템 이름</p>
+      </div>
+      <p class="about">아이템 설명:</p>
+      <div></div>
       <button @click="hasopen = 0">닫기</button>
     </div>
   </div>
@@ -13,7 +18,7 @@ export default {
   data() {
     return {
       hasopen: 1,
-    }
+    };
   },
 };
 </script>
@@ -29,8 +34,28 @@ export default {
 }
 .white-bg {
   box-sizing: border-box;
-  width: 100%;
+  width: 40%;
   background: white;
   border-radius: 8px;
   padding: 20px;
-}</style>
+  margin: 0px auto;
+}
+h4 {
+  margin-top: 0px;
+}
+.white-bg h4 {
+  text-align: left;
+}
+.about {
+  text-align: left;
+}
+.img {
+  display: inline-block;
+  margin: 16px 16px;
+}
+.container {
+  display: flex;
+  align-content: center;
+  justify-content: left;
+}
+</style>
