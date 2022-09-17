@@ -219,4 +219,7 @@ td .table_frequency {
   text-align: right;
   font-size: 14px;
 }
+td .table_item:hover {
+  cursor: pointer;
+}
 </style>
