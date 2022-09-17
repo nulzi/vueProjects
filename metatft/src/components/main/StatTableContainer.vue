@@ -24,11 +24,20 @@
           <th><div class="table_frequency">Frequency</div></th>
         </thead>
         <tbody>
-          <tr v-for="item in items" :key="item">
+          <tr v-for="item in items" :key="item.name">
             <td>
               <div class="table_item">
-                <img @click="showModal" :src="item.src" alt="itemImg" />
-                <div @click="showModal" class="itemName">{{ item.name }}</div>
+                <img
+                  @click="showModal(item.src, item.name, item.about)"
+                  :src="item.src"
+                  alt="itemImg"
+                />
+                <div
+                  @click="showModal(item.src, item.name, item.about)"
+                  class="itemName"
+                >
+                  {{ item.name }}
+                </div>
               </div>
             </td>
             <td><div class="table_tier">S</div></td>
@@ -46,6 +55,7 @@
 export default {
   data() {
     return {
+      hasOpen: 1,
       items: [
         {
           name: "Zeke's Herald",
@@ -87,8 +97,10 @@ export default {
     };
   },
   methods: {
-    showModal() {
-      console.log('showModal()');
+    showModal(img, name, about) {
+      // console.log('showModal():statTable');
+      console.log(`name:${name}, about:${about}`);
+      this.$emit('hasOpen', this.hasOpen, img, name, about);
     },
   },
 };
@@ -219,7 +231,8 @@ td .table_frequency {
   text-align: right;
   font-size: 14px;
 }
-td .table_item:hover {
+td .itemName:hover,
+td img:hover {
   cursor: pointer;
 }
 </style>

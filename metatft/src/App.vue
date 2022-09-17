@@ -1,29 +1,52 @@
 <template>
-  <Modal></Modal>
+  <Modal
+    v-if="hasOpen"
+    @close="hasOpen = 0"
+    :img="img"
+    :name="name"
+    :about="about"
+  ></Modal>
   <div class="globalcontainer">
     <Header class="header"></Header>
     <Sidebar class="sidebar-a"></Sidebar>
-    <Main class="main"></Main>
+    <Main class="main" @hasOpen="showModal"></Main>
     <Sidebar class="sidebar-b"></Sidebar>
     <Footer class="footer"></Footer>
   </div>
 </template>
 
 <script>
-import Header from "./components/HeaderBar.vue";
-import Sidebar from "./components/SideBar.vue";
-import Main from "./components/MainPage.vue";
-import Footer from "./components/FooterPage.vue";
-import Modal from './components/ModalPage.vue'
+import Header from './components/HeaderBar.vue';
+import Sidebar from './components/SideBar.vue';
+import Main from './components/MainPage.vue';
+import Footer from './components/FooterPage.vue';
+import Modal from './components/ModalPage.vue';
 
 export default {
-  name: "App",
+  name: 'App',
+  data() {
+    return {
+      hasOpen: 0,
+      img: '',
+      name: '',
+      about: '',
+    };
+  },
   components: {
     Header,
     Sidebar,
     Main,
     Footer,
     Modal,
+  },
+  methods: {
+    showModal(hasOpen, img, name, about) {
+      // console.log(`showModal():app`);
+      this.hasOpen = hasOpen;
+      this.img = img;
+      this.name = name;
+      this.about = about;
+    },
   },
 };
 </script>
@@ -39,9 +62,9 @@ export default {
 .globalcontainer {
   display: grid;
   grid-template-areas:
-    "header header header"
-    "   a    main    b   "
-    "footer footer footer";
+    'header header header'
+    '   a    main    b   '
+    'footer footer footer';
   background-color: #313236;
 }
 .header {

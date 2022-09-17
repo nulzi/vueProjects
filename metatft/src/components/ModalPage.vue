@@ -1,24 +1,23 @@
 <template>
-  <div class="black-bg" v-if="hasopen == 1">
+  <div class="black-bg">
     <div class="white-bg">
       <h4>아이템 설명 페이지임</h4>
       <div class="container">
-        <div class="img">아이템 이미지</div>
-        <p>아이템 이름</p>
+        <div class="img"><img :src="img" alt="item_img" /></div>
+        <p class="name">{{ name }}</p>
       </div>
-      <p class="about">아이템 설명:</p>
+      <p class="about">{{ about }}</p>
       <div></div>
-      <button @click="hasopen = 0">닫기</button>
+      <button @click="this.$emit('close', 0)">닫기</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['img', 'name', 'about'],
   data() {
-    return {
-      hasopen: 1,
-    };
+    return {};
   },
 };
 </script>
@@ -48,6 +47,11 @@ h4 {
 }
 .about {
   text-align: left;
+}
+.name {
+  font-size: 25px;
+  font-weight: 700;
+  align-self: center;
 }
 .img {
   display: inline-block;
