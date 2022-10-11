@@ -330,14 +330,8 @@ export default {
         this.isClicked[i] = true;
       }
     },
-    isHovering(name) {
-      console.log(name);
-      // var target = document.getElementsByClassName('changingP');
-      // target.style.content = name;
-      document.documentElement.style.setProperty('--itemName', name);
-    },
     GetItem(item) {
-      // console.log(item)
+      // console.log(item);
       for (let j in this.alldata.items) {
         if (item == this.alldata.items[j].id) {
           return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
