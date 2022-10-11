@@ -46,7 +46,7 @@
           id="swordFilter"
           class="filter-item-img unclicked"
           @click="changeButton('swordFilter')"
-          :src="this.GetItem(-2)"
+          :src="this.GetItem(1)"
           alt="B.F. sword"
         />
         <img
@@ -74,7 +74,7 @@
           id="vestFilter"
           class="filter-item-img unclicked"
           @click="changeButton('vestFilter')"
-          :src="this.GetItem(-5)"
+          :src="this.GetItem(5)"
           alt="chain vest"
         />
         <img
@@ -123,7 +123,7 @@
                           <br />
                           <strong> +200ap +200hp </strong>
                           <img
-                            :src="this.GetItem(-2)"
+                            :src="this.GetItem(1)"
                             alt="recipeitem1"
                             width="20px"
                             height="20px"
