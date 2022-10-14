@@ -375,7 +375,7 @@
         </div>
       </div>
       <div class="unit-content">
-        <div class="container">
+        <div class="table-container">
           <table>
             <thead>
               <th><div class="table_item">Unit</div></th>
@@ -385,36 +385,49 @@
               <th><div class="table_frequency">Frequency</div></th>
             </thead>
             <tbody>
-              <tr v-for="item in items" :key="item.name">
+              <tr v-for="name in units" :key="name">
                 <td>
                   <div class="table_item">
                     <div class="help-tip">
-                      <a><img :src="item.src" alt="itemImg" /></a>
+                      <a
+                        ><img
+                          class="unit-img"
+                          :src="GetChampionUrlByName(name)"
+                          :style="championBorderStyle[0][0].border"
+                          alt="itemImg"
+                      /></a>
                       <div class="tip-container">
                         <div class="tip-name-container">
-                          <p class="tip-name">{{ item.name }}</p>
+                          <p class="tip-name">{{ name }}</p>
                         </div>
                         <p class="tip-detail">
                           <br />
-                          <strong> +200ap +200hp </strong>
+                          특성: 블라블라
+                          <br />
+                          추천템:
                           <img
                             :src="this.GetItem(1)"
-                            alt="recipeitem1"
-                            width="20px"
-                            height="20px"
+                            alt="recommanditem1"
+                            width="15px"
+                            height="15px"
                           />
-                          +
                           <img
                             :src="this.GetItem(7)"
-                            alt="recipeitem2"
-                            width="20px"
-                            height="20px"
+                            alt="recommanditem2"
+                            width="15px"
+                            height="15px"
+                          />
+                          <img
+                            :src="this.GetItem(3)"
+                            alt="recommanditem3"
+                            width="15px"
+                            height="15px"
                           />
                         </p>
                       </div>
                     </div>
                     <div class="itemName">
-                      <a>{{ item.name }}</a>
+                      <a>{{ name }}</a>
                     </div>
                   </div>
                 </td>
@@ -426,6 +439,7 @@
             </tbody>
           </table>
         </div>
+        <div class="graph-container"></div>
       </div>
     </div>
     <div class="footer-content">
@@ -449,150 +463,43 @@ export default {
     return {
       alldata,
       isClicked: [true, false, false, false, false, false, false, false],
-      items: [
+      units: ['vladimir', 'ashe', 'braum', 'diana', 'dragonpurple'],
+      championBorderStyle: [
+        //코스트 기준으로 바꾸는게 좋아보임
         {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
+          0: {
+            border: 'border:solid 2px gray;',
+          },
         },
         {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
+          1: {
+            border: 'border:solid 2px green;',
+          },
         },
         {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
+          2: {
+            border: 'border:solid 2px blue;',
+          },
         },
         {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
+          3: {
+            border: 'border:solid 2px purple;',
+          },
         },
         {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
+          4: {
+            border: 'border:solid 2px orange;',
+          },
         },
         {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
+          5: {
+            border: 'border:solid 2px yellow;',
+          },
         },
         {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
+          6: {
+            border: 'solid 2px red',
+          },
         },
       ],
     };
@@ -605,18 +512,6 @@ export default {
         this.isClicked[i] = true;
       }
       // console.log(this.isClicked[i]);
-    },
-    GetItem(item) {
-      // console.log(item);
-      for (let j in this.alldata.items) {
-        if (item == this.alldata.items[j].id) {
-          return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
-            j
-          ].icon
-            .toLowerCase()
-            .slice(0, -4)}.png`;
-        }
-      }
     },
     changeButton(id) {
       const classList = document.getElementById(id).classList;
@@ -638,6 +533,36 @@ export default {
           classList.replace('unclicked', 'clicked');
         }
       }
+    },
+    GetItem(item) {
+      // console.log(item);
+      for (let j in this.alldata.items) {
+        if (item == this.alldata.items[j].id) {
+          return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
+            j
+          ].icon
+            .toLowerCase()
+            .slice(0, -4)}.png`;
+        }
+      }
+    },
+    GetChampionUrlByName(championName) {
+      let changeName = '';
+      let temp = championName.toLowerCase();
+      if (temp == 'dragonblue') {
+        changeName = 'miragedragon';
+      } else if (temp == 'dragongold') {
+        changeName = 'shimmerscaledragon';
+      } else if (temp == 'dragongreen') {
+        changeName = 'jadedragon';
+      } else if (temp == 'dragonpurple') {
+        changeName = 'whispersdragon';
+      } else {
+        changeName = temp;
+      }
+      // console.log(temp)
+      // console.log(changeName)
+      return `https://raw.communitydragon.org/latest/game/assets/characters/tft7_${temp}/hud/tft7_${changeName}_square.tft_set7.png`;
     },
   },
 };
@@ -727,13 +652,13 @@ export default {
   background-color: rgb(172, 225, 227);
   padding: 0px 0px 20px;
 }
-.container {
+.table-container {
   overflow: auto;
   height: 590px;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
 }
-.container::-webkit-scrollbar {
+.table-container::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 table {
@@ -820,7 +745,8 @@ td .table_frequency {
   text-align: left;
   background-color: #1e2021;
   padding: 10px;
-  width: 150px;
+  /* 이 부분이 상세창 넓이 */
+  width: 200px;
   position: absolute;
   z-index: 1;
   border-radius: 3px;
@@ -829,7 +755,7 @@ td .table_frequency {
   font-size: 13px;
   line-height: 1;
 }
-.help-tip .tip-detail::before {
+/* .help-tip .tip-detail::before {
   position: absolute;
   content: '';
   font-size: 10px;
@@ -840,7 +766,7 @@ td .table_frequency {
   top: 40px;
   left: -12px;
   rotate: -90deg;
-}
+} */
 .help-tip .tip-detail img {
   margin-top: 0.5rem;
   margin-left: 0.2rem;
@@ -887,5 +813,8 @@ td .table_frequency {
 }
 .cost {
   display: flex;
+}
+.unit-img {
+  border-radius: 5px;
 }
 </style>
