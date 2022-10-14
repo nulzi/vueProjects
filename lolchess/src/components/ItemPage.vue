@@ -100,7 +100,7 @@
         />
       </div>
       <div class="item-content">
-        <div class="container">
+        <div class="table-container">
           <table>
             <thead>
               <th><div class="table_item">Item</div></th>
@@ -151,6 +151,7 @@
             </tbody>
           </table>
         </div>
+        <div class="graph-container"></div>
       </div>
     </div>
     <div class="footer-content">
@@ -443,13 +444,13 @@ span {
   background-color: rgb(172, 225, 227);
   padding: 0px 0px 20px;
 }
-.container {
+.table-container {
   overflow: auto;
   height: 590px;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
 }
-.container::-webkit-scrollbar {
+.table-container::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 table {
