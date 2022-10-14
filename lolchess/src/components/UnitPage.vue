@@ -8,6 +8,8 @@
     <div class="filter-content">
       <div>
         <span class="filter">Filter</span>
+        <button>table</button>
+        <button>graph</button>
       </div>
       <div class="filter1">
         <button
@@ -375,7 +377,7 @@
         </div>
       </div>
       <div class="unit-content">
-        <div class="table-container">
+        <div v-if="container === 0" class="table-container">
           <table>
             <thead>
               <th><div class="table_item">Unit</div></th>
@@ -439,7 +441,9 @@
             </tbody>
           </table>
         </div>
-        <div class="graph-container"></div>
+        <div v-if="container === 1" class="graph-container">
+          <Apex></Apex>
+        </div>
       </div>
     </div>
     <div class="footer-content">
@@ -453,15 +457,18 @@ import alldata from '../assets/data.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
+import Apex from './Apex.vue';
 
 export default {
   components: {
     Header,
     Footer,
+    Apex,
   },
   data() {
     return {
       alldata,
+      container: 1,
       isClicked: [true, false, false, false, false, false, false, false],
       units: ['vladimir', 'ashe', 'braum', 'diana', 'dragonpurple'],
       championBorderStyle: [

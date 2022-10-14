@@ -100,7 +100,7 @@
         />
       </div>
       <div class="item-content">
-        <div class="table-container">
+        <div v-if="container === 0" class="table-container">
           <table>
             <thead>
               <th><div class="table_item">Item</div></th>
@@ -151,7 +151,9 @@
             </tbody>
           </table>
         </div>
-        <div class="graph-container"></div>
+        <div v-if="container === 1" class="graph-container">
+          <Apex></Apex>
+        </div>
       </div>
     </div>
     <div class="footer-content">
@@ -165,15 +167,18 @@ import alldata from '../assets/data.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
+import Apex from './Apex.vue';
 
 export default {
   components: {
     Header,
     Footer,
+    Apex,
   },
   data() {
     return {
       alldata,
+      container: 0,
       isClicked: [true, false, false, false, false],
       items: [
         {
