@@ -441,8 +441,13 @@
             </tbody>
           </table>
         </div>
-        <div v-if="container === 1" class="graph-container">
-          <Apex></Apex>
+        <div v-if="container === 1" id="chart" class="graph-container">
+          <apexchart
+            type="scatter"
+            height="350"
+            :options="chartOptions"
+            :series="series"
+          ></apexchart>
         </div>
       </div>
     </div>
@@ -454,16 +459,16 @@
 
 <script>
 import alldata from '../assets/data.json';
+import VueApexCharts from 'vue3-apexcharts';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
-import Apex from './Apex.vue';
 
 export default {
   components: {
+    apexchart: VueApexCharts,
     Header,
     Footer,
-    Apex,
   },
   data() {
     return {
@@ -471,6 +476,98 @@ export default {
       container: 1,
       isClicked: [true, false, false, false, false, false, false, false],
       units: ['vladimir', 'ashe', 'braum', 'diana', 'dragonpurple'],
+      series: [
+        {
+          name: 'unit1',
+          data: [
+            [10.4, 3.2],
+            [16.4, 5.4],
+            [21.7, 4],
+            [25.4, 3],
+            [19, 2],
+            [10.9, 1],
+            [13.6, 3.2],
+            [10.9, 7],
+            [10.9, 8.2],
+            [16.4, 4],
+          ],
+        },
+        {
+          name: 'unit2',
+          data: [
+            [6.4, 5.4],
+            [13.6, 12],
+            [29.9, 3],
+            [10.9, 5.2],
+            [16.4, 6.5],
+            [10.9, 8],
+            [24.5, 7.1],
+            [10.9, 7],
+            [8.1, 4.7],
+            [19, 10],
+            [27.1, 10],
+            [24.5, 8],
+            [27.1, 3],
+            [29.9, 11.5],
+            [27.1, 0.8],
+            [22.1, 2],
+          ],
+        },
+      ],
+      chartOptions: {
+        chart: {
+          height: 350,
+          type: 'scatter',
+          animations: {
+            enabled: false,
+          },
+          zoom: {
+            enabled: false,
+          },
+          toolbar: {
+            show: false,
+          },
+          colors: ['#056BF6', '#D2376A'],
+          xaxis: {
+            tickAmount: 10,
+            min: 0,
+            max: 40,
+          },
+          yaxis: {
+            tickAmount: 7,
+          },
+          markers: {
+            size: 20,
+          },
+          fill: {
+            type: 'image',
+            opacity: 1,
+            image: {
+              src: [
+                `https://raw.communitydragon.org/latest/game/assets/characters/tft7_vladimir/hud/tft7_vladimir_square.tft_set7.png`,
+                `https://raw.communitydragon.org/latest/game/assets/characters/tft7_vladimir/hud/tft7_vladimir_square.tft_set7.png`,
+              ],
+              width: 40,
+              height: 40,
+            },
+          },
+        },
+        legend: {
+          labels: {
+            useSeriesColors: true,
+          },
+          markers: {
+            customHTML: [
+              function () {
+                return '';
+              },
+              function () {
+                return '';
+              },
+            ],
+          },
+        },
+      },
       championBorderStyle: [
         //코스트 기준으로 바꾸는게 좋아보임
         {
