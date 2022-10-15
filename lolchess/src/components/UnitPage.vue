@@ -352,6 +352,45 @@ export default {
       }
       // console.log(this.champs);
     },
+    GetChampNameStage2() {
+      //url link媛 ?ㅻⅨ 梨?쇱??대? ??ν湲?+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+        let name = newdata.setData[0].champions[i].apiName
+          .toLowerCase()
+          .replace(/ /g, '');
+        if (
+          newdata.setData[0].champions[i].traits[0] === undefined ||
+          newdata.setData[0].champions[i].traits[1] === undefined
+        )
+          continue;
+        else if (
+          exceptionStage2.includes(
+            newdata.setData[0].champions[i].traits[0].toLowerCase()
+          ) ||
+          exceptionStage2.includes(
+            newdata.setData[0].champions[i].traits[1].toLowerCase()
+          )
+        )
+          this.stage2.push(name);
+        // console.log(newdata.setData[0].champions[i].traits[0].toLowerCase());
+      }
+      // console.log(newdata.setData[0].champions[0].traits[0].toLowerCase());
+      this.stage2.push(
+        'tft7b_heimerdinger',
+        'tft7b_lulu',
+        'tft7b_tristana',
+        'tft7_jayce',
+        'tft7_graves',
+        'tft7_pantheon',
+        'tft7_rakan',
+        'tft7_lux',
+        'tft7_zyra',
+        'tft7_jax',
+        'tft7_nasus',
+        'tft7_wukong'
+      );
+      // console.log(this.stage2);
+    },
     GetChampionUrlByName(championName) {
       let changeName = '';
       let temp = championName.toLowerCase();
