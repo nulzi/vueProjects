@@ -455,6 +455,14 @@ export default {
       else
         return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7.png`;
     },
+    GetTraitName() {
+      for (let i = 0; i < traitsdata.length; i++) {
+        if (traitsdata[i].set === 'TFTSet7') {
+          this.traits.push(traitsdata[i].display_name);
+        }
+      }
+      // console.log(this.traits);
+    },
   },
 };
 </script>
