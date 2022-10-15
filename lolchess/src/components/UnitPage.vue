@@ -196,7 +196,6 @@ export default {
   data() {
     return {
       alldata,
-      units: ['vladimir', 'ashe', 'braum', 'diana', 'dragonpurple'],
       container: 0,
       isClicked: [
         false,
@@ -228,6 +227,10 @@ export default {
         false,
         false,
       ],
+      champs: [],
+      stage2: [],
+      costs: [],
+      traits: [],
       championBorderStyle: [
         //코스트 기준으로 바꾸는게 좋아보임
         {
@@ -489,6 +492,11 @@ export default {
       }
     },
   },
+  mounted() {
+    this.GetTraitName();
+    this.GetChampName();
+    this.GetChampNameStage2();
+    this.GetChampCost();
   },
 };
 </script>
