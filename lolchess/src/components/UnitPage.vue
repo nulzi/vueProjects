@@ -180,6 +180,8 @@
 
 <script>
 import alldata from '../assets/data.json';
+import newdata from '../assets/newdata.json';
+import traitsdata from '../assets/tfttraits.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
