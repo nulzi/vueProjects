@@ -249,9 +249,9 @@ export default {
       }
       // console.log(this.isClicked[i]);
     },
-    changeButton(id) {
+    changeButton(id, class_name) {
       const classList = document.getElementById(id).classList;
-      const isExist = document.getElementsByClassName('cost clicked');
+      const isExist = document.getElementsByClassName(class_name);
       if (isExist.length === 0) {
         //선택된 필터가 없는 경우
         classList.replace('unclicked', 'clicked');
