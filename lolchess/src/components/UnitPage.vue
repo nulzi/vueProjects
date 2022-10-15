@@ -241,11 +241,11 @@ export default {
     };
   },
   methods: {
-    changeState(i) {
-      if (this.isClicked[i] === true) {
-        this.isClicked[i] = false;
+    changeState(index) {
+      if (this.isClicked[index] === true) {
+        this.isClicked[index] = false;
       } else {
-        this.isClicked[i] = true;
+        this.isClicked[index] = true;
       }
       // console.log(this.isClicked[i]);
     },
