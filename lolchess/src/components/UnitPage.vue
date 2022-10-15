@@ -167,13 +167,8 @@
             </tbody>
           </table>
         </div>
-        <div v-if="container === 1" id="chart" class="graph-container">
-          <apexchart
-            type="scatter"
-            height="350"
-            :options="chartOptions"
-            :series="series"
-          ></apexchart>
+        <div v-if="container === 1" class="graph-container">
+          <Apex></Apex>
         </div>
       </div>
     </div>
@@ -188,9 +183,11 @@ import alldata from '../assets/data.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
+import Apex from './Apex.vue';
 
 export default {
   components: {
+    Apex,
     Header,
     Footer,
   },
