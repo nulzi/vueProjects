@@ -420,20 +420,40 @@ export default {
     GetChampionUrlByName(championName) {
       let changeName = '';
       let temp = championName.toLowerCase();
-      if (temp == 'dragonblue') {
-        changeName = 'miragedragon';
-      } else if (temp == 'dragongold') {
-        changeName = 'shimmerscaledragon';
-      } else if (temp == 'dragongreen') {
-        changeName = 'jadedragon';
-      } else if (temp == 'dragonpurple') {
-        changeName = 'whispersdragon';
+
+      if (temp == 'tft7_dragonblue') {
+        changeName = 'tft7_miragedragon';
+      } else if (temp == 'tft7_dragongold') {
+        changeName = 'tft7_shimmerscaledragon';
+      } else if (temp == 'tft7_dragongreen') {
+        changeName = 'tft7_jadedragon';
+      } else if (temp == 'tft7_dragonpurple') {
+        changeName = 'tft7_whispersdragon';
+      } else if (temp == 'tft7_aquaticdragon') {
+        changeName = 'tft7_sohm';
+      } else if (temp == 'tft7_nomsy') {
+        temp = 'tft7_nomsymage';
+        changeName = 'tft7_nomsy';
+      } else if (temp == 'tft7_heimerdinger') {
+        temp = 'tft7b_heimerdinger';
+        changeName = temp;
+      } else if (temp == 'tft7_tristana') {
+        temp = 'tft7b_tristana';
+        changeName = temp;
+      } else if (temp == 'tft7_lulu') {
+        temp = 'tft7b_lulu';
+        changeName = temp;
       } else {
         changeName = temp;
       }
       // console.log(temp)
       // console.log(changeName)
-      return `https://raw.communitydragon.org/latest/game/assets/characters/tft7_${temp}/hud/tft7_${changeName}_square.tft_set7.png`;
+      if (this.stage2.includes(temp))
+        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7_stage2.png`;
+      else if (temp == 'tft7_dragonguild')
+        return 'https://raw.communitydragon.org/latest/game/assets/characters/tft7_dragonguild/hud/icons2d/tft7_zippy_square.tft_set7_stage2.png';
+      else
+        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7.png`;
     },
   },
 };
