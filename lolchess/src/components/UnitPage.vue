@@ -364,6 +364,38 @@ export default {
         }
       }
     },
+    GetChampName() {
+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+        let name = newdata.setData[0].champions[i].apiName
+          .toLowerCase()
+          .replace(/ /g, '');
+        const exception = [
+          'tft6_thegoldenegg',
+          'tft7_ivernminion',
+          'tft7_jadestatue',
+          'tft7_lagoonrelic',
+        ];
+        if (exception.includes(name)) continue;
+        else if (
+          name == 'tft7_nomsymage' ||
+          name == 'tft7_nomsyevoker' ||
+          name == 'tft7_nomsycannoneer'
+        ) {
+          name = 'tft7_nomsy';
+          this.champs.push(name);
+        } else if (name == 'tft7b_heimerdinger') {
+          name = 'tft7_heimerdinger';
+          this.champs.push(name);
+        } else if (name == 'tft7b_lulu') {
+          name = 'tft7_lulu';
+          this.champs.push(name);
+        } else if (name == 'tft7b_tristana') {
+          name = 'tft7_tristana';
+          this.champs.push(name);
+        } else this.champs.push(name);
+      }
+      // console.log(this.champs);
+    },
     GetChampionUrlByName(championName) {
       let changeName = '';
       let temp = championName.toLowerCase();
