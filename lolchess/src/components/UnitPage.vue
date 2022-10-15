@@ -391,6 +391,18 @@ export default {
       );
       // console.log(this.stage2);
     },
+    GetChampCost() {
+      //??由?蹂寃⑥ ?? 梨?쇱?肄?ㅽ????+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+        let cost = newdata.setData[0].champions[i].cost;
+        if (cost === 11 || cost === 8) continue;
+        else {
+          this.costs.push(cost);
+          // console.log(`${this.champs[i]}:${this.costs[i]}`);
+        }
+        // console.log(`${this.champs[i]}:${this.costs[i]}`);
+      }
+      // console.log(this.costs);
+    },
     GetChampionUrlByName(championName) {
       let changeName = '';
       let temp = championName.toLowerCase();
