@@ -454,12 +454,10 @@ export default {
   color: black;
 }
 .filter1,
-.filter2 .raw1,
-.filter2 .raw2,
-.filter2 .raw3,
-.filter2 .raw4 {
+.filter2 .raw1 {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .filter2 .filter-trait-img {
   display: flex;
