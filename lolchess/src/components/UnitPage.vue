@@ -113,7 +113,7 @@
               <th><div class="table_frequency">Frequency</div></th>
             </thead>
             <tbody>
-              <tr v-for="name in units" :key="name">
+              <tr v-for="(name, index) in champs" :key="index">
                 <td>
                   <div class="table_item">
                     <div class="help-tip">
@@ -121,12 +121,14 @@
                         ><img
                           class="unit-img"
                           :src="GetChampionUrlByName(name)"
-                          :style="championBorderStyle[0][0].border"
+                          :style="GetChampBorderByCost(costs[index])"
                           alt="itemImg"
                       /></a>
                       <div class="tip-container">
                         <div class="tip-name-container">
-                          <p class="tip-name">{{ name }}</p>
+                          <p class="tip-name">
+                            {{ name.slice(5, name.length) }}
+                          </p>
                         </div>
                         <p class="tip-detail">
                           <br />
@@ -155,7 +157,7 @@
                       </div>
                     </div>
                     <div class="itemName">
-                      <a>{{ name }}</a>
+                      <a>{{ name.slice(5, name.length) }}</a>
                     </div>
                   </div>
                 </td>
