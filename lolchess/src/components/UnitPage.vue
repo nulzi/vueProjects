@@ -8,8 +8,20 @@
     <div class="filter-content">
       <div>
         <span class="filter">Filter</span>
-        <button>table</button>
-        <button>graph</button>
+        <button
+          id="tableBtn"
+          @click="changeTable('tableBtn', 'filter-change-button clicked')"
+          class="filter-change-button clicked"
+        >
+          table
+        </button>
+        <button
+          id="graphBtn"
+          @click="changeTable('graphBtn', 'filter-change-button clicked')"
+          class="filter-change-button unclicked"
+        >
+          graph
+        </button>
       </div>
       <div class="filter1">
         <button
@@ -258,6 +270,16 @@ export default {
           classList.replace('unclicked', 'clicked');
         }
       }
+    },
+    changeTable(id, class_name) {
+      const classList = document.getElementById(id).classList;
+      const isExist = document.getElementsByClassName(class_name);
+      //checked filter off
+      isExist.item(0).classList.replace('clicked', 'unclicked');
+      //checked filter on
+      classList.replace('unclicked', 'clicked');
+      if (id === 'tableBtn') this.container = 0;
+      else this.container = 1;
     },
     GetItem(item) {
       // console.log(item);
@@ -570,8 +592,12 @@ td .table_frequency {
 }
 .cost {
   display: flex;
+  margin-right: 10px;
 }
 .unit-img {
   border-radius: 5px;
+}
+.filter-change-button {
+  margin-right: 10px;
 }
 </style>
