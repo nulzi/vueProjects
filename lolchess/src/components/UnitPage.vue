@@ -403,6 +403,20 @@ export default {
       }
       // console.log(this.costs);
     },
+    GetChampBorderByCost(champCost) {
+      //肄?ㅽ몄 ?곕Ⅸ ??由??ㅽ??諛?
+      if (champCost === 1) {
+        return this.championBorderStyle[0];
+      } else if (champCost === 2) {
+        return this.championBorderStyle[1];
+      } else if (champCost === 3) {
+        return this.championBorderStyle[2];
+      } else if (champCost === 4) {
+        return this.championBorderStyle[3];
+      } else if (champCost === 5) {
+        return this.championBorderStyle[4];
+      }
+    },
     GetChampionUrlByName(championName) {
       let changeName = '';
       let temp = championName.toLowerCase();
