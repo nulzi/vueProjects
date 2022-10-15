@@ -234,42 +234,11 @@ export default {
       costs: [],
       traits: [],
       championBorderStyle: [
-        //코스트 기준으로 바꾸는게 좋아보임
-        {
-          0: {
-            border: 'border:solid 2px gray;',
-          },
-        },
-        {
-          1: {
-            border: 'border:solid 2px green;',
-          },
-        },
-        {
-          2: {
-            border: 'border:solid 2px blue;',
-          },
-        },
-        {
-          3: {
-            border: 'border:solid 2px purple;',
-          },
-        },
-        {
-          4: {
-            border: 'border:solid 2px orange;',
-          },
-        },
-        {
-          5: {
-            border: 'border:solid 2px yellow;',
-          },
-        },
-        {
-          6: {
-            border: 'solid 2px red',
-          },
-        },
+        'border:solid 3px gray;',
+        'border:solid 3px green;',
+        'border:solid 3px blue;',
+        'border:solid 3px purple;',
+        'border:solid 3px yellow;',
       ],
     };
   },
@@ -286,19 +255,19 @@ export default {
       const classList = document.getElementById(id).classList;
       const isExist = document.getElementsByClassName(class_name);
       if (isExist.length === 0) {
-        //선택된 필터가 없는 경우
+        //no checked filter
         classList.replace('unclicked', 'clicked');
       } else {
-        //선택된 필터가 이미 있는 경우
+        //already checked filter
 
-        //이미 선택된 것을 끄고 싶을 경우
+        //already checked filter off
         if (classList.contains('clicked')) {
           classList.replace('clicked', 'unclicked');
         } else {
-          //다른 것을 선택한 경우
-          //선택된 필터를 끄기
+          //select another
+          //checked filter off
           isExist.item(0).classList.replace('clicked', 'unclicked');
-          //선택한 필터 켜기
+          //checked filter on
           classList.replace('unclicked', 'clicked');
         }
       }
@@ -363,7 +332,8 @@ export default {
       // console.log(this.champs);
     },
     GetChampNameStage2() {
-      //url link媛 ?ㅻⅨ 梨?쇱??대? ??ν湲?+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      //store name that has different url
+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
       for (let i = 0; i < newdata.setData[0].champions.length; i++) {
         let name = newdata.setData[0].champions[i].apiName
           .toLowerCase()
@@ -402,7 +372,8 @@ export default {
       // console.log(this.stage2);
     },
     GetChampCost() {
-      //??由?蹂寃⑥ ?? 梨?쇱?肄?ㅽ????+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+      //store cost for champBorder
+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
         let cost = newdata.setData[0].champions[i].cost;
         if (cost === 11 || cost === 8) continue;
         else {
@@ -414,7 +385,7 @@ export default {
       // console.log(this.costs);
     },
     GetChampBorderByCost(champCost) {
-      //肄?ㅽ몄 ?곕Ⅸ ??由??ㅽ??諛?
+      //return border style each cost
       if (champCost === 1) {
         return this.championBorderStyle[0];
       } else if (champCost === 2) {
@@ -683,7 +654,7 @@ td .table_frequency {
   text-align: left;
   background-color: #1e2021;
   padding: 10px;
-  /* 이 부분이 상세창 넓이 */
+  /* detail window width */
   width: 200px;
   position: absolute;
   z-index: 1;
