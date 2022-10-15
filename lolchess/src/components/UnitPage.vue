@@ -311,6 +311,11 @@ export default {
       if (id === 'tableBtn') this.container = 0;
       else this.container = 1;
     },
+    traitChange(index) {
+      return this.isClicked[index] === true
+        ? 'filter-trait-img clicked'
+        : 'filter-trait-img unclicked';
+    },
     GetItem(item) {
       // console.log(item);
       for (let j in this.alldata.items) {
