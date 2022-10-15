@@ -27,7 +27,7 @@
         <button
           id="1cost"
           class="cost unclicked"
-          @click="changeButton('1cost')"
+          @click="changeButton('1cost', 'cost clicked')"
         >
           <img
             class="coin"
@@ -39,7 +39,7 @@
         <button
           id="2cost"
           class="cost unclicked"
-          @click="changeButton('2cost')"
+          @click="changeButton('2cost', 'cost clicked')"
         >
           <img
             class="coin"
@@ -51,7 +51,7 @@
         <button
           id="3cost"
           class="cost unclicked"
-          @click="changeButton('3cost')"
+          @click="changeButton('3cost', 'cost clicked')"
         >
           <img
             class="coin"
@@ -63,7 +63,7 @@
         <button
           id="4cost"
           class="cost unclicked"
-          @click="changeButton('4cost')"
+          @click="changeButton('4cost', 'cost clicked')"
         >
           <img
             class="coin"
@@ -75,7 +75,7 @@
         <button
           id="5cost"
           class="cost unclicked"
-          @click="changeButton('5cost')"
+          @click="changeButton('5cost', 'cost clicked')"
         >
           <img
             class="coin"
