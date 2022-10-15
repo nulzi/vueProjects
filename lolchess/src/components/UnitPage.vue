@@ -463,6 +463,32 @@ export default {
       }
       // console.log(this.traits);
     },
+    GetTraitImage(trait) {
+      // console.log(trait.toLowerCase());
+      const exceptionNone = ['assassin', 'shapeshifter'];
+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      const exception2 = ['mage', 'mystic'];
+      if (exceptionNone.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.png`;
+      } else if (exceptionStage2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.tft_set7_stage2.png`;
+      } else if (trait.toLowerCase() === 'bruiser') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png`;
+      } else if (exception2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${trait.toLowerCase()}.png`;
+      } else if (trait.toLowerCase() === 'scalescorn') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_dragonbane.png`;
+      } else if (trait.toLowerCase() === 'cavalier') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cavalry.png`;
+      } else if (trait.toLowerCase() === 'spelltheif') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_spellthief.png`;
+      } else if (trait.toLowerCase() === 'cannoneer') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
+      } else {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${trait.toLowerCase()}.png`;
+      }
+    },
+  },
   },
 };
 </script>
