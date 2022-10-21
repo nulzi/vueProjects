@@ -6,100 +6,102 @@
     <div class="sidebar-a"></div>
     <div class="sidebar-b"></div>
     <div class="filter-content">
-      <div>
-        <span class="filter">Filter</span>
-        <button
-          id="tableBtn"
-          @click="changeTable('tableBtn', 'filter-change-button clicked')"
-          class="filter-change-button clicked"
-        >
-          table
-        </button>
-        <button
-          id="graphBtn"
-          @click="changeTable('graphBtn', 'filter-change-button clicked')"
-          class="filter-change-button unclicked"
-        >
-          graph
-        </button>
-      </div>
-      <div class="filter1">
-        <button
-          id="1cost"
-          class="cost unclicked"
-          @click="changeButton('1cost', 'cost clicked')"
-        >
-          <img
-            class="coin"
-            src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-            alt="cost"
-          />
-          <span class="coin">1</span>
-        </button>
-        <button
-          id="2cost"
-          class="cost unclicked"
-          @click="changeButton('2cost', 'cost clicked')"
-        >
-          <img
-            class="coin"
-            src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-            alt="cost"
-          />
-          <span class="coin">2</span>
-        </button>
-        <button
-          id="3cost"
-          class="cost unclicked"
-          @click="changeButton('3cost', 'cost clicked')"
-        >
-          <img
-            class="coin"
-            src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-            alt="cost"
-          />
-          <span class="coin">3</span>
-        </button>
-        <button
-          id="4cost"
-          class="cost unclicked"
-          @click="changeButton('4cost', 'cost clicked')"
-        >
-          <img
-            class="coin"
-            src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-            alt="cost"
-          />
-          <span class="coin">4</span>
-        </button>
-        <button
-          id="5cost"
-          class="cost unclicked"
-          @click="changeButton('5cost', 'cost clicked')"
-        >
-          <img
-            class="coin"
-            src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-            alt="cost"
-          />
-          <span class="coin">5</span>
-        </button>
-      </div>
-      <div class="filter2">
-        <div class="raw1">
-          <div
-            v-for="(trait, index) in traits"
-            :key="index"
-            :class="traitChange(index)"
-            :style="{
-              'background-image': `url(${this.GetTraitImage(trait)})`,
-              'background-size': '65%',
-              'background-repeat': 'no-repeat',
-              'background-position': 'center',
-            }"
-            @click="changeState(index)"
-            alt="trait image"
-          />
+      <div class="filter-container">
+        <h5>Filter</h5>
+        <div class="filter">
+          <button
+            id="tableBtn"
+            @click="changeTable('tableBtn', 'filter-change-button clicked')"
+            class="filter-change-button clicked"
+          >
+            table
+          </button>
+          <button
+            id="graphBtn"
+            @click="changeTable('graphBtn', 'filter-change-button clicked')"
+            class="filter-change-button unclicked"
+          >
+            graph
+          </button>
+        </div>
+        <div class="filter1">
+          <button
+            id="1cost"
+            class="cost unclicked"
+            @click="changeButton('1cost', 'cost clicked')"
+          >
+            <img
+              class="coin"
+              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
+              alt="cost"
+            />
+            <span class="coin">1</span>
+          </button>
+          <button
+            id="2cost"
+            class="cost unclicked"
+            @click="changeButton('2cost', 'cost clicked')"
+          >
+            <img
+              class="coin"
+              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
+              alt="cost"
+            />
+            <span class="coin">2</span>
+          </button>
+          <button
+            id="3cost"
+            class="cost unclicked"
+            @click="changeButton('3cost', 'cost clicked')"
+          >
+            <img
+              class="coin"
+              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
+              alt="cost"
+            />
+            <span class="coin">3</span>
+          </button>
+          <button
+            id="4cost"
+            class="cost unclicked"
+            @click="changeButton('4cost', 'cost clicked')"
+          >
+            <img
+              class="coin"
+              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
+              alt="cost"
+            />
+            <span class="coin">4</span>
+          </button>
+          <button
+            id="5cost"
+            class="cost unclicked"
+            @click="changeButton('5cost', 'cost clicked')"
+          >
+            <img
+              class="coin"
+              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
+              alt="cost"
+            />
+            <span class="coin">5</span>
+          </button>
+        </div>
+        <div class="filter2">
+          <div class="raw1">
+            <div
+              v-for="(trait, index) in traits"
+              :key="index"
+              :class="traitChange(index)"
+              :style="{
+                'background-image': `url(${this.GetTraitImage(trait)})`,
+                'background-size': '65%',
+                'background-repeat': 'no-repeat',
+                'background-position': 'center',
+              }"
+              @click="changeState(index)"
+              alt="trait image"
+            />
+          </div>
         </div>
       </div>
       <div class="unit-content">
@@ -502,7 +504,6 @@ export default {
 }
 .footer-content {
   grid-area: footer;
-  height: 30px;
 }
 .sidebar-a {
   grid-area: a;
@@ -518,15 +519,14 @@ export default {
 .info-content {
   grid-area: info;
 }
+.filter-container {
+  padding: 0.5rem;
+}
 .filter1,
 .filter2,
 .filter {
-  padding: 0.5rem 1.3rem;
+  padding: 0.5rem 0rem;
   margin: 0.5rem 0rem;
-}
-.filter {
-  font-size: 20px;
-  color: black;
 }
 .filter1,
 .filter2 .raw1 {
