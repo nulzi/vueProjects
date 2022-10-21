@@ -174,6 +174,9 @@
         </div>
       </div>
     </div>
+    <div class="info-content">
+      <UnitInfo></UnitInfo>
+    </div>
     <div class="footer-content">
       <Footer></Footer>
     </div>
@@ -186,13 +189,15 @@ import newdata from '../assets/newdata.json';
 import traitsdata from '../assets/tfttraits.json';
 
 import Header from './Header.vue';
-import Footer from './Footer.vue';
 import UnitApex from './UnitApex.vue';
+import UnitInfo from './UnitInfo.vue';
+import Footer from './Footer.vue';
 
 export default {
   components: {
-    UnitApex,
     Header,
+    UnitApex,
+    UnitInfo,
     Footer,
   },
   data() {
@@ -487,6 +492,7 @@ export default {
   grid-template-areas:
     'header header header'
     'a filter b'
+    'a info b'
     'footer footer footer';
   height: 100vh;
   align-items: stretch;
@@ -508,6 +514,9 @@ export default {
   grid-area: filter;
   background-color: #faf8ec;
   height: 94%;
+}
+.info-content {
+  grid-area: info;
 }
 .filter1,
 .filter2,
