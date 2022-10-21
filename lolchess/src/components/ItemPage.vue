@@ -8,6 +8,20 @@
     <div class="filter-content">
       <div>
         <span>Filter</span>
+        <button
+          id="tableBtn"
+          @click="changeTable('tableBtn', 'filter-change-button clicked')"
+          class="filter-change-button clicked"
+        >
+          table
+        </button>
+        <button
+          id="graphBtn"
+          @click="changeTable('graphBtn', 'filter-change-button clicked')"
+          class="filter-change-button unclicked"
+        >
+          graph
+        </button>
       </div>
       <div class="filter1">
         <button
@@ -336,17 +350,15 @@ export default {
         this.isClicked[i] = true;
       }
     },
-    GetItem(item) {
-      // console.log(item);
-      for (let j in this.alldata.items) {
-        if (item == this.alldata.items[j].id) {
-          return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
-            j
-          ].icon
-            .toLowerCase()
-            .slice(0, -4)}.png`;
-        }
-      }
+    changeTable(id, class_name) {
+      const classList = document.getElementById(id).classList;
+      const isExist = document.getElementsByClassName(class_name);
+      //checked filter off
+      isExist.item(0).classList.replace('clicked', 'unclicked');
+      //checked filter on
+      classList.replace('unclicked', 'clicked');
+      if (id === 'tableBtn') this.container = 0;
+      else this.container = 1;
     },
     changeButton(id) {
       const classList = document.getElementById(id).classList;
@@ -368,6 +380,18 @@ export default {
           isExist.item(0).classList.replace('clicked', 'unclicked');
           //선택한 필터 켜기
           classList.replace('unclicked', 'clicked');
+        }
+      }
+    },
+    GetItem(item) {
+      // console.log(item);
+      for (let j in this.alldata.items) {
+        if (item == this.alldata.items[j].id) {
+          return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
+            j
+          ].icon
+            .toLowerCase()
+            .slice(0, -4)}.png`;
         }
       }
     },
@@ -596,5 +620,8 @@ td .table_frequency {
   100% {
     opacity: 100%;
   }
+}
+.filter-change-button {
+  margin-right: 10px;
 }
 </style>
