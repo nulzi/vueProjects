@@ -166,7 +166,7 @@
           </table>
         </div>
         <div v-if="container === 1" class="graph-container">
-          <Apex></Apex>
+          <ItemApex></ItemApex>
         </div>
       </div>
     </div>
@@ -181,13 +181,13 @@ import alldata from '../assets/data.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
-import Apex from './Apex.vue';
+import ItemApex from './ItemApex.vue';
 
 export default {
   components: {
     Header,
     Footer,
-    Apex,
+    ItemApex,
   },
   data() {
     return {

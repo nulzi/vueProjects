@@ -170,7 +170,7 @@
           </table>
         </div>
         <div v-if="container === 1" class="graph-container">
-          <Apex></Apex>
+          <UnitApex></UnitApex>
         </div>
       </div>
     </div>
@@ -187,11 +187,11 @@ import traitsdata from '../assets/tfttraits.json';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
-import Apex from './Apex.vue';
+import UnitApex from './UnitApex.vue';
 
 export default {
   components: {
-    Apex,
+    UnitApex,
     Header,
     Footer,
   },
