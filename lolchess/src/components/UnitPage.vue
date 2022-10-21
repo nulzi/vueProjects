@@ -234,11 +234,11 @@ export default {
       costs: [],
       traits: [],
       championBorderStyle: [
-        'border:solid 3px gray;',
-        'border:solid 3px green;',
-        'border:solid 3px blue;',
-        'border:solid 3px purple;',
-        'border:solid 3px yellow;',
+        'border:solid 2px gray;',
+        'border:solid 2px green;',
+        'border:solid 2px blue;',
+        'border:solid 2px purple;',
+        'border:solid 2px #ffd700;',
       ],
     };
   },
