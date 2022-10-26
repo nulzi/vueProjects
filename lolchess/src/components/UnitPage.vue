@@ -38,11 +38,7 @@
             class="cost unclicked"
             @click="changeButton('1cost', 'cost clicked')"
           >
-            <img
-              class="coin"
-              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-              alt="cost"
-            />
+            <img class="coin" src="../assets/coin.png" alt="cost" />
             <span class="coin">1</span>
           </button>
           <button
@@ -50,11 +46,7 @@
             class="cost unclicked"
             @click="changeButton('2cost', 'cost clicked')"
           >
-            <img
-              class="coin"
-              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-              alt="cost"
-            />
+            <img class="coin" src="../assets/coin.png" alt="cost" />
             <span class="coin">2</span>
           </button>
           <button
@@ -62,11 +54,7 @@
             class="cost unclicked"
             @click="changeButton('3cost', 'cost clicked')"
           >
-            <img
-              class="coin"
-              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-              alt="cost"
-            />
+            <img class="coin" src="../assets/coin.png" alt="cost" />
             <span class="coin">3</span>
           </button>
           <button
@@ -74,11 +62,7 @@
             class="cost unclicked"
             @click="changeButton('4cost', 'cost clicked')"
           >
-            <img
-              class="coin"
-              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-              alt="cost"
-            />
+            <img class="coin" src="../assets/coin.png" alt="cost" />
             <span class="coin">4</span>
           </button>
           <button
@@ -86,11 +70,7 @@
             class="cost unclicked"
             @click="changeButton('5cost', 'cost clicked')"
           >
-            <img
-              class="coin"
-              src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/pykegold.png"
-              alt="cost"
-            />
+            <img class="coin" src="../assets/coin.png" alt="cost" />
             <span class="coin">5</span>
           </button>
         </div>
