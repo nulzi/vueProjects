@@ -1,4 +1,5 @@
 <template>
+  <UnitInfo v-if="modalOpen" @close="modalOpen = 0"></UnitInfo>
   <div class="app_container">
     <div class="header-content">
       <Header></Header>
@@ -113,6 +114,7 @@
                           :src="GetChampionUrlByName(name)"
                           :style="GetChampBorderByCost(costs[index])"
                           alt="itemImg"
+                          @click="showDetail()"
                       /></a>
                       <div class="tip-container">
                         <div class="tip-name-container">
@@ -164,9 +166,6 @@
         </div>
       </div>
     </div>
-    <div class="info-content">
-      <UnitInfo></UnitInfo>
-    </div>
     <div class="footer-content">
       <Footer></Footer>
     </div>
@@ -193,6 +192,7 @@ export default {
   data() {
     return {
       alldata,
+      modalOpen: 1,
       container: 0,
       isClicked: [
         false,
@@ -238,6 +238,9 @@ export default {
     };
   },
   methods: {
+    showDetail() {
+      this.modalOpen = 1;
+    },
     changeState(index) {
       if (this.isClicked[index] === true) {
         this.isClicked[index] = false;
@@ -482,7 +485,6 @@ export default {
   grid-template-areas:
     'header header header'
     'a filter b'
-    'a info b'
     'footer footer footer';
   height: 100vh;
   align-items: stretch;
