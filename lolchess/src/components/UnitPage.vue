@@ -7,7 +7,15 @@
     <div class="sidebar-b"></div>
     <div class="filter-content">
       <div class="filter-container">
-        <h5>Filter</h5>
+        <div class="filter-header">
+          Filter
+          <img
+            src="../assets/reroll_default.png"
+            alt="init"
+            width="30"
+            height="30"
+          />
+        </div>
         <div class="filter">
           <button
             id="tableBtn"
@@ -516,11 +524,13 @@ export default {
   background-color: #faf8ec;
   height: 94%;
 }
-.info-content {
-  grid-area: info;
-}
 .filter-container {
   padding: 0.5rem;
+}
+.filter-header {
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
 }
 .filter1,
 .filter2,
