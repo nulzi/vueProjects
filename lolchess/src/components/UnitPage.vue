@@ -546,7 +546,7 @@ export default {
   height: 30px;
   margin: 0.3rem;
 }
-.clicked {
+.unclicked {
   color: black;
   border-radius: 10px;
   background-color: #faf8ec;
@@ -558,7 +558,7 @@ export default {
   border: 0.1px solid #c3936f;
   box-shadow: 4px 4px 0px 0 #c3936f, -5px -7px 1px 0 rgba(255, 255, 255, 0.3);
 }
-.unclicked {
+.clicked {
   color: black;
   border-radius: 10px;
   background-color: #faf8ec;
