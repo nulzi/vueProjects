@@ -44,7 +44,7 @@ export default {
         } else {
           //select another
           //checked filter off
-          isExist.item(0).classList.replace('clicked', 'unclicked');
+          // isExist.item(0).classList.replace('clicked', 'unclicked');
           //checked filter on
           classList.replace('unclicked', 'clicked');
         }
