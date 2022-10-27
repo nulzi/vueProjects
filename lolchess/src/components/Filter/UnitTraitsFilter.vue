@@ -1,0 +1,120 @@
+<template>
+  <div class="filter2">
+    <div class="filter-raw">
+      <div
+        v-for="(trait, index) in traits"
+        :key="index"
+        :class="traitChange(index)"
+        :style="{
+          'background-image': `url(${this.GetTraitImage(trait)})`,
+          'background-size': '65%',
+          'background-repeat': 'no-repeat',
+          'background-position': 'center',
+        }"
+        @click="changeState(index)"
+        alt="trait image"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import traitsdata from '../../assets/tfttraits.json';
+
+export default {
+  data() {
+    return {
+      isClicked: [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0,
+      ],
+      traits: [],
+    };
+  },
+  methods: {
+    traitChange(index) {
+      return this.isClicked[index] === 1
+        ? 'filter-trait-img clicked'
+        : 'filter-trait-img unclicked';
+    },
+    GetTraitName() {
+      for (let i = 0; i < traitsdata.length; i++) {
+        if (traitsdata[i].set === 'TFTSet7') {
+          this.traits.push(traitsdata[i].display_name);
+        }
+      }
+      // console.log(this.traits);
+    },
+    GetTraitImage(trait) {
+      // console.log(trait.toLowerCase());
+      const exceptionNone = ['assassin', 'shapeshifter'];
+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      const exception2 = ['mage', 'mystic'];
+      if (exceptionNone.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.png`;
+      } else if (exceptionStage2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.tft_set7_stage2.png`;
+      } else if (trait.toLowerCase() === 'bruiser') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png`;
+      } else if (exception2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${trait.toLowerCase()}.png`;
+      } else if (trait.toLowerCase() === 'scalescorn') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_dragonbane.png`;
+      } else if (trait.toLowerCase() === 'cavalier') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cavalry.png`;
+      } else if (trait.toLowerCase() === 'spelltheif') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_spellthief.png`;
+      } else if (trait.toLowerCase() === 'cannoneer') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
+      } else {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${trait.toLowerCase()}.png`;
+      }
+    },
+    changeState(index) {
+      if (this.isClicked[index] === 1) {
+        this.isClicked[index] = 0;
+      } else {
+        this.isClicked[index] = 1;
+      }
+      // console.log(this.isClicked[i]);
+    },
+  },
+  mounted() {
+    this.GetTraitName();
+  },
+};
+</script>
+
+<style scoped>
+.filter2 {
+  padding: 0.5rem 0rem;
+  margin: 0.5rem 0rem;
+}
+.filter2 .filter-trait-img {
+  display: flex;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin: 0.3rem;
+}
+.filter-raw {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.unclicked {
+  color: black;
+  border-radius: 10px;
+  background-color: #faf8ec;
+  border: 0.1px solid #c3936f;
+  box-shadow: 4px 4px 0px 0 #c3936f, -5px -7px 1px 0 rgba(255, 255, 255, 0.3);
+}
+.clicked {
+  color: black;
+  border-radius: 10px;
+  background-color: #faf8ec;
+  border: 0.1px solid #eec9ad;
+  box-shadow: inset 4px 4px 0px 0 #eec9ad,
+    inset -1px -1px 7px 0 rgba(255, 255, 255, 0.5);
+}
+</style>
