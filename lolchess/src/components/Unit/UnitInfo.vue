@@ -222,8 +222,9 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  position: fixed;
+  position: absolute;
   padding: 60px;
+  z-index: 1;
 }
 .btn-close {
   display: flex;
@@ -232,7 +233,7 @@ export default {
 }
 .info-container {
   box-sizing: border-box;
-  width: 55%;
+  max-width: 800px;
   background: white;
   border-radius: 8px;
   padding: 8px 20px 15px;
@@ -347,9 +348,10 @@ export default {
   flex-direction: column;
 }
 .champ-detail-stat-image {
-  margin-right: 0.2rem;
+  margin-right: 0.4rem;
 }
 .champ-detail-stats-table td {
   border: none;
+  width: 50%;
 }
 </style>
