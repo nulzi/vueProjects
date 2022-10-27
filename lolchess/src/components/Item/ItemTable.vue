@@ -14,7 +14,7 @@
             <div class="table-item">
               <div class="help-tip">
                 <a>
-                  <img :src="item.src" alt="itemImg" width="44" height="44" />
+                  <img :src="item.src" alt="itemImg" width="28" height="28" />
                 </a>
                 <div class="tip-container">
                   <div class="tip-name-container">
@@ -320,7 +320,7 @@ td .table-frequency {
   background-color: #1e2021;
   padding: 10px;
   /* detail window width */
-  width: 200px;
+  width: 150px;
   position: absolute;
   z-index: 1;
   border-radius: 3px;
