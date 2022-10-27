@@ -13,14 +13,15 @@
           <td>
             <div class="table-item">
               <div class="help-tip">
-                <a
-                  ><img
+                <a>
+                  <img
                     class="unit-img"
                     :src="GetChampionUrlByName(name)"
                     :style="GetChampBorderByCost(costs[index])"
                     alt="itemImg"
                     @click="showDetail()"
-                /></a>
+                  />
+                </a>
                 <div class="tip-container">
                   <div class="tip-name-container">
                     <p class="tip-name">
@@ -35,20 +36,20 @@
                     <img
                       :src="this.GetItem(1)"
                       alt="recommanditem1"
-                      width="15px"
-                      height="15px"
+                      width="15"
+                      height="15"
                     />
                     <img
                       :src="this.GetItem(7)"
                       alt="recommanditem2"
-                      width="15px"
-                      height="15px"
+                      width="15"
+                      height="15"
                     />
                     <img
                       :src="this.GetItem(3)"
                       alt="recommanditem3"
-                      width="15px"
-                      height="15px"
+                      width="15"
+                      height="15"
                     />
                   </p>
                 </div>
