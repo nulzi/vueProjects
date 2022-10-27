@@ -84,15 +84,15 @@
               <tr>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/attack.png"
                     alt="coin-img"
                   />40
                 </td>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/magicAttack.png"
                     alt="coin-img"
                   />100%
                 </td>
@@ -100,15 +100,15 @@
               <tr>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/defend.png"
                     alt="coin-img"
                   />45
                 </td>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/magicDefend.png"
                     alt="coin-img"
                   />45
                 </td>
@@ -116,15 +116,15 @@
               <tr>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/attackSpeed.png"
                     alt="coin-img"
                   />0.6
                 </td>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/rangeGray.png"
                     alt="coin-img"
                   />2
                 </td>
@@ -132,15 +132,15 @@
               <tr>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/critRate.png"
                     alt="coin-img"
                   />0.25
                 </td>
                 <td>
                   <img
-                    class="champ-detail-cost-image"
-                    src="../assets/coin.png"
+                    class="champ-detail-stat-image"
+                    src="../assets/stats/critAdd.png"
                     alt="coin-img"
                   />130
                 </td>
@@ -232,7 +232,7 @@ export default {
 }
 .info-container {
   box-sizing: border-box;
-  width: 40%;
+  width: 55%;
   background: white;
   border-radius: 8px;
   padding: 8px 20px 15px;
@@ -345,6 +345,9 @@ export default {
 .champ-detail-stats-right {
   display: flex;
   flex-direction: column;
+}
+.champ-detail-stat-image {
+  margin-right: 0.2rem;
 }
 .champ-detail-stats-table td {
   border: none;
