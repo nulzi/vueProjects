@@ -13,13 +13,13 @@
             v-for="(champstar, index) in champStars"
             :key="index"
             @click="fillStar(index)"
-            :src="require(`../assets/${star[index]}.png`)"
+            :src="require(`../../assets/${star[index]}.png`)"
             alt="champ-star"
           />
         </div>
         <div class="champ-detail-header">
           <img
-            src="../assets/logo.png"
+            src="../../assets/logo.png"
             alt="champ-img"
             width="60"
             height="60"
@@ -30,7 +30,7 @@
               <div class="champ-detail-cost-name">cost</div>
               <img
                 class="champ-detail-cost-image"
-                src="../assets/coin.png"
+                src="../../assets/coin.png"
                 alt="coin-img"
               />4
             </div>
@@ -38,12 +38,12 @@
               <div class="champ-detail-trait-name">traits</div>
               <img
                 class="champ-detail-cost-image"
-                src="../assets/coin.png"
+                src="../../assets/coin.png"
                 alt="coin-img"
               />
               <img
                 class="champ-detail-cost-image"
-                src="../assets/coin.png"
+                src="../../assets/coin.png"
                 alt="coin-img"
               />
             </div>
@@ -85,14 +85,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/attack.png"
+                    src="../../assets/stats/attack.png"
                     alt="coin-img"
                   />40
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/magicAttack.png"
+                    src="../../assets/stats/magicAttack.png"
                     alt="coin-img"
                   />100%
                 </td>
@@ -101,14 +101,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/defend.png"
+                    src="../../assets/stats/defend.png"
                     alt="coin-img"
                   />45
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/magicDefend.png"
+                    src="../../assets/stats/magicDefend.png"
                     alt="coin-img"
                   />45
                 </td>
@@ -117,14 +117,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/attackSpeed.png"
+                    src="../../assets/stats/attackSpeed.png"
                     alt="coin-img"
                   />0.6
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/rangeGray.png"
+                    src="../../assets/stats/rangeGray.png"
                     alt="coin-img"
                   />2
                 </td>
@@ -133,14 +133,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/critRate.png"
+                    src="../../assets/stats/critRate.png"
                     alt="coin-img"
                   />0.25
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../assets/stats/critAdd.png"
+                    src="../../assets/stats/critAdd.png"
                     alt="coin-img"
                   />130
                 </td>
@@ -167,7 +167,7 @@
               class="recommand-item-image"
               v-for="recommandItem in recommandItems"
               :key="recommandItem"
-              src="../assets/logo.png"
+              src="../../assets/logo.png"
               alt="recommand-item"
               width="40"
               height="40"
@@ -349,6 +349,9 @@ export default {
 }
 .champ-detail-stat-image {
   margin-right: 0.4rem;
+}
+.champ-detail-stats-table {
+  width: 100%;
 }
 .champ-detail-stats-table td {
   border: none;
