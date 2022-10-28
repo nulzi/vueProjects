@@ -19,7 +19,7 @@
                     alt="itemImg"
                     width="28"
                     height="28"
-                    @click="this.$emit('open', 0)"
+                    @click="this.$emit('open')"
                   />
                 </a>
                 <div class="tip-container">
