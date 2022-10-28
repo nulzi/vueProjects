@@ -9,13 +9,13 @@
         <th><div class="table-frequency">Frequency</div></th>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.name">
+        <tr v-for="item in items" :key="item">
           <td>
             <div class="table-item">
               <div class="help-tip">
                 <a>
                   <img
-                    :src="item.src"
+                    :src="GetItemUrlByID(item.id)"
                     alt="itemImg"
                     width="28"
                     height="28"
@@ -24,24 +24,31 @@
                 </a>
                 <div class="tip-container">
                   <div class="tip-name-container">
-                    <p class="tip-name">{{ item.name }}</p>
+                    <p class="tip-name">
+                      {{ item.name }}
+                    </p>
                   </div>
                   <p class="tip-detail">
                     <br />
-                    <strong> +200ap +200hp </strong>
-                    <img
-                      :src="this.GetItem(1)"
-                      alt="recipeitem1"
-                      width="15"
-                      height="15"
-                    />
-                    +
-                    <img
-                      :src="this.GetItem(7)"
-                      alt="recipeitem2"
-                      width="15"
-                      height="15"
-                    />
+                    <strong v-for="(effect, name) in item.effects" :key="name">
+                      {{ name }}+{{ effect }}
+                    </strong>
+                    <span
+                      v-if="!isEmptyArr(item.from)"
+                      class="tip-detail-image"
+                    >
+                      <img
+                        :src="this.GetItemUrlByID(item.from[0])"
+                        alt="recipeitem1"
+                        width="15"
+                        height="15" />
+                      +
+                      <img
+                        :src="this.GetItemUrlByID(item.from[1])"
+                        alt="recipeitem2"
+                        width="15"
+                        height="15"
+                    /></span>
                   </p>
                 </div>
               </div>
@@ -62,163 +69,19 @@
 
 <script>
 import alldata from '../../assets/data.json';
+import newdata from '../../assets/newdata.json';
 
 export default {
   data() {
     return {
-      items: [
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-        {
-          name: "Zeke's Herald",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/17.png',
-          about:
-            'Combat start: Grant 30% Attack Speed to the holder and allies within 1 hex in the same row.​​[Aura item]',
-        },
-        {
-          name: "Protector's Vow",
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/45.png',
-          about:
-            'Grant 15 bonus starting Mana. Once per combat: At 50% Health, allies within 3 hexes gain a 20% maximum Health shield that lasts up to 2 seconds. Shielded allies gain 15 Armor and 15 Magic Resist for the rest of combat.​​[Aura item]',
-        },
-        {
-          name: 'Shroud of Stillness',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/59.png',
-          about:
-            'Combat start: Shoot a beam that increases the maximum Mana of affected enemies by 35% until they cast.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Sunfire Cape',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/57.png',
-          about:
-            'Grant 150 bonus Health. Every 2 seconds, an enemy within 2 hexes is burned for 10% of their maximum Health as true damage over 10 seconds, and reducing healing by 50% for the duration.[Unique - only 1 per champion]',
-        },
-        {
-          name: 'Hand Of Justice',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/49.png',
-          about:
-            'Grant 2 effects: +15 Attack Damage and +15 Ability Power.15% Omnivamp.Each round, randomly double 1 of these effects.',
-        },
-        {
-          name: 'Bloodthirster',
-          src: 'https://cdn.metatft.com/file/metatft/set7/items/16.png',
-          about:
-            'Grant 25% Omnivamp.Once per combat: At 40% Health, gain a 25% maximum Health shield that lasts up to 5 seconds.',
-        },
-      ],
+      items: [],
     };
   },
   methods: {
     showDetail() {
       this.modalOpen = 1;
     },
-    GetItem(item) {
+    GetItemUrlByID(item) {
       // console.log(item);
       for (let j in alldata.items) {
         if (item == alldata.items[j].id) {
@@ -230,6 +93,29 @@ export default {
         }
       }
     },
+    GetItems() {
+      //tierItem is server data
+      // for (let i = 0; i < newdata.items.length; i++) {
+      //   let id = newdata.items[i].id;
+      //   const filter1 = 'tft7_item';
+      //   if (id == tierItem.items[i].id) this.items.push(newdata.items[i]);
+      // }
+      for (let i = 0; i < newdata.items.length; i++) {
+        let name = newdata.items[i].apiName.toLowerCase().replace(/ /g, '');
+        const filter1 = 'tft7_item';
+        if (name.includes(filter1)) this.items.push(newdata.items[i]);
+      }
+    },
+    isEmptyArr(arr) {
+      if (Array.isArray(arr) && arr.length === 0) {
+        return true;
+      }
+
+      return false;
+    },
+  },
+  created() {
+    this.GetItems();
   },
 };
 </script>
