@@ -7,6 +7,7 @@
       alt="init"
       width="22"
       height="22"
+      @click="this.$emit('reset')"
     />
   </div>
 </template>

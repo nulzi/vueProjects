@@ -7,7 +7,15 @@
     <div class="sidebar-a"></div>
     <div class="sidebar-b"></div>
     <div class="filter-content">
-      <Filter></Filter>
+      <Filter
+        :content="this.container"
+        :type="this.type"
+        :base="this.base"
+        @reset="reset"
+        @content="changeContent"
+        @type="changeType"
+        @base="changeBase"
+      ></Filter>
       <div class="item-content">
         <ItemTable v-if="container === 0" @open="modalOpen = 1"></ItemTable>
         <ItemApex v-if="container === 1"></ItemApex>
@@ -37,9 +45,29 @@ export default {
     Filter,
   },
   data() {
-    return { modalOpen: 1, container: 0 };
+    return { modalOpen: 0, container: 0, type: [0, 0, 0, 0, 0], base: 0 };
   },
-  methods: {},
+  methods: {
+    reset() {
+      console.log('reset');
+      this.container = 0;
+      this.type = [0, 0, 0, 0, 0];
+      this.base = 0;
+    },
+    changeContent(content) {
+      console.log(`content${content}`);
+      // console.log(`page: ${content}`);
+      this.container = content;
+    },
+    changeType(type) {
+      console.log(`type${type}`);
+      this.type[type - 1] = 1;
+    },
+    changeBase(base) {
+      console.log(`base${base}`);
+      this.base = base;
+    },
+  },
 };
 </script>
 

@@ -1,9 +1,10 @@
 <template>
   <div class="filter-container">
-    <Header></Header>
-    <Content></Content>
-    <Type></Type>
-    <Base></Base>
+    <Header @reset="reset"></Header>
+    <Content :content="content" @content="changeContent"></Content>
+    <Type :type="type" @type="changeType"></Type>
+    <Base :base="base" @base="changeBase"></Base>
+    {{ `${content}, ${type}, ${base}` }}
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Type from './ItemTypeFilter.vue';
 import Base from './BaseItemFilter.vue';
 
 export default {
+  props: ['content', 'type', 'base'],
   components: {
     Header,
     Content,
@@ -23,7 +25,24 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    reset() {
+      // console.log('reset');
+      this.$emit('reset');
+    },
+    changeContent(content) {
+      // console.log(`fileter: ${content}`);
+      this.$emit('content', content);
+    },
+    changeType(type) {
+      // console.log(`fileter: ${content}`);
+      this.$emit('type', type);
+    },
+    changeBase(itemID) {
+      // console.log(`fileter: ${itemID}`);
+      this.$emit('base', itemID);
+    },
+  },
 };
 </script>
 

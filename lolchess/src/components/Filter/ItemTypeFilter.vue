@@ -8,7 +8,7 @@
           ? 'filter-type clicked'
           : 'filter-type unclicked',
       ]"
-      @click="changeState(index)"
+      @click="changeType(index)"
     >
       {{ type }}
     </button>
@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  props: ['type'],
   data() {
     return {
       types: [
@@ -30,13 +31,20 @@ export default {
     };
   },
   methods: {
-    changeState(i) {
+    reset() {
+      this.isClicked = this.type;
+    },
+    changeType(i) {
       if (this.isClicked[i] === 1) {
         this.isClicked[i] = 0;
       } else {
         this.isClicked[i] = 1;
+        this.$emit('type', i + 1);
       }
     },
+  },
+  updated() {
+    this.reset();
   },
 };
 </script>

@@ -5,7 +5,7 @@
       :key="item"
       :id="item.name"
       class="filter-item-img unclicked"
-      @click="changeButton(item.name)"
+      @click="changeBase(item)"
       :src="this.GetItem(item.id)"
       :alt="item.name"
     />
@@ -16,44 +16,64 @@
 import alldata from '../../assets/data.json';
 
 export default {
+  props: ['base'],
   data() {
     return {
       items: [
-        { isClicked: 0, name: 'swordFilter', id: 1 },
-        { isClicked: 0, name: 'bowFilter', id: 2 },
-        { isClicked: 0, name: 'rodFilter', id: 3 },
-        { isClicked: 0, name: 'tearFilter', id: 4 },
-        { isClicked: 0, name: 'vestFilter', id: 5 },
-        { isClicked: 0, name: 'cloakFilter', id: 6 },
-        { isClicked: 0, name: 'beltFilter', id: 7 },
-        { isClicked: 0, name: 'glovesFilter', id: 9 },
+        { name: 'swordFilter', id: 1 },
+        { name: 'bowFilter', id: 2 },
+        { name: 'rodFilter', id: 3 },
+        { name: 'tearFilter', id: 4 },
+        { name: 'vestFilter', id: 5 },
+        { name: 'cloakFilter', id: 6 },
+        { name: 'beltFilter', id: 7 },
+        { name: 'glovesFilter', id: 9 },
       ],
+      isClicked: 0,
     };
   },
   methods: {
-    changeButton(id) {
-      const classList = document.getElementById(id).classList;
+    reset(base) {
+      if (base == 0) {
+        // console.log('reset');
+        for (let item of this.items) {
+          // console.log(item);
+          if (this.isClicked === item.id) {
+            const classList = document.getElementById(item.name).classList;
+            classList.replace('clicked', 'unclicked');
+          }
+        }
+      }
+      this.isClicked = base;
+    },
+    changeBase(item) {
+      const classList = document.getElementById(item.name).classList;
       const isExist = document.getElementsByClassName(
         'filter-item-img clicked'
       );
 
       if (isExist.length === 0) {
         //선택된 필터가 없는 경우
+        this.isClicked = item.id;
         classList.replace('unclicked', 'clicked');
       } else {
         //선택된 필터가 이미 있는 경우
 
         //이미 선택된 것을 끄고 싶을 경우
         if (classList.contains('clicked')) {
+          this.isClicked = 0;
           classList.replace('clicked', 'unclicked');
         } else {
           //다른 것을 선택한 경우
           //선택된 필터를 끄기
           isExist.item(0).classList.replace('clicked', 'unclicked');
           //선택한 필터 켜기
+          this.isClicked = item.id;
           classList.replace('unclicked', 'clicked');
         }
       }
+      // console.log(this.isClicked);
+      this.$emit('base', this.isClicked);
     },
     GetItem(item) {
       // console.log(item);
@@ -67,6 +87,9 @@ export default {
         }
       }
     },
+  },
+  updated() {
+    this.reset(this.base);
   },
 };
 </script>

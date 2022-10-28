@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import alldata from '../../assets/data.json';
+// import alldata from '../../assets/data.json';
 import newdata from '../../assets/newdata.json';
 
 export default {
@@ -83,13 +83,31 @@ export default {
     },
     GetItemUrlByID(item) {
       // console.log(item);
-      for (let j in alldata.items) {
-        if (item == alldata.items[j].id) {
-          return `https://raw.communitydragon.org/latest/game/${alldata.items[
-            j
-          ].icon
+      // for (let j in newdata.items) {
+      //   if (item == newdata.items[j].id) {
+      //     console.log(
+      //       `https://raw.communitydragon.org/latest/game/${newdata.items[j].icon
+      //         .toLowerCase()
+      //         .slice(0, -4)}.png`
+      //     );
+      //     return `https://raw.communitydragon.org/latest/game/${newdata.items[
+      //       j
+      //     ].icon
+      //       .toLowerCase()
+      //       .slice(0, -4)}.png`;
+      //   }
+      // }
+      // console.log(item)
+      for (let j in newdata.items) {
+        if (item == newdata.items[j].id) {
+          // console.log(newdata.items[j].icon.toLowerCase().split('.'));
+          let temp = newdata.items[j].icon
             .toLowerCase()
-            .slice(0, -4)}.png`;
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
         }
       }
     },
@@ -101,9 +119,10 @@ export default {
       //   if (id == tierItem.items[i].id) this.items.push(newdata.items[i]);
       // }
       for (let i = 0; i < newdata.items.length; i++) {
-        let name = newdata.items[i].apiName.toLowerCase().replace(/ /g, '');
-        const filter1 = 'tft7_item';
-        if (name.includes(filter1)) this.items.push(newdata.items[i]);
+        // let name = newdata.items[i].apiName.toLowerCase().replace(/ /g, '');
+        // const filter1 = 'tft7_item';
+        // if (name.includes(filter1)) this.items.push(newdata.items[i]);
+        this.items.push(newdata.items[i]);
       }
     },
     isEmptyArr(arr) {

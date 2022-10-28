@@ -2,14 +2,14 @@
   <div class="filter">
     <button
       id="tableBtn"
-      @click="changeTable('tableBtn')"
+      @click="changeContent('tableBtn')"
       class="filter-change-button clicked"
     >
       table
     </button>
     <button
       id="graphBtn"
-      @click="changeTable('graphBtn')"
+      @click="changeContent('graphBtn')"
       class="filter-change-button unclicked"
     >
       graph
@@ -19,11 +19,12 @@
 
 <script>
 export default {
+  props: ['content'],
   data() {
     return {};
   },
   methods: {
-    changeTable(id) {
+    reset(id) {
       const classList = document.getElementById(id).classList;
       const isExist = document.getElementsByClassName(
         'filter-change-button clicked'
@@ -32,9 +33,17 @@ export default {
       isExist.item(0).classList.replace('clicked', 'unclicked');
       //checked filter on
       classList.replace('unclicked', 'clicked');
-      if (id === 'tableBtn') this.container = 0;
-      else this.container = 1;
     },
+    changeContent(id) {
+      this.reset(id);
+      if (id === 'tableBtn') this.$emit('content', 0);
+      else this.$emit('content', 1);
+    },
+  },
+  updated() {
+    if (this.content == 0) {
+      this.reset('tableBtn');
+    }
   },
 };
 </script>
