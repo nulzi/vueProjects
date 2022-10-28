@@ -6,7 +6,7 @@
       padding: 3%;
     "
   >
-    <div class="my-tier" v-for="(tier, tIndex) in this.getData" :key="tIndex">
+    <div class="my-tier" v-for="(tier, tIndex) in this.tierdata" :key="tIndex">
       <div class="my-tier-main">
         <img
           style="margin-right: 1%"
@@ -104,10 +104,10 @@
 </template>
 
 <script>
-import alldata from "../assets/data.json";
-import UserTabs from "./UserTabs.vue";
-import tierdata from "../assets/TierData.json";
-import axios from "axios";
+import alldata from '../assets/data.json';
+import UserTabs from './UserTabs.vue';
+import tierdata from '../assets/TierData.json';
+import axios from 'axios';
 
 export default {
   data() {
@@ -121,16 +121,16 @@ export default {
   components: { UserTabs },
   methods: {
     GetChampionUrlByName(championName) {
-      let changeName = "";
+      let changeName = '';
       let temp = championName.toLowerCase();
-      if (temp == "tft7_dragonblue") {
-        changeName = "tft7_miragedragon";
-      } else if (temp == "tft7_dragongold") {
-        changeName = "tft7_shimmerscaledragon";
-      } else if (temp == "tft7_dragongreen") {
-        changeName = "tft7_jadedragon";
-      } else if (temp == "tft7_dragonpurple") {
-        changeName = "tft7_whispersdragon";
+      if (temp == 'tft7_dragonblue') {
+        changeName = 'tft7_miragedragon';
+      } else if (temp == 'tft7_dragongold') {
+        changeName = 'tft7_shimmerscaledragon';
+      } else if (temp == 'tft7_dragongreen') {
+        changeName = 'tft7_jadedragon';
+      } else if (temp == 'tft7_dragonpurple') {
+        changeName = 'tft7_whispersdragon';
       } else {
         changeName = temp;
       }
@@ -160,14 +160,14 @@ export default {
     },
     GetDeck() {
       axios
-        .get("/test/mockdoridomabem")
+        .get('/test/mockdoridomabem')
         .then((result) => {
           console.log(`GetDeck: ${result.data}`);
           console.log(result.data);
           this.getData = result.data;
         })
         .catch(() => {
-          console.log("GetDeck Error");
+          console.log('GetDeck Error');
         });
     },
   },
