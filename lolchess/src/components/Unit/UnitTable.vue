@@ -19,7 +19,7 @@
                     :src="GetChampionUrlByName(name)"
                     :style="GetChampBorderByCost(costs[index])"
                     alt="itemImg"
-                    @click="showDetail()"
+                    @click="showModal(name)"
                   />
                 </a>
                 <div class="tip-container">
@@ -89,8 +89,9 @@ export default {
     };
   },
   methods: {
-    showDetail() {
-      this.modalOpen = 1;
+    showModal(name) {
+      // console.log(`emit:${name}`);
+      this.$emit('open', 1, name);
     },
     GetItem(item) {
       // console.log(item);
@@ -204,6 +205,7 @@ export default {
       }
     },
     GetChampionUrlByName(championName) {
+      // console.log(championName);
       let changeName = '';
       let temp = championName.toLowerCase();
 

@@ -19,12 +19,12 @@
         </div>
         <div class="champ-detail-header">
           <img
-            src="../../assets/logo.png"
+            :src="GetChampionUrlByName(this.champName)"
             alt="champ-img"
             width="60"
             height="60"
           />
-          <div class="champ-detail-name">champ-name</div>
+          <div class="champ-detail-name">{{ this.champ.name }}</div>
           <div class="champ-detail-sub">
             <div class="champ-detail-cost">
               <div class="champ-detail-cost-name">cost</div>
@@ -32,18 +32,15 @@
                 class="champ-detail-cost-image"
                 src="../../assets/coin.png"
                 alt="coin-img"
-              />4
+              />{{ this.champ.cost }}
             </div>
             <div class="champ-detail-trait">
               <div class="champ-detail-trait-name">traits</div>
               <img
-                class="champ-detail-cost-image"
-                src="../../assets/coin.png"
-                alt="coin-img"
-              />
-              <img
-                class="champ-detail-cost-image"
-                src="../../assets/coin.png"
+                v-for="trait in this.champ.traits"
+                :key="trait"
+                class="champ-detail-trait-image"
+                :src="GetTraitImage(trait)"
                 alt="coin-img"
               />
             </div>
@@ -51,10 +48,11 @@
         </div>
         <div class="champ-detail-body">
           <div class="champ-detail-main">
-            <div class="champ-detail-hp">hp</div>
-            <div class="champ-detail-mana">initialmana/mana</div>
+            <div class="champ-detail-hp">{{ this.stats.hp }}</div>
+            <div class="champ-detail-mana">
+              {{ this.stats.initialMana }}/{{ this.champ.stats.armor }}
+            </div>
             <div class="champ-detail-skill">
-              <!-- <div class="champ-detail-skill-image"> -->
               <img
                 class="champ-detail-skill-image"
                 src="https://ddragon.leagueoflegends.com/cdn/12.13.1/img/spell/VladimirQ.png"
@@ -62,16 +60,16 @@
                 width="44"
                 height="44"
               />
-              <!-- </div> -->
               <div class="champ-detail-skill-info">
-                <div class="champ-detail-skill-name">skill-name</div>
+                <div class="champ-detail-skill-name">
+                  {{ this.ability.name }}
+                </div>
                 <div class="champ-detail-skill-desc">
-                  Vladimir deals @ModifiedDamage@ magic damage to the target and
-                  heals for @ModifiedHeal@ Health.
+                  {{ this.ability.desc }}
                 </div>
                 <div
                   class="champ-detail-skill-variables"
-                  v-for="variable in variables"
+                  v-for="variable in this.champ.variables"
                   :key="variable"
                 >
                   {{ variable.name }}: {{ variable.value }}
@@ -85,14 +83,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/attack.png"
+                    src="../../assets/stats/AD.png"
                     alt="coin-img"
                   />40
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/magicAttack.png"
+                    src="../../assets/stats/AP.png"
                     alt="coin-img"
                   />100%
                 </td>
@@ -101,14 +99,14 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/defend.png"
+                    src="../../assets/stats/Armor.png"
                     alt="coin-img"
                   />45
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/magicDefend.png"
+                    src="../../assets/stats/MagicResist.png"
                     alt="coin-img"
                   />45
                 </td>
@@ -117,7 +115,7 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/attackSpeed.png"
+                    src="../../assets/stats/AS.png"
                     alt="coin-img"
                   />0.6
                 </td>
@@ -133,7 +131,7 @@
                 <td>
                   <img
                     class="champ-detail-stat-image"
-                    src="../../assets/stats/critRate.png"
+                    src="../../assets/stats/CritChance.png"
                     alt="coin-img"
                   />0.25
                 </td>
@@ -180,10 +178,17 @@
 </template>
 
 <script>
+import newdata from '../../assets/newdata.json';
+
 export default {
+  props: ['champName'],
   components: {},
   data() {
     return {
+      champ: {},
+      stats: {},
+      ability: {},
+      stage2: [],
       variables: [
         { name: 'variable', value: 'value' },
         { name: 'variable', value: 'value' },
@@ -209,6 +214,110 @@ export default {
       else this.champStars = [1, 1, 1];
       this.checkStar(index);
     },
+    GetChamp(champName) {
+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+        let name = newdata.setData[0].champions[i].apiName
+          .toLowerCase()
+          .replace(/ /g, '');
+        if (name === champName) this.champ = newdata.setData[0].champions[i];
+      }
+      console.log(this.champ);
+    },
+    GetChampNameStage2() {
+      //store name that has different url
+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
+        let name = newdata.setData[0].champions[i].apiName
+          .toLowerCase()
+          .replace(/ /g, '');
+        if (
+          newdata.setData[0].champions[i].traits[0] === undefined ||
+          newdata.setData[0].champions[i].traits[1] === undefined
+        )
+          continue;
+        else if (
+          exceptionStage2.includes(
+            newdata.setData[0].champions[i].traits[0].toLowerCase()
+          ) ||
+          exceptionStage2.includes(
+            newdata.setData[0].champions[i].traits[1].toLowerCase()
+          )
+        )
+          this.stage2.push(name);
+        // console.log(newdata.setData[0].champions[i].traits[0].toLowerCase());
+      }
+    },
+    GetChampionUrlByName(championName) {
+      // console.log(championName);
+      let changeName = '';
+      let temp = championName.toLowerCase();
+
+      if (temp == 'tft7_dragonblue') {
+        changeName = 'tft7_miragedragon';
+      } else if (temp == 'tft7_dragongold') {
+        changeName = 'tft7_shimmerscaledragon';
+      } else if (temp == 'tft7_dragongreen') {
+        changeName = 'tft7_jadedragon';
+      } else if (temp == 'tft7_dragonpurple') {
+        changeName = 'tft7_whispersdragon';
+      } else if (temp == 'tft7_aquaticdragon') {
+        changeName = 'tft7_sohm';
+      } else if (temp == 'tft7_nomsy') {
+        temp = 'tft7_nomsymage';
+        changeName = 'tft7_nomsy';
+      } else if (temp == 'tft7_heimerdinger') {
+        temp = 'tft7b_heimerdinger';
+        changeName = temp;
+      } else if (temp == 'tft7_tristana') {
+        temp = 'tft7b_tristana';
+        changeName = temp;
+      } else if (temp == 'tft7_lulu') {
+        temp = 'tft7b_lulu';
+        changeName = temp;
+      } else {
+        changeName = temp;
+      }
+      // console.log(temp)
+      // console.log(changeName)
+      if (this.stage2.includes(temp))
+        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7_stage2.png`;
+      else if (temp == 'tft7_dragonguild')
+        return 'https://raw.communitydragon.org/latest/game/assets/characters/tft7_dragonguild/hud/icons2d/tft7_zippy_square.tft_set7_stage2.png';
+      else
+        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7.png`;
+    },
+    GetTraitImage(trait) {
+      // console.log(trait.toLowerCase());
+      const exceptionNone = ['assassin', 'shapeshifter'];
+      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
+      const exception2 = ['mage', 'mystic'];
+      if (exceptionNone.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.png`;
+      } else if (exceptionStage2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.tft_set7_stage2.png`;
+      } else if (trait.toLowerCase() === 'bruiser') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png`;
+      } else if (exception2.includes(trait.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${trait.toLowerCase()}.png`;
+      } else if (trait.toLowerCase() === 'scalescorn') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_dragonbane.png`;
+      } else if (trait.toLowerCase() === 'cavalier') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cavalry.png`;
+      } else if (trait.toLowerCase() === 'spelltheif') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_spellthief.png`;
+      } else if (trait.toLowerCase() === 'cannoneer') {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
+      } else {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${trait.toLowerCase()}.png`;
+      }
+    },
+  },
+  mounted() {
+    // console.log(this.champName);
+    this.GetChamp(this.champName);
+    this.GetChampNameStage2();
+    this.stats = this.champ.stats;
+    this.ability = this.champ.ability;
   },
 };
 </script>
@@ -246,10 +355,7 @@ export default {
 .champion-container {
   display: flex;
   flex-direction: column;
-}
-.second-star,
-.third-star {
-  -webkit-filter: grayscale(100%);
+  padding: 0rem 1rem;
 }
 .info-container hr {
   margin-top: 0px;
@@ -331,6 +437,14 @@ export default {
   margin-right: 0.1rem;
   padding: 0.2rem 0rem 0.1rem;
   border-radius: 10px;
+}
+.champ-detail-trait-image {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.1rem;
+  padding: 0.2rem 0rem 0.1rem;
+  border-radius: 10px;
+  background-color: black;
 }
 .champ-detail-skill-image {
   position: absolute;

@@ -1,5 +1,9 @@
 <template>
-  <UnitInfo v-if="modalOpen" @close="modalOpen = 0"></UnitInfo>
+  <UnitInfo
+    v-if="modalOpen"
+    @close="modalOpen = 0"
+    :champName="this.champName"
+  ></UnitInfo>
   <div class="app_container">
     <div class="header-content">
       <Header></Header>
@@ -9,7 +13,7 @@
     <div class="filter-content">
       <Filter></Filter>
       <div class="unit-content">
-        <UnitTable v-if="container === 0"></UnitTable>
+        <UnitTable v-if="container === 0" @open="showModal"></UnitTable>
         <UnitApex v-if="container === 1"></UnitApex>
       </div>
     </div>
@@ -38,9 +42,17 @@ export default {
   },
   data() {
     return {
-      modalOpen: 1,
+      modalOpen: 0,
       container: 0,
+      champName: '',
     };
+  },
+  methods: {
+    showModal(modalOpen, name) {
+      this.modalOpen = modalOpen;
+      this.champName = name;
+      // console.log(`champName: ${this.champName}`);
+    },
   },
 };
 </script>
