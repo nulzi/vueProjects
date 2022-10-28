@@ -1,7 +1,7 @@
 <template>
   <div class="filter-container">
-    <Header></Header>
-    <Content></Content>
+    <Header @reset="reset"></Header>
+    <Content @content="changeContent"></Content>
     <UnitCost></UnitCost>
     <UnitTraits></UnitTraits>
   </div>
@@ -23,7 +23,13 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    changeContent(content) {
+      // console.log(`fileter: ${content}`);
+      this.$emit('content', content);
+    },
+    reset() {},
+  },
 };
 </script>
 

@@ -11,7 +11,7 @@
     <div class="sidebar-a"></div>
     <div class="sidebar-b"></div>
     <div class="filter-content">
-      <Filter></Filter>
+      <Filter @content="changeContent"></Filter>
       <div class="unit-content">
         <UnitTable v-if="container === 0" @open="showModal"></UnitTable>
         <UnitApex v-if="container === 1"></UnitApex>
@@ -52,6 +52,10 @@ export default {
       this.modalOpen = modalOpen;
       this.champName = name;
       // console.log(`champName: ${this.champName}`);
+    },
+    changeContent(content) {
+      // console.log(`page: ${content}`);
+      this.container = content;
     },
   },
 };
