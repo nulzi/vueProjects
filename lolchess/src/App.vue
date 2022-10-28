@@ -12,16 +12,18 @@
     :matchData="this.More(this.userName)"
   ></ResultPage> -->
   <!-- <SearchPage v-if="$store.state.page == 0"></SearchPage> -->
-  <ResultPage v-if="$store.state.page == 1"></ResultPage>
-  <!-- <ItemPage v-if="$store.state.page == 0"></ItemPage> -->
-  <UnitPage v-if="$store.state.page == 0"></UnitPage>
+  <!-- <ResultPage v-if="$store.state.page == 1"></ResultPage> -->
+  <ItemPage v-if="$store.state.page == 0"></ItemPage>
+  <UnitPage v-if="$store.state.page == 1"></UnitPage>
 </template>
 
 <script>
 // import SearchPage from './components/SearchPage.vue';
-import ResultPage from './components/ResultPage.vue';
-// import ItemPage from './components/ItemPage.vue';
-import UnitPage from './components/UnitPage.vue';
+// import ResultPage from './components/ResultPage.vue';
+import ItemPage from './components/Item/ItemPage.vue';
+// import ItemPage from './components/Filter/ItemFilterContainer.vue';
+// import ItemPage from './components/Filter/UnitFilterContainer.vue';
+import UnitPage from './components/Unit/UnitPage.vue';
 import axios from 'axios';
 
 export default {
@@ -36,8 +38,8 @@ export default {
   props: {},
   components: {
     // SearchPage,
-    ResultPage,
-    // ItemPage,
+    // ResultPage,
+    ItemPage,
     UnitPage,
   },
   methods: {

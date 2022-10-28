@@ -48,9 +48,11 @@
         </div>
         <div class="champ-detail-body">
           <div class="champ-detail-main">
-            <div class="champ-detail-hp">{{ this.stats.hp }}</div>
+            <div class="champ-detail-hp">
+              {{ this.champ.stats.hp }}
+            </div>
             <div class="champ-detail-mana">
-              {{ this.stats.initialMana }}/{{ this.champ.stats.armor }}
+              {{ this.champ.stats.initialMana }} / {{ this.champ.stats.mana }}
             </div>
             <div class="champ-detail-skill">
               <img
@@ -62,14 +64,14 @@
               />
               <div class="champ-detail-skill-info">
                 <div class="champ-detail-skill-name">
-                  {{ this.ability.name }}
+                  {{ this.champ.ability.name }}
                 </div>
                 <div class="champ-detail-skill-desc">
-                  {{ this.ability.desc }}
+                  {{ this.champ.ability.desc }}
                 </div>
                 <div
                   class="champ-detail-skill-variables"
-                  v-for="variable in this.champ.variables"
+                  v-for="variable in this.champ.ability.variables"
                   :key="variable"
                 >
                   {{ variable.name }}: {{ variable.value }}
@@ -85,7 +87,7 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/AD.png"
                     alt="coin-img"
-                  />40
+                  />{{ this.champ.stats.damage }}
                 </td>
                 <td>
                   <img
@@ -101,14 +103,14 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/Armor.png"
                     alt="coin-img"
-                  />45
+                  />{{ this.champ.stats.armor }}
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
                     src="../../assets/stats/MagicResist.png"
                     alt="coin-img"
-                  />45
+                  />{{ this.champ.stats.magicResist }}
                 </td>
               </tr>
               <tr>
@@ -117,14 +119,14 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/AS.png"
                     alt="coin-img"
-                  />0.6
+                  />{{ this.champ.stats.attackSpeed }}
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
                     src="../../assets/stats/rangeGray.png"
                     alt="coin-img"
-                  />2
+                  />{{ this.champ.stats.range }}
                 </td>
               </tr>
               <tr>
@@ -133,14 +135,14 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/CritChance.png"
                     alt="coin-img"
-                  />0.25
+                  />{{ this.champ.stats.critChance }}
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
                     src="../../assets/stats/critAdd.png"
                     alt="coin-img"
-                  />130
+                  />{{ this.champ.stats.critMultiplier }}
                 </td>
               </tr>
             </table>
@@ -185,6 +187,7 @@ export default {
   components: {},
   data() {
     return {
+      newdata,
       champ: {},
       stats: {},
       ability: {},
@@ -215,36 +218,41 @@ export default {
       this.checkStar(index);
     },
     GetChamp(champName) {
-      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
-        let name = newdata.setData[0].champions[i].apiName
+      var temp = {};
+      for (let i = 0; i < this.newdata.setData[0].champions.length; i++) {
+        let name = this.newdata.setData[0].champions[i].apiName
           .toLowerCase()
           .replace(/ /g, '');
-        if (name === champName) this.champ = newdata.setData[0].champions[i];
+        if (name === champName) temp = this.newdata.setData[0].champions[i];
       }
+      console.log(`getchamp:${this.champ}`);
       console.log(this.champ);
+      console.log(`temp:${temp}`);
+      console.log(temp);
+      return temp;
     },
     GetChampNameStage2() {
       //store name that has different url
       const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
-      for (let i = 0; i < newdata.setData[0].champions.length; i++) {
-        let name = newdata.setData[0].champions[i].apiName
+      for (let i = 0; i < this.newdata.setData[0].champions.length; i++) {
+        let name = this.newdata.setData[0].champions[i].apiName
           .toLowerCase()
           .replace(/ /g, '');
         if (
-          newdata.setData[0].champions[i].traits[0] === undefined ||
-          newdata.setData[0].champions[i].traits[1] === undefined
+          this.newdata.setData[0].champions[i].traits[0] === undefined ||
+          this.newdata.setData[0].champions[i].traits[1] === undefined
         )
           continue;
         else if (
           exceptionStage2.includes(
-            newdata.setData[0].champions[i].traits[0].toLowerCase()
+            this.newdata.setData[0].champions[i].traits[0].toLowerCase()
           ) ||
           exceptionStage2.includes(
-            newdata.setData[0].champions[i].traits[1].toLowerCase()
+            this.newdata.setData[0].champions[i].traits[1].toLowerCase()
           )
         )
           this.stage2.push(name);
-        // console.log(newdata.setData[0].champions[i].traits[0].toLowerCase());
+        // console.log(this.newdata.setData[0].champions[i].traits[0].toLowerCase());
       }
     },
     GetChampionUrlByName(championName) {
@@ -312,9 +320,11 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     // console.log(this.champName);
-    this.GetChamp(this.champName);
+    this.champ = this.GetChamp(this.champName);
+    console.log(`mounted:${this.champ}`);
+    console.log(this.champ.stats.hp);
     this.GetChampNameStage2();
     this.stats = this.champ.stats;
     this.ability = this.champ.ability;

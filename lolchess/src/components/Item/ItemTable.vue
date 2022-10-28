@@ -14,7 +14,13 @@
             <div class="table-item">
               <div class="help-tip">
                 <a>
-                  <img :src="item.src" alt="itemImg" width="28" height="28" />
+                  <img
+                    :src="item.src"
+                    alt="itemImg"
+                    width="28"
+                    height="28"
+                    @click="this.$emit('open', 0)"
+                  />
                 </a>
                 <div class="tip-container">
                   <div class="tip-name-container">

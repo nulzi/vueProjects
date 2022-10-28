@@ -34,20 +34,10 @@
                     <br />
                     추천템:
                     <img
-                      :src="this.GetItem(1)"
+                      v-for="(recommand, index) in recommands"
+                      :key="index"
+                      :src="this.GetItem(recommand)"
                       alt="recommanditem1"
-                      width="15"
-                      height="15"
-                    />
-                    <img
-                      :src="this.GetItem(7)"
-                      alt="recommanditem2"
-                      width="15"
-                      height="15"
-                    />
-                    <img
-                      :src="this.GetItem(3)"
-                      alt="recommanditem3"
                       width="15"
                       height="15"
                     />
@@ -76,6 +66,7 @@ import newdata from '../../assets/newdata.json';
 export default {
   data() {
     return {
+      newdata,
       champs: [],
       stage2: [],
       costs: [],
@@ -86,6 +77,7 @@ export default {
         'border:solid 2px purple;',
         'border:solid 2px #ffd700;',
       ],
+      recommands: [1, 6, 3],
     };
   },
   methods: {

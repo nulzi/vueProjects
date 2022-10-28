@@ -1,4 +1,5 @@
 <template>
+  <ItemInfo v-if="modalOpen" @close="modalOpen = 0"></ItemInfo>
   <div class="app_container">
     <div class="header-content">
       <Header></Header>
@@ -8,7 +9,7 @@
     <div class="filter-content">
       <Filter></Filter>
       <div class="item-content">
-        <ItemTable v-if="container === 0"></ItemTable>
+        <ItemTable v-if="container === 0" @open="modalOpen = 1"></ItemTable>
         <ItemApex v-if="container === 1"></ItemApex>
       </div>
     </div>
@@ -19,11 +20,12 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import Filter from './Filter/ItemFilterContainer.vue';
-import ItemTable from './Item/ItemTable.vue';
-import ItemApex from './Item/ItemApex.vue';
-import Footer from './Footer.vue';
+import Header from '../Header.vue';
+import Filter from '../Filter/ItemFilterContainer.vue';
+import ItemTable from './ItemTable.vue';
+import ItemApex from './ItemApex.vue';
+import ItemInfo from './ItemInfo.vue';
+import Footer from '../Footer.vue';
 
 export default {
   components: {
@@ -31,12 +33,11 @@ export default {
     Footer,
     ItemTable,
     ItemApex,
+    ItemInfo,
     Filter,
   },
   data() {
-    return {
-      container: 0,
-    };
+    return { modalOpen: 1, container: 0 };
   },
   methods: {},
 };
