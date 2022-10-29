@@ -1,9 +1,9 @@
 <template>
   <div class="filter-container">
     <Header @reset="reset"></Header>
-    <Content @content="changeContent"></Content>
-    <UnitCost></UnitCost>
-    <UnitTraits></UnitTraits>
+    <Content :content="content" @content="changeContent"></Content>
+    <UnitCost :cost="cost" @cost="changeCost"></UnitCost>
+    <UnitTraits :traits="traits" @traits="changeTrait"></UnitTraits>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import UnitCost from './UnitCostFilter.vue';
 import UnitTraits from './UnitTraitsFilter.vue';
 
 export default {
+  props: ['content', 'cost', 'traits'],
   components: {
     Header,
     Content,
@@ -24,11 +25,22 @@ export default {
     return {};
   },
   methods: {
+    reset() {
+      // console.log('reset');
+      this.$emit('reset');
+    },
     changeContent(content) {
       // console.log(`fileter: ${content}`);
       this.$emit('content', content);
     },
-    reset() {},
+    changeCost(cost) {
+      // console.log(`fileter: ${cost}`);
+      this.$emit('cost', cost);
+    },
+    changeTrait(traits) {
+      // console.log(`fileter: ${traits}`);
+      this.$emit('traits', traits);
+    },
   },
 };
 </script>

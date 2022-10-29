@@ -2,7 +2,7 @@
   <div class="filter2">
     <div class="filter-raw">
       <div
-        v-for="(trait, index) in traits"
+        v-for="(trait, index) in traitNames"
         :key="index"
         :class="traitChange(index)"
         :style="{
@@ -11,7 +11,7 @@
           'background-repeat': 'no-repeat',
           'background-position': 'center',
         }"
-        @click="changeState(index)"
+        @click="changeTrait(index)"
         alt="trait image"
       />
     </div>
@@ -22,16 +22,20 @@
 import traitsdata from '../../assets/tfttraits.json';
 
 export default {
+  props: ['traits'],
   data() {
     return {
       isClicked: [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0,
       ],
-      traits: [],
+      traitNames: [],
     };
   },
   methods: {
+    reset() {
+      this.isClicked = this.traits;
+    },
     traitChange(index) {
       return this.isClicked[index] === 1
         ? 'filter-trait-img clicked'
@@ -40,47 +44,51 @@ export default {
     GetTraitName() {
       for (let i = 0; i < traitsdata.length; i++) {
         if (traitsdata[i].set === 'TFTSet7') {
-          this.traits.push(traitsdata[i].display_name);
+          this.traitNames.push(traitsdata[i].display_name);
         }
       }
       // console.log(this.traits);
     },
-    GetTraitImage(trait) {
-      // console.log(trait.toLowerCase());
+    GetTraitImage(traitName) {
+      // console.log(traitName.toLowerCase());
       const exceptionNone = ['assassin', 'shapeshifter'];
       const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
       const exception2 = ['mage', 'mystic'];
-      if (exceptionNone.includes(trait.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.png`;
-      } else if (exceptionStage2.includes(trait.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${trait.toLowerCase()}.tft_set7_stage2.png`;
-      } else if (trait.toLowerCase() === 'bruiser') {
+      if (exceptionNone.includes(traitName.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${traitName.toLowerCase()}.png`;
+      } else if (exceptionStage2.includes(traitName.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${traitName.toLowerCase()}.tft_set7_stage2.png`;
+      } else if (traitName.toLowerCase() === 'bruiser') {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png`;
-      } else if (exception2.includes(trait.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${trait.toLowerCase()}.png`;
-      } else if (trait.toLowerCase() === 'scalescorn') {
+      } else if (exception2.includes(traitName.toLowerCase())) {
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${traitName.toLowerCase()}.png`;
+      } else if (traitName.toLowerCase() === 'scalescorn') {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_dragonbane.png`;
-      } else if (trait.toLowerCase() === 'cavalier') {
+      } else if (traitName.toLowerCase() === 'cavalier') {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cavalry.png`;
-      } else if (trait.toLowerCase() === 'spelltheif') {
+      } else if (traitName.toLowerCase() === 'spelltheif') {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_spellthief.png`;
-      } else if (trait.toLowerCase() === 'cannoneer') {
+      } else if (traitName.toLowerCase() === 'cannoneer') {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
       } else {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${trait.toLowerCase()}.png`;
+        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${traitName.toLowerCase()}.png`;
       }
     },
-    changeState(index) {
+    changeTrait(index) {
       if (this.isClicked[index] === 1) {
         this.isClicked[index] = 0;
       } else {
         this.isClicked[index] = 1;
       }
       // console.log(this.isClicked[i]);
+      this.$emit('traits', this.isClicked);
     },
   },
-  mounted() {
+  created() {
     this.GetTraitName();
+  },
+  updated() {
+    this.reset();
   },
 };
 </script>

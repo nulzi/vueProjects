@@ -1,22 +1,22 @@
 <template>
   <div class="filter1">
-    <button id="1cost" class="cost unclicked" @click="changeButton('1cost')">
+    <button id="1cost" class="cost unclicked" @click="changeCost('1cost')">
       <img class="coin" src="../../assets/coin.png" alt="coin" />
       <span class="coin">1</span>
     </button>
-    <button id="2cost" class="cost unclicked" @click="changeButton('2cost')">
+    <button id="2cost" class="cost unclicked" @click="changeCost('2cost')">
       <img class="coin" src="../../assets/coin.png" alt="coin" />
       <span class="coin">2</span>
     </button>
-    <button id="3cost" class="cost unclicked" @click="changeButton('3cost')">
+    <button id="3cost" class="cost unclicked" @click="changeCost('3cost')">
       <img class="coin" src="../../assets/coin.png" alt="coin" />
       <span class="coin">3</span>
     </button>
-    <button id="4cost" class="cost unclicked" @click="changeButton('4cost')">
+    <button id="4cost" class="cost unclicked" @click="changeCost('4cost')">
       <img class="coin" src="../../assets/coin.png" alt="coin" />
       <span class="coin">4</span>
     </button>
-    <button id="5cost" class="cost unclicked" @click="changeButton('5cost')">
+    <button id="5cost" class="cost unclicked" @click="changeCost('5cost')">
       <img class="coin" src="../../assets/coin.png" alt="coin" />
       <span class="coin">5</span>
     </button>
@@ -25,31 +25,44 @@
 
 <script>
 export default {
+  props: ['cost'],
   data() {
-    return {};
+    return {
+      isClicked: [0, 0, 0, 0, 0],
+    };
   },
   methods: {
-    changeButton(id) {
-      const classList = document.getElementById(id).classList;
-      const isExist = document.getElementsByClassName('cost clicked');
-      if (isExist.length === 0) {
-        //no checked filter
-        classList.replace('unclicked', 'clicked');
-      } else {
-        //already checked filter
-
-        //already checked filter off
-        if (classList.contains('clicked')) {
+    reset() {
+      for (let i = 0; i < this.isClicked.length; i++) {
+        // console.log(item);
+        if (this.isClicked[i] === 1) {
+          const classList = document.getElementById(`${i + 1}cost`).classList;
           classList.replace('clicked', 'unclicked');
-        } else {
-          //select another
-          //checked filter off
-          // isExist.item(0).classList.replace('clicked', 'unclicked');
-          //checked filter on
-          classList.replace('unclicked', 'clicked');
         }
       }
+      this.isClicked = this.cost;
     },
+    idToIndex(id) {
+      return Number(id[0]) - 1;
+    },
+    changeCost(id) {
+      const classList = document.getElementById(id).classList;
+      const index = this.idToIndex(id);
+
+      //filter off
+      if (classList.contains('clicked')) {
+        this.isClicked[index] = 0;
+        classList.replace('clicked', 'unclicked');
+      } else {
+        //filter on
+        this.isClicked[index] = 1;
+        classList.replace('unclicked', 'clicked');
+      }
+      this.$emit('cost', this.isClicked);
+    },
+  },
+  updated() {
+    this.reset();
   },
 };
 </script>

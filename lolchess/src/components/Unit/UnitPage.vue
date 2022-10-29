@@ -11,7 +11,15 @@
     <div class="sidebar-a"></div>
     <div class="sidebar-b"></div>
     <div class="filter-content">
-      <Filter @content="changeContent"></Filter>
+      <Filter
+        :content="this.container"
+        :cost="this.cost"
+        :traits="this.traits"
+        @reset="reset"
+        @content="changeContent"
+        @cost="changeCost"
+        @traits="changeTrait"
+      ></Filter>
       <div class="unit-content">
         <UnitTable v-if="container === 0" @open="showModal"></UnitTable>
         <UnitApex v-if="container === 1"></UnitApex>
@@ -45,6 +53,11 @@ export default {
       modalOpen: 0,
       container: 0,
       champName: '',
+      cost: [0, 0, 0, 0, 0],
+      traits: [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0,
+      ],
     };
   },
   methods: {
@@ -53,9 +66,26 @@ export default {
       this.champName = name;
       // console.log(`champName: ${this.champName}`);
     },
+    reset() {
+      console.log('reset');
+      this.container = 0;
+      this.cost = [0, 0, 0, 0, 0];
+      this.traits = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0,
+      ];
+    },
     changeContent(content) {
-      // console.log(`page: ${content}`);
+      console.log(`content${content}`);
       this.container = content;
+    },
+    changeCost(cost) {
+      console.log(`cost${cost}`);
+      this.cost[cost - 1] = 1;
+    },
+    changeTrait(traits) {
+      console.log(`traits${traits}`);
+      this.traits = traits;
     },
   },
 };
