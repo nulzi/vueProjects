@@ -10,8 +10,10 @@
       <Filter
         :content="this.container"
         :tier="this.tier"
+        :traits="this.traits"
         @reset="reset"
         @tier="changeTier"
+        @traits="changeTrait"
       ></Filter>
       <div class="deck-content">
         <Deck></Deck>
@@ -27,7 +29,6 @@
 import Header from '../Header.vue';
 import Filter from '../Filter/DeckFilterContainer.vue';
 import Deck from './TierDeck.vue';
-// import ItemInfo from './ItemInfo.vue';
 import Footer from '../Footer.vue';
 
 export default {
@@ -35,20 +36,28 @@ export default {
     Header,
     Deck,
     Footer,
-    // ItemTable,
-    // ItemApex,
-    // ItemInfo,
     Filter,
   },
   data() {
-    return { modalOpen: 0, container: 0, tier: [0, 0, 0, 0, 0], base: 0 };
+    return {
+      modalOpen: 0,
+      container: 0,
+      tier: [0, 0, 0, 0, 0],
+      traits: [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0,
+      ],
+    };
   },
   methods: {
     reset() {
       console.log('reset');
       this.container = 0;
       this.tier = [0, 0, 0, 0, 0];
-      this.base = 0;
+      this.traits = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0,
+      ];
     },
     changeContent(content) {
       console.log(`content${content}`);
@@ -59,9 +68,9 @@ export default {
       console.log(`tier${tier}`);
       this.tier[tier - 1] = 1;
     },
-    changeBase(base) {
-      console.log(`base${base}`);
-      this.base = base;
+    changeTrait(traits) {
+      console.log(`traits${traits}`);
+      this.traits = traits;
     },
   },
 };
