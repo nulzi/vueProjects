@@ -4,7 +4,7 @@ import axios from 'axios';
 const store = createStore({
   state() {
     return {
-      page: 0,
+      page: 2,
       name: '',
       matchData: [],
       matchData2: [],

@@ -15,6 +15,7 @@
   <!-- <ResultPage v-if="$store.state.page == 1"></ResultPage> -->
   <ItemPage v-if="$store.state.page == 0"></ItemPage>
   <UnitPage v-if="$store.state.page == 1"></UnitPage>
+  <TierPage v-if="$store.state.page == 2"></TierPage>
 </template>
 
 <script>
@@ -24,6 +25,7 @@ import ItemPage from './components/Item/ItemPage.vue';
 // import ItemPage from './components/Filter/ItemFilterContainer.vue';
 // import ItemPage from './components/Filter/UnitFilterContainer.vue';
 import UnitPage from './components/Unit/UnitPage.vue';
+import TierPage from './components/Deck/DeckPage.vue';
 import axios from 'axios';
 
 export default {
@@ -41,6 +43,7 @@ export default {
     // ResultPage,
     ItemPage,
     UnitPage,
+    TierPage,
   },
   methods: {
     // GetMatchData(name) {
