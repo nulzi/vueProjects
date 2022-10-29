@@ -4,7 +4,7 @@
     <Content :content="content" @content="changeContent"></Content>
     <Type :type="type" @type="changeType"></Type>
     <Base :base="base" @base="changeBase"></Base>
-    {{ `${content}, ${type}, ${base}` }}
+    <!-- {{ `${content}, ${type}, ${base}` }} -->
   </div>
 </template>
 

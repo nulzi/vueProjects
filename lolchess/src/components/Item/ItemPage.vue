@@ -56,7 +56,6 @@ export default {
     },
     changeContent(content) {
       console.log(`content${content}`);
-      // console.log(`page: ${content}`);
       this.container = content;
     },
     changeType(type) {
