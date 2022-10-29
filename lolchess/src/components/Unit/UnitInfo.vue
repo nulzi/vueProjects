@@ -2,6 +2,7 @@
   <div class="blackBG">
     <div class="info-container">
       <div class="info-title">
+        <!-- {{ this.GetChampionUrl(this.champ.apiName) }} -->
         <h5>Unit Info</h5>
         <button class="btn-close" @click="this.$emit('close', 0)"></button>
       </div>
@@ -19,7 +20,7 @@
         </div>
         <div class="champ-detail-header">
           <img
-            :src="GetChampionUrlByName(this.champName)"
+            :src="GetChampionUrl(this.champ.apiName)"
             alt="champ-img"
             width="60"
             height="60"
@@ -40,7 +41,7 @@
                 v-for="trait in this.champ.traits"
                 :key="trait"
                 class="champ-detail-trait-image"
-                :src="GetTraitImage(trait)"
+                :src="GetTraitUrl(trait)"
                 alt="coin-img"
               />
             </div>
@@ -57,7 +58,7 @@
             <div class="champ-detail-skill">
               <img
                 class="champ-detail-skill-image"
-                src="https://ddragon.leagueoflegends.com/cdn/12.13.1/img/spell/VladimirQ.png"
+                :src="GetSkillUrl(this.champ.apiName)"
                 alt="skill-img"
                 width="44"
                 height="44"
@@ -119,7 +120,7 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/AS.png"
                     alt="coin-img"
-                  />{{ this.champ.stats.attackSpeed }}
+                  />{{ this.champ.stats.attackSpeed.toFixed(1) }}
                 </td>
                 <td>
                   <img
@@ -135,14 +136,14 @@
                     class="champ-detail-stat-image"
                     src="../../assets/stats/CritChance.png"
                     alt="coin-img"
-                  />{{ this.champ.stats.critChance }}
+                  />{{ this.champ.stats.critChance * 100 }}%
                 </td>
                 <td>
                   <img
                     class="champ-detail-stat-image"
                     src="../../assets/stats/critAdd.png"
                     alt="coin-img"
-                  />{{ this.champ.stats.critMultiplier }}
+                  />{{ this.champ.stats.critMultiplier.toFixed(2) * 100 }}%
                 </td>
               </tr>
             </table>
@@ -167,7 +168,7 @@
               class="recommand-item-image"
               v-for="recommandItem in recommandItems"
               :key="recommandItem"
-              src="../../assets/logo.png"
+              :src="GetItemUrl(recommandItem)"
               alt="recommand-item"
               width="40"
               height="40"
@@ -189,8 +190,6 @@ export default {
     return {
       newdata,
       champ: {},
-      stats: {},
-      ability: {},
       stage2: [],
       variables: [
         { name: 'variable', value: 'value' },
@@ -198,7 +197,7 @@ export default {
       ],
       champStars: [1, 0, 0],
       star: ['starbronze', 'star', 'star'],
-      recommandItems: [10, 20, 25],
+      recommandItems: [1, 2, 25],
     };
   },
   methods: {
@@ -220,15 +219,16 @@ export default {
     GetChamp(champName) {
       var temp = {};
       for (let i = 0; i < this.newdata.setData[0].champions.length; i++) {
-        let name = this.newdata.setData[0].champions[i].apiName
-          .toLowerCase()
-          .replace(/ /g, '');
+        let name = this.newdata.setData[0].champions[i].apiName.replace(
+          / /g,
+          ''
+        );
         if (name === champName) temp = this.newdata.setData[0].champions[i];
       }
-      console.log(`getchamp:${this.champ}`);
-      console.log(this.champ);
-      console.log(`temp:${temp}`);
-      console.log(temp);
+      // console.log(`getchamp:${this.champ}`);
+      // console.log(this.champ);
+      // console.log(`temp:${temp}`);
+      // console.log(temp);
       return temp;
     },
     GetChampNameStage2() {
@@ -253,6 +253,42 @@ export default {
         )
           this.stage2.push(name);
         // console.log(this.newdata.setData[0].champions[i].traits[0].toLowerCase());
+      }
+    },
+    GetChampionUrl(championID) {
+      // get url by champion ID
+      // ex) TFT7_NomsyCannonee
+      for (let i in this.newdata.setData) {
+        for (let j in this.newdata.setData[i].champions) {
+          if (this.newdata.setData[i].champions[j].apiName == championID) {
+            let temp = this.newdata.setData[i].champions[j].icon
+              .toLowerCase()
+              .split('/');
+            // console.log(temp);
+            // let newUrl = temp.slice(0, -1);
+            let newUrl2 = temp.slice(-1)[0].split('.');
+            // console.log(newUrl);
+            // console.log(newUrl2);
+            if (newUrl2[0] == 'tft7_volibear') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/${
+                newUrl2[0]
+              }_square.${newUrl2[1].slice(0, 8)}.png`;
+            } else if (newUrl2[0] == 'tft7_zippy') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/icons2d/${
+                newUrl2[0]
+              }_square.${newUrl2[1]}.png`;
+            } else if (newUrl2[0] == 'tft7_dragongreen') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/tft7_jadedragon_square.${newUrl2[1].slice(
+                0,
+                8
+              )}.png`;
+            } else {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/${
+                newUrl2[0]
+              }_square.${newUrl2[1]}.png`;
+            }
+          }
+        }
       }
     },
     GetChampionUrlByName(championName) {
@@ -294,6 +330,60 @@ export default {
       else
         return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7.png`;
     },
+    GetItemUrl(item) {
+      // console.log(item);
+      // for (let j in alldata.items) {
+      //   if (item == alldata.items[j].id) {
+      //     return `https://raw.communitydragon.org/latest/game/${alldata.items[
+      //       j
+      //     ].icon
+      //       .toLowerCase()
+      //       .slice(0, -4)}.png`;
+      //   }
+      // }// console.log(item)
+      for (let j in this.newdata.items) {
+        if (item == this.newdata.items[j].id) {
+          // console.log(this.newdata.items[j].icon.toLowerCase().split('.'));
+          let temp = this.newdata.items[j].icon
+            .toLowerCase()
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
+        }
+      }
+    },
+    GetSkillUrl(championID) {
+      for (let i in this.newdata.setData[0].champions) {
+        if (this.newdata.setData[0].champions[i].apiName == championID) {
+          let temp = this.newdata.setData[0].champions[i].ability.icon
+            .toLowerCase()
+            .split('/');
+          // console.log(temp);
+          let newUrl2 = temp.slice(-1)[0].split('.');
+          // console.log(newUrl2);
+          if (newUrl2[1] != 'dds') {
+            return `https://raw.communitydragon.org/latest/game/assets/characters/${temp[2]}/hud/icons2d/${newUrl2[0]}.${newUrl2[1]}.png`;
+          } else
+            return `https://raw.communitydragon.org/latest/game/assets/characters/${temp[2]}/hud/icons2d/${newUrl2[0]}.png`;
+        }
+      }
+    },
+    GetTraitUrl(traitName) {
+      for (let i in this.newdata.setData[0].traits) {
+        // console.log(i);
+        if (this.newdata.setData[0].traits[i].name == traitName) {
+          let temp = this.newdata.setData[0].traits[i].icon
+            .toLowerCase()
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
+        }
+      }
+    },
     GetTraitImage(trait) {
       // console.log(trait.toLowerCase());
       const exceptionNone = ['assassin', 'shapeshifter'];
@@ -324,10 +414,10 @@ export default {
     // console.log(this.champName);
     this.champ = this.GetChamp(this.champName);
     console.log(`mounted:${this.champ}`);
+    console.log(this.champName);
+    console.log(this.champ);
     console.log(this.champ.stats.hp);
     this.GetChampNameStage2();
-    this.stats = this.champ.stats;
-    this.ability = this.champ.ability;
   },
 };
 </script>

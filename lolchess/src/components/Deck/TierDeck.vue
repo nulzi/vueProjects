@@ -46,7 +46,7 @@
             </div>
             <img
               class="my-tier-champion-img"
-              :src="this.GetChampionUrlByName(j.character_id)"
+              :src="this.GetChampionUrl(j.character_id)"
               width="44"
               height="44"
             />
@@ -83,7 +83,7 @@
             />
             <div class="my-tier-champion-stars" style="width: 100%">
               <img
-                :src="GetItem(w)"
+                :src="GetItemUrl(w)"
                 class="my-tier-champion-item"
                 v-for="w in j.items"
                 :key="w"
@@ -91,7 +91,7 @@
             </div>
           </div>
         </div>
-        <div class="row-container my-tier-expands">
+        <!-- <div class="row-container my-tier-expands">
           <div class="row-item">
             <img
               v-if="!this.tabs"
@@ -106,17 +106,17 @@
               @click="this.tabs = !this.tabs"
             />
           </div>
-        </div>
+        </div> -->
       </div>
-      <hr />
+      <!-- <hr /> -->
     </div>
-    <UserTabs v-if="this.tabs"></UserTabs>
+    <!-- <UserTabs v-if="this.tabs"></UserTabs> -->
   </div>
 </template>
 
 <script>
-import alldata from '../../assets/newdata.json';
-import UserTabs from '../UserTabs.vue';
+import newdata from '../../assets/newdata.json';
+// import UserTabs from '../UserTabs.vue';
 import tierdata from '../../assets/TierData.json';
 import axios from 'axios';
 
@@ -125,19 +125,55 @@ export default {
     return {
       tabs: false,
       tierdata,
-      alldata,
+      newdata,
       getData: [],
     };
   },
-  components: { UserTabs },
+  // components: { UserTabs },
   methods: {
+    GetChampionUrl(championID) {
+      // get url by champion ID
+      // ex) TFT7_NomsyCannonee
+      for (let i in this.newdata.setData) {
+        for (let j in this.newdata.setData[i].champions) {
+          if (this.newdata.setData[i].champions[j].apiName == championID) {
+            let temp = this.newdata.setData[i].champions[j].icon
+              .toLowerCase()
+              .split('/');
+            // console.log(temp);
+            // let newUrl = temp.slice(0, -1);
+            let newUrl2 = temp.slice(-1)[0].split('.');
+            // console.log(newUrl);
+            // console.log(newUrl2);
+            if (newUrl2[0] == 'tft7_volibear') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/${
+                newUrl2[0]
+              }_square.${newUrl2[1].slice(0, 8)}.png`;
+            } else if (newUrl2[0] == 'tft7_zippy') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/icons2d/${
+                newUrl2[0]
+              }_square.${newUrl2[1]}.png`;
+            } else if (newUrl2[0] == 'tft7_dragongreen') {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/tft7_jadedragon_square.${newUrl2[1].slice(
+                0,
+                8
+              )}.png`;
+            } else {
+              return `https://raw.communitydragon.org/latest/game/assets/characters/${championID.toLowerCase()}/hud/${
+                newUrl2[0]
+              }_square.${newUrl2[1]}.png`;
+            }
+          }
+        }
+      }
+    },
     GetChampionUrlByName(championID) {
       // get url by champion ID
       // ex) TFT7_NomsyCannonee
-      for (let i in this.alldata.setData) {
-        for (let j in this.alldata.setData[i].champions) {
-          if (this.alldata.setData[i].champions[j].apiName == championID) {
-            let temp = this.alldata.setData[i].champions[j].icon
+      for (let i in this.newdata.setData) {
+        for (let j in this.newdata.setData[i].champions) {
+          if (this.newdata.setData[i].champions[j].apiName == championID) {
+            let temp = this.newdata.setData[i].champions[j].icon
               .toLowerCase()
               .split('/');
             // console.log(temp[-2]);
@@ -186,16 +222,33 @@ export default {
         return 'starbronze';
       }
     },
-    GetItem(item) {
+    GetItemUrl(item) {
       // console.log(item);
-      for (let j in this.alldata.items) {
-        // console.log(this.alldata.items[j].id);
-        if (item == this.alldata.items[j].id) {
-          return `https://raw.communitydragon.org/latest/game/${this.alldata.items[
-            j
-          ].icon
+      // for (let j in newdata.items) {
+      //   if (item == newdata.items[j].id) {
+      //     console.log(
+      //       `https://raw.communitydragon.org/latest/game/${newdata.items[j].icon
+      //         .toLowerCase()
+      //         .slice(0, -4)}.png`
+      //     );
+      //     return `https://raw.communitydragon.org/latest/game/${newdata.items[
+      //       j
+      //     ].icon
+      //       .toLowerCase()
+      //       .slice(0, -4)}.png`;
+      //   }
+      // }
+      // console.log(item)
+      for (let j in newdata.items) {
+        if (item == newdata.items[j].id) {
+          // console.log(newdata.items[j].icon.toLowerCase().split('.'));
+          let temp = newdata.items[j].icon
             .toLowerCase()
-            .slice(0, -4)}.png`;
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
         }
       }
     },

@@ -1,5 +1,9 @@
 <template>
-  <ItemInfo v-if="modalOpen" @close="modalOpen = 0"></ItemInfo>
+  <ItemInfo
+    v-if="modalOpen"
+    @close="modalOpen = 0"
+    :itemID="this.itemID"
+  ></ItemInfo>
   <div class="app_container">
     <div class="header-content">
       <Header></Header>
@@ -17,7 +21,7 @@
         @base="changeBase"
       ></Filter>
       <div class="item-content">
-        <ItemTable v-if="container === 0" @open="modalOpen = 1"></ItemTable>
+        <ItemTable v-if="container === 0" @open="showModal"></ItemTable>
         <ItemApex v-if="container === 1"></ItemApex>
       </div>
     </div>
@@ -45,9 +49,20 @@ export default {
     Filter,
   },
   data() {
-    return { modalOpen: 0, container: 0, type: [0, 0, 0, 0, 0], base: 0 };
+    return {
+      modalOpen: 0,
+      itemID: 0,
+      container: 0,
+      type: [0, 0, 0, 0, 0],
+      base: 0,
+    };
   },
   methods: {
+    showModal(modalOpen, id) {
+      this.modalOpen = modalOpen;
+      this.itemID = id;
+      // console.log(`champName: ${this.champName}`);
+    },
     reset() {
       console.log('reset');
       this.container = 0;

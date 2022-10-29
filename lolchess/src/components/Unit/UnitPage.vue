@@ -21,7 +21,12 @@
         @traits="changeTrait"
       ></Filter>
       <div class="unit-content">
-        <UnitTable v-if="container === 0" @open="showModal"></UnitTable>
+        <UnitTable
+          :cost="this.cost"
+          :traits="this.traits"
+          v-if="container === 0"
+          @open="showModal"
+        ></UnitTable>
         <UnitApex v-if="container === 1"></UnitApex>
       </div>
     </div>

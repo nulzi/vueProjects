@@ -6,7 +6,7 @@
         :key="index"
         :class="traitChange(index)"
         :style="{
-          'background-image': `url(${this.GetTraitImage(trait)})`,
+          'background-image': `url(${this.GetTraitUrl(trait)})`,
           'background-size': '65%',
           'background-repeat': 'no-repeat',
           'background-position': 'center',
@@ -20,11 +20,13 @@
 
 <script>
 import traitsdata from '../../assets/tfttraits.json';
+import newdata from '../../assets/newdata.json';
 
 export default {
   props: ['traits'],
   data() {
     return {
+      newdata,
       isClicked: [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0,
@@ -48,6 +50,20 @@ export default {
         }
       }
       // console.log(this.traits);
+    },
+    GetTraitUrl(traitName) {
+      for (let i in this.newdata.setData[0].traits) {
+        // console.log(i);
+        if (this.newdata.setData[0].traits[i].name == traitName) {
+          let temp = this.newdata.setData[0].traits[i].icon
+            .toLowerCase()
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
+        }
+      }
     },
     GetTraitImage(traitName) {
       // console.log(traitName.toLowerCase());

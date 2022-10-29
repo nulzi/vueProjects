@@ -9,41 +9,62 @@
       <div class="item-container">
         <div class="item-detail-header">
           <img
-            src="../../assets/logo.png"
+            :src="GetItemUrl(itemID)"
             alt="item-img"
             width="60"
             height="60"
           />
           <div class="item-detail-sub">
-            <div class="item-detail-name">item-name</div>
-            <div class="item-detail-effect">
-              <div
-                class="item-detail-effect-box"
-                v-for="effect in effects"
-                :key="effect"
-              >
+            <div class="item-detail-name">{{ this.item.name }}</div>
+            <div v-if="isEmptyArr(this.item.from)" class="item-detail-effect">
+              <div class="item-detail-effect-box">
                 <img
                   class="item-detail-effect-image"
-                  :src="require(`../../assets/stats/${effect.name}.png`)"
+                  :src="
+                    require(`../../assets/stats/${
+                      Object.entries(this.item.effects)[0][0]
+                    }.png`)
+                  "
                   alt="effect-image"
                   width="20"
                   height="20"
                 />
-                +20
+                +{{ Object.entries(this.item.effects)[0][1] }}
+              </div>
+            </div>
+            <div
+              v-if="!isEmptyArr(Object.entries(this.item.effects)[0])"
+              class="item-detail-effect"
+            >
+              <div
+                class="item-detail-effect-box"
+                v-for="(baseID, i) in this.item.from"
+                :key="i"
+              >
+                <!-- {{ this.GetEffectUrl(baseID, i) }} -->
+                <img
+                  class="item-detail-effect-image"
+                  :src="
+                    require(`../../assets/stats/${this.GetEffectUrl(
+                      baseID
+                    )}.png`)
+                  "
+                  alt="effect-image"
+                  width="20"
+                  height="20"
+                />
+                +{{ Object.entries(this.GetItem(baseID).effects)[0][1] }}
               </div>
             </div>
           </div>
         </div>
         <hr />
-        <div class="item-detail-skill-desc">
-          Vladimir deals @ModifiedDamage@ magic damage to the target and heals
-          for @ModifiedHeal@ Health.
-        </div>
+        <div class="item-detail-skill-desc">{{ this.item.desc }}</div>
         <hr />
-        <div class="item-detail-mix">
+        <div class="item-detail-mix" v-if="!isEmptyArr(this.item.from)">
           <img
             class="item-detail-cost-image"
-            src="../../assets/logo.png"
+            :src="GetItemUrl(this.item.from[0])"
             alt="coin-img"
             width="35"
             height="35"
@@ -51,7 +72,7 @@
           +
           <img
             class="item-detail-cost-image"
-            src="../../assets/logo.png"
+            :src="GetItemUrl(this.item.from[1])"
             alt="coin-img"
             width="35"
             height="35"
@@ -63,17 +84,78 @@
 </template>
 
 <script>
+import newdata from '../../assets/newdata.json';
+
 export default {
-  components: {},
+  props: ['itemID'],
   data() {
     return {
-      effects: [
-        { name: 'AD', value: 10.0 },
-        { name: 'AS', value: 30.0 },
-      ],
+      newdata,
+      item: {},
     };
   },
-  methods: {},
+  methods: {
+    GetItem(itemID) {
+      let temp = {};
+      for (let i = 0; i < this.newdata.items.length; i++) {
+        let id = this.newdata.items[i].id;
+        if (id === itemID) {
+          temp = this.newdata.items[i];
+        }
+      }
+      // console.log(`getchamp:${this.champ}`);
+      // console.log(this.champ);
+      // console.log(`temp:${temp}`);
+      // console.log(temp);
+      // this.item = temp;
+      return temp;
+    },
+    GetItemUrl(item) {
+      // console.log(item);
+      // for (let j in alldata.items) {
+      //   if (item == alldata.items[j].id) {
+      //     return `https://raw.communitydragon.org/latest/game/${alldata.items[
+      //       j
+      //     ].icon
+      //       .toLowerCase()
+      //       .slice(0, -4)}.png`;
+      //   }
+      // }// console.log(item)
+      for (let j in this.newdata.items) {
+        if (item == this.newdata.items[j].id) {
+          // console.log(this.newdata.items[j].icon.toLowerCase().split('.'));
+          let temp = this.newdata.items[j].icon
+            .toLowerCase()
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
+        }
+      }
+    },
+    isEmptyArr(arr) {
+      if (Array.isArray(arr) && arr.length === 0) {
+        return true;
+      }
+
+      return false;
+    },
+    GetEffectUrl(baseID) {
+      // console.log(baseID);
+      const baseItem = this.GetItem(baseID);
+      let effect = Object.entries(baseItem.effects);
+      // console.log(Object.entries(baseItem.effects)[0]);
+      console.log(effect[0][0]);
+      return effect[0][0];
+    },
+  },
+  beforeCreate() {
+    console.log(this.itemID);
+  },
+  created() {
+    this.item = this.GetItem(this.itemID);
+  },
 };
 </script>
 
@@ -127,7 +209,6 @@ export default {
 }
 .item-detail-sub {
   display: flex;
-  align-items: center;
   flex-direction: column;
   margin-left: 0.8rem;
 }

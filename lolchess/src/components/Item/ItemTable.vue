@@ -15,11 +15,11 @@
               <div class="help-tip">
                 <a>
                   <img
-                    :src="GetItemUrlByID(item.id)"
+                    :src="GetItemUrl(item.id)"
                     alt="itemImg"
                     width="28"
                     height="28"
-                    @click="this.$emit('open')"
+                    @click="showModal(item.id)"
                   />
                 </a>
                 <div class="tip-container">
@@ -38,13 +38,13 @@
                       class="tip-detail-image"
                     >
                       <img
-                        :src="this.GetItemUrlByID(item.from[0])"
+                        :src="this.GetItemUrl(item.from[0])"
                         alt="recipeitem1"
                         width="15"
                         height="15" />
                       +
                       <img
-                        :src="this.GetItemUrlByID(item.from[1])"
+                        :src="this.GetItemUrl(item.from[1])"
                         alt="recipeitem2"
                         width="15"
                         height="15"
@@ -78,10 +78,11 @@ export default {
     };
   },
   methods: {
-    showDetail() {
-      this.modalOpen = 1;
+    showModal(id) {
+      // console.log(`emit:${name}`);
+      this.$emit('open', 1, id);
     },
-    GetItemUrlByID(item) {
+    GetItemUrl(item) {
       // console.log(item);
       // for (let j in newdata.items) {
       //   if (item == newdata.items[j].id) {
