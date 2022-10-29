@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import TierDeck from "./TierDeck.vue";
-import Apex from "./Apex.vue";
+import TierDeck from './Deck/TierDeck.vue';
+import Apex from './Apex.vue';
 export default { components: { TierDeck, Apex } };
 </script>
 
