@@ -63,7 +63,7 @@ export default {
           this.traitNames.push(traitsdata[i].display_name);
         }
       }
-      // console.log(this.traits);
+      // console.log(this.traitNames);
     },
     GetTraitImage(traitName) {
       // console.log(traitName.toLowerCase());
