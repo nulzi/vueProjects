@@ -21,6 +21,7 @@
         @traits="changeTrait"
       ></Filter>
       <div class="unit-content">
+        <!-- {{ this.cost }} -->
         <UnitTable
           :cost="this.cost"
           :traits="this.traits"
@@ -92,6 +93,10 @@ export default {
       console.log(`traits${traits}`);
       this.traits = traits;
     },
+  },
+  updated() {
+    this.changeCost();
+    this.changeTrait();
   },
 };
 </script>
