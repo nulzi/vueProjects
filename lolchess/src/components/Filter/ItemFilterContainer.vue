@@ -1,15 +1,9 @@
 <template>
-  <!-- {{ typeof '' }} -->
-  <!-- {{ this.typeFilter().length }}
-  <div v-for="id in this.typeFilter()" :key="id">
-    {{ id }}
-    <img :src="GetItemUrl(id)" alt="" />
-  </div> -->
   <div class="filter-container">
     <Header @reset="reset"></Header>
     <Content :content="content" @content="changeContent"></Content>
-    <Type :type="type" @type="changeType"></Type>
-    <Base :base="base" @base="changeBase"></Base>
+    <Type :middletype="toptype" @type="changeType"></Type>
+    <Base :middlebase="topbase" @base="changeBase"></Base>
     <!-- {{ `${content}, ${type}, ${base}` }} -->
   </div>
 </template>
@@ -23,7 +17,7 @@ import Base from './BaseItemFilter.vue';
 import newdata from '../../assets/newdata.json';
 
 export default {
-  props: ['content', 'type', 'base'],
+  props: ['content', 'toptype', 'topbase'],
   components: {
     Header,
     Content,
@@ -63,7 +57,7 @@ export default {
           itemArray.push(temp);
         }
       }
-      console.log(itemArray);
+      // console.log(itemArray);
       return itemArray;
     },
     GetItemUrl(item) {

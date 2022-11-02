@@ -13,11 +13,12 @@
       {{ type }}
     </button>
   </div>
+  middletype{{ middletype }}
 </template>
 
 <script>
 export default {
-  props: ['type'],
+  props: ['middletype'],
   data() {
     return {
       types: [
@@ -32,7 +33,7 @@ export default {
   },
   methods: {
     reset() {
-      this.isClicked = this.type;
+      this.isClicked = this.middletype;
     },
     changeType(i) {
       if (this.isClicked[i] === 1) {

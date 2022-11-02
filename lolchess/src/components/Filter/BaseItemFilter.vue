@@ -1,5 +1,6 @@
 <template>
   <div class="filter2">
+    middlebase {{ middlebase }}
     <img
       v-for="item in items"
       :key="item"
@@ -16,7 +17,7 @@
 import newdata from '../../assets/newdata.json';
 
 export default {
-  props: ['base'],
+  props: ['middlebase'],
   data() {
     return {
       newdata,
@@ -108,7 +109,7 @@ export default {
     },
   },
   updated() {
-    this.reset(this.base);
+    this.reset(this.middlebase);
   },
 };
 </script>

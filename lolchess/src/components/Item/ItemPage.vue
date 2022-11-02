@@ -13,15 +13,21 @@
     <div class="filter-content">
       <Filter
         :content="this.container"
-        :type="this.type"
-        :base="this.base"
+        :toptype="this.type"
+        :topbase="this.base"
         @reset="reset"
         @content="changeContent"
         @type="changeType"
         @base="changeBase"
       ></Filter>
       <div class="item-content">
-        <ItemTable v-if="container === 0" @open="showModal"></ItemTable>
+        toptype {{ type }}
+        <ItemTable
+          v-if="container === 0"
+          :pagetype="this.type"
+          :pagebase="this.base"
+          @open="showModal"
+        ></ItemTable>
         <ItemApex v-if="container === 1"></ItemApex>
       </div>
     </div>
@@ -81,6 +87,10 @@ export default {
       console.log(`base${base}`);
       this.base = base;
     },
+  },
+  updated() {
+    // this.changeBase();
+    // console.log(this.base);
   },
 };
 </script>

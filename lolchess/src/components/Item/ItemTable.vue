@@ -1,5 +1,6 @@
 <template>
   <div class="table-container">
+    toptype {{ pagetype }}
     <table>
       <thead>
         <th><div class="table-item">Item</div></th>
@@ -72,8 +73,10 @@
 import newdata from '../../assets/newdata.json';
 
 export default {
+  props: ['pagetype', 'pagebase'],
   data() {
     return {
+      newdata,
       items: [],
     };
   },
@@ -119,12 +122,15 @@ export default {
       //   const filter1 = 'tft7_item';
       //   if (id == tierItem.items[i].id) this.items.push(newdata.items[i]);
       // }
+      const temp = [];
       for (let i = 0; i < newdata.items.length; i++) {
         // let name = newdata.items[i].apiName.toLowerCase().replace(/ /g, '');
         // const filter1 = 'tft7_item';
         // if (name.includes(filter1)) this.items.push(newdata.items[i]);
-        this.items.push(newdata.items[i]);
+        temp.push(newdata.items[i]);
       }
+      // console.log(this.items);
+      return temp;
     },
     isEmptyArr(arr) {
       if (Array.isArray(arr) && arr.length === 0) {
@@ -133,9 +139,124 @@ export default {
 
       return false;
     },
+    baseFilter(itemID) {
+      // const itemID = 1;
+      let itemArray = [];
+      for (let i in this.newdata.items) {
+        if (
+          this.newdata.items[i].from.includes(itemID) ||
+          this.newdata.items[i].id == itemID
+        ) {
+          const temp = this.newdata.items[i];
+          // console.log(temp);
+          itemArray.push(temp);
+        }
+      }
+      // console.log(itemArray);
+      return itemArray;
+    },
+    baseFilterTest(itemID) {
+      // const itemID = 1;
+      let itemArray = [];
+      for (let i in this.items) {
+        if (this.items[i].from.includes(itemID) || this.items[i].id == itemID) {
+          const temp = this.items[i];
+          // console.log(temp);
+          itemArray.push(temp);
+        }
+      }
+      // console.log(itemArray);
+      return itemArray;
+    },
+    typeFilter(types) {
+      // const word = 'Shimmerscale/';
+      // Ornn
+      // Radiant/
+      // Standard/ need exception
+      // Shimmerscale/ duplicate id 3000, 3010
+      // Emblem
+      // console.log(this.newdata.items[i].name.includes(word));
+      let itemArray = [];
+      const word = [
+        'Standard/',
+        'Emblem',
+        'Ornn_',
+        'Radiant/',
+        'Shimmerscale/',
+      ];
+      for (let j in types) {
+        if (types[j] === 1) {
+          // console.log(`j${j}`);
+          for (let i in this.newdata.items) {
+            if (this.newdata.items[i].icon.includes(word[j])) {
+              // console.log(word[j]);
+              const temp = this.newdata.items[i];
+              // console.log(temp);
+              itemArray.push(temp);
+            }
+          }
+        }
+      }
+      // console.log(itemArray);
+      return itemArray;
+    },
+    typeFilterTest(types) {
+      // const word = 'Shimmerscale/';
+      // Ornn
+      // Radiant/
+      // Standard/ need exception
+      // Shimmerscale/ duplicate id 3000, 3010
+      // Emblem
+      // console.log(this.newdata.items[i].name.includes(word));
+      let itemArray = [];
+      const word = [
+        'Standard/',
+        'Emblem',
+        'Ornn_',
+        'Radiant/',
+        'Shimmerscale/',
+      ];
+      for (let j in types) {
+        if (types[j] === 1) {
+          // console.log(`j${j}`);
+          for (let i in this.items) {
+            if (this.items[i].icon.includes(word[j])) {
+              // console.log(word[j]);
+              const temp = this.items[i];
+              // console.log(temp);
+              itemArray.push(temp);
+            }
+          }
+        }
+      }
+      // console.log(itemArray);
+      return itemArray;
+    },
+    test() {
+      for (let type in this.pagetype) {
+        console.log(this.pagetype[type]);
+      }
+    },
   },
   created() {
-    this.GetItems();
+    this.items = this.GetItems();
+    // this.test();
+  },
+  beforeUpdate() {
+    if (this.pagebase != 0 || this.pagetype.includes(1)) {
+      // console.log('1', this.items);
+      this.items = [];
+      // console.log('2', this.items);
+      // console.log('filter:', this.baseFilter(this.pagebase));
+      this.items = this.items.concat(this.baseFilter(this.pagebase));
+      // console.log('filter:', this.baseFilter(this.pagetype));
+      this.items = this.items.concat(this.typeFilter(this.pagetype));
+    } else this.items = this.GetItems();
+    // console.log(this.baseFilter(this.pagebase));
+    // console.log(this.baseFilterTest(this.pagebase));
+    // console.log(this.typeFilterTest(this.pagetype));
+    // console.log(this.items.concat(this.baseFilter(2)));
+    console.log(this.items);
   },
 };
 </script>
