@@ -30,6 +30,7 @@ export default {
         { name: 'cloakFilter', id: 6 },
         { name: 'beltFilter', id: 7 },
         { name: 'glovesFilter', id: 9 },
+        { name: 'spatula', id: 8 },
       ],
       isClicked: 0,
     };
