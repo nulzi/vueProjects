@@ -1,6 +1,7 @@
 <template>
   <div class="table-container">
     toptype {{ pagetype }}
+    <!-- {{ this.items.filter((item) => item.icon.includes('Standard/')).length }} -->
     <table>
       <thead>
         <th><div class="table-item">Item</div></th>
@@ -78,6 +79,7 @@ export default {
     return {
       newdata,
       items: [],
+      tempItems: [],
     };
   },
   methods: {
@@ -195,22 +197,51 @@ export default {
   },
   created() {
     this.items = this.GetItems();
-    // this.test();
+    this.tempItems = this.items;
   },
   beforeUpdate() {
-    if (this.pagebase != 0 || this.pagetype.includes(1)) {
-      // console.log('1', this.items);
-      this.items = [];
-      // console.log('2', this.items);
-      // console.log('filter:', this.baseFilter(this.pagebase));
-      this.items = this.items.concat(this.baseFilter(this.pagebase));
-      // console.log('filter:', this.baseFilter(this.pagetype));
-      this.items = this.items.concat(this.typeFilter(this.pagetype));
+    if (this.pagebase != 0 && this.pagetype.includes(1)) {
+      this.items = this.tempItems
+        .filter(
+          (item) =>
+            item.from.includes(this.pagebase) || item.id == this.pagebase
+        )
+        .filter((item) => {
+          const word = [
+            'Standard/',
+            'Emblem',
+            'Ornn_',
+            'Radiant/',
+            'Shimmerscale/',
+          ];
+          for (let j in this.pagetype) {
+            if (this.pagetype[j] === 1) {
+              if (item.icon.includes(word[j])) return true;
+            }
+          }
+        });
+    } else if (this.pagebase != 0) {
+      // this.items = this.tempItems;
+      this.items = this.tempItems.filter(
+        (item) => item.from.includes(this.pagebase) || item.id == this.pagebase
+      );
+    } else if (this.pagetype.includes(1)) {
+      this.items = this.tempItems.filter((item) => {
+        const word = [
+          'Standard/',
+          'Emblem',
+          'Ornn_',
+          'Radiant/',
+          'Shimmerscale/',
+        ];
+        for (let j in this.pagetype) {
+          if (this.pagetype[j] === 1) {
+            if (item.icon.includes(word[j])) return true;
+          }
+        }
+      });
     } else this.items = this.GetItems();
-    // console.log(this.baseFilter(this.pagebase));
-    // console.log(this.baseFilterTest(this.pagebase));
-    // console.log(this.typeFilterTest(this.pagetype));
-    // console.log(this.items.concat(this.baseFilter(2)));
+
     console.log(this.items);
   },
 };
