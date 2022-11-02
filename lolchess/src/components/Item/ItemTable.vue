@@ -155,19 +155,6 @@ export default {
       // console.log(itemArray);
       return itemArray;
     },
-    baseFilterTest(itemID) {
-      // const itemID = 1;
-      let itemArray = [];
-      for (let i in this.items) {
-        if (this.items[i].from.includes(itemID) || this.items[i].id == itemID) {
-          const temp = this.items[i];
-          // console.log(temp);
-          itemArray.push(temp);
-        }
-      }
-      // console.log(itemArray);
-      return itemArray;
-    },
     typeFilter(types) {
       // const word = 'Shimmerscale/';
       // Ornn
@@ -191,38 +178,6 @@ export default {
             if (this.newdata.items[i].icon.includes(word[j])) {
               // console.log(word[j]);
               const temp = this.newdata.items[i];
-              // console.log(temp);
-              itemArray.push(temp);
-            }
-          }
-        }
-      }
-      // console.log(itemArray);
-      return itemArray;
-    },
-    typeFilterTest(types) {
-      // const word = 'Shimmerscale/';
-      // Ornn
-      // Radiant/
-      // Standard/ need exception
-      // Shimmerscale/ duplicate id 3000, 3010
-      // Emblem
-      // console.log(this.newdata.items[i].name.includes(word));
-      let itemArray = [];
-      const word = [
-        'Standard/',
-        'Emblem',
-        'Ornn_',
-        'Radiant/',
-        'Shimmerscale/',
-      ];
-      for (let j in types) {
-        if (types[j] === 1) {
-          // console.log(`j${j}`);
-          for (let i in this.items) {
-            if (this.items[i].icon.includes(word[j])) {
-              // console.log(word[j]);
-              const temp = this.items[i];
               // console.log(temp);
               itemArray.push(temp);
             }
