@@ -23,8 +23,8 @@
       <div class="unit-content">
         <!-- {{ this.cost }} -->
         <UnitTable
-          :cost="this.cost"
-          :traits="this.traits"
+          :topcost="this.cost"
+          :toptraits="this.traits"
           v-if="container === 0"
           @open="showModal"
         ></UnitTable>

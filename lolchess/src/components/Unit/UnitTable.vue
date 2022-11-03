@@ -68,7 +68,7 @@
 import newdata from '../../assets/newdata.json';
 
 export default {
-  props: ['cost', 'traits'],
+  props: ['topcost', 'toptraits'],
   data() {
     return {
       newdata,

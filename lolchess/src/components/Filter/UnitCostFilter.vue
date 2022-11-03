@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  props: ['cost'],
+  props: ['middlecost'],
   data() {
     return {
       isClicked: [0, 0, 0, 0, 0],
@@ -36,11 +36,13 @@ export default {
       for (let i = 0; i < this.isClicked.length; i++) {
         // console.log(item);
         if (this.isClicked[i] === 1) {
-          const classList = document.getElementById(`${i + 1}cost`).classList;
+          const classList = document.getElementById(
+            `${i + 1}middlecost`
+          ).classList;
           classList.replace('clicked', 'unclicked');
         }
       }
-      this.isClicked = this.cost;
+      this.isClicked = this.middlecost;
     },
     idToIndex(id) {
       return Number(id[0]) - 1;
@@ -58,6 +60,7 @@ export default {
         this.isClicked[index] = 1;
         classList.replace('unclicked', 'clicked');
       }
+      console.log(`costfilter:${this.isClicked}`);
       this.$emit('cost', this.isClicked);
     },
   },
