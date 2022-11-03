@@ -83,7 +83,6 @@ export default {
         'border:solid 2px #ffd700;',
       ],
       recommands: [1, 6, 3],
-      costFilter: this.cost,
     };
   },
   methods: {
@@ -253,15 +252,51 @@ export default {
         }
       }
     },
+    costFilter() {
+      const { champions } = this.newdata.setData[0];
+      const costs = [1, 0, 1, 1, 0];
+      let champs = [];
+      for (let cost = 0; cost < costs.length; cost++) {
+        if (costs[cost] == 1) {
+          const temp = champions.filter((v) => v.cost == cost + 1);
+          // console.log(temp);
+          champs.push(temp);
+        }
       }
-      // console.log(temp)
-      // console.log(changeName)
-      if (this.stage2.includes(temp))
-        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7_stage2.png`;
-      else if (temp == 'tft7_dragonguild')
-        return 'https://raw.communitydragon.org/latest/game/assets/characters/tft7_dragonguild/hud/icons2d/tft7_zippy_square.tft_set7_stage2.png';
-      else
-        return `https://raw.communitydragon.org/latest/game/assets/characters/${temp}/hud/${changeName}_square.tft_set7.png`;
+      let temp = champs[0];
+      if (champs.length > 1) {
+        for (let i = 1; i < champs.length; i++) {
+          temp = temp.concat(champs[i]);
+        }
+      }
+      champs = temp;
+      console.log(champs);
+    },
+    traitsFilter() {
+      const { champions } = this.newdata.setData[0];
+      const filteredChampionsTrait = champions.filter((champion) =>
+        champion.traits.includes('Astral')
+      );
+      console.log(filteredChampionsTrait);
+    },
+    testFilter() {
+      const objPersons = {
+        persons: [
+          { name: 'kim', age: 20, gender: 'man' },
+          { name: 'vicky', age: 22, gender: 'women' },
+          { name: 'gloria', age: 42, gender: 'women' },
+          { name: 'gom', age: 27, gender: 'man' },
+        ],
+      };
+      const { persons } = objPersons;
+      // ES5: const persons = Object.assign([], objPersons.persons)와 동일
+      console.log(Object.values(persons));
+      const mapPersons = Object.values(persons).map((v) =>
+        Object.keys(v).map((v2) => v[v2])
+      );
+      const filteredPersonsAge = persons.filter((v) => v.age > 25);
+      console.log(mapPersons);
+      console.log(filteredPersonsAge);
     },
   },
   created() {
@@ -271,9 +306,6 @@ export default {
   },
   updated() {
     // console.log(this.cost);
-    if (this.cost.includes(1)) {
-      this.filter();
-    }
   },
 };
 </script>
