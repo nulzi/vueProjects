@@ -141,31 +141,11 @@ export default {
 
       return false;
     },
-    baseFilter(itemID) {
-      // const itemID = 1;
-      let itemArray = [];
-      for (let i in this.newdata.items) {
-        if (
-          this.newdata.items[i].from.includes(itemID) ||
-          this.newdata.items[i].id == itemID
-        ) {
-          const temp = this.newdata.items[i];
-          // console.log(temp);
-          itemArray.push(temp);
-        }
-      }
-      // console.log(itemArray);
-      return itemArray;
+    baseFilter(item) {
+      if (item.from.includes(this.pagebase) || item.id == this.pagebase)
+        return true;
     },
-    typeFilter(types) {
-      // const word = 'Shimmerscale/';
-      // Ornn
-      // Radiant/
-      // Standard/ need exception
-      // Shimmerscale/ duplicate id 3000, 3010
-      // Emblem
-      // console.log(this.newdata.items[i].name.includes(word));
-      let itemArray = [];
+    typeFilter(item) {
       const word = [
         'Standard/',
         'Emblem',
@@ -173,26 +153,25 @@ export default {
         'Radiant/',
         'Shimmerscale/',
       ];
-      for (let j in types) {
-        if (types[j] === 1) {
-          // console.log(`j${j}`);
-          for (let i in this.newdata.items) {
-            if (this.newdata.items[i].icon.includes(word[j])) {
-              // console.log(word[j]);
-              const temp = this.newdata.items[i];
-              // console.log(temp);
-              itemArray.push(temp);
-            }
-          }
+      for (let j in this.pagetype) {
+        if (this.pagetype[j] === 1) {
+          if (item.icon.includes(word[j])) return true;
         }
       }
-      // console.log(itemArray);
-      return itemArray;
     },
-    test() {
-      for (let type in this.pagetype) {
-        console.log(this.pagetype[type]);
-      }
+    totalFilter() {
+      let result = [];
+      if (this.pagebase != 0 && this.pagetype.includes(1)) {
+        result = this.tempItems
+          .filter((item) => this.baseFilter(item))
+          .filter((item) => this.typeFilter(item));
+      } else if (this.pagebase != 0) {
+        result = this.tempItems.filter((item) => this.baseFilter(item));
+      } else if (this.pagetype.includes(1)) {
+        result = this.tempItems.filter((item) => this.typeFilter(item));
+      } else result = this.GetItems();
+
+      return result;
     },
   },
   created() {
@@ -200,49 +179,8 @@ export default {
     this.tempItems = this.items;
   },
   beforeUpdate() {
-    if (this.pagebase != 0 && this.pagetype.includes(1)) {
-      this.items = this.tempItems
-        .filter(
-          (item) =>
-            item.from.includes(this.pagebase) || item.id == this.pagebase
-        )
-        .filter((item) => {
-          const word = [
-            'Standard/',
-            'Emblem',
-            'Ornn_',
-            'Radiant/',
-            'Shimmerscale/',
-          ];
-          for (let j in this.pagetype) {
-            if (this.pagetype[j] === 1) {
-              if (item.icon.includes(word[j])) return true;
-            }
-          }
-        });
-    } else if (this.pagebase != 0) {
-      // this.items = this.tempItems;
-      this.items = this.tempItems.filter(
-        (item) => item.from.includes(this.pagebase) || item.id == this.pagebase
-      );
-    } else if (this.pagetype.includes(1)) {
-      this.items = this.tempItems.filter((item) => {
-        const word = [
-          'Standard/',
-          'Emblem',
-          'Ornn_',
-          'Radiant/',
-          'Shimmerscale/',
-        ];
-        for (let j in this.pagetype) {
-          if (this.pagetype[j] === 1) {
-            if (item.icon.includes(word[j])) return true;
-          }
-        }
-      });
-    } else this.items = this.GetItems();
-
-    console.log(this.items);
+    this.items = this.totalFilter();
+    // console.log(this.items);
   },
 };
 </script>
