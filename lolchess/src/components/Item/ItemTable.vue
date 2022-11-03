@@ -118,18 +118,20 @@ export default {
       }
     },
     GetItems() {
-      //tierItem is server data
-      // for (let i = 0; i < newdata.items.length; i++) {
-      //   let id = newdata.items[i].id;
-      //   const filter1 = 'tft7_item';
-      //   if (id == tierItem.items[i].id) this.items.push(newdata.items[i]);
-      // }
       const temp = [];
       for (let i = 0; i < newdata.items.length; i++) {
-        // let name = newdata.items[i].apiName.toLowerCase().replace(/ /g, '');
-        // const filter1 = 'tft7_item';
-        // if (name.includes(filter1)) this.items.push(newdata.items[i]);
         temp.push(newdata.items[i]);
+      }
+      // console.log(this.items);
+      return temp;
+    },
+    GetItemsByJson(datas) {
+      const temp = [];
+      for (let i = 0; i < this.newdata.items.length; i++) {
+        for (let j in datas.items.length) {
+          if (this.newdata.items[i].id == datas.items[j].ID)
+            temp.push(this.newdata.items[i]);
+        }
       }
       // console.log(this.items);
       return temp;
