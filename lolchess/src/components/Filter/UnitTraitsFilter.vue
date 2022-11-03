@@ -59,29 +59,6 @@ export default {
       }
     },
     GetTraitName() {
-    GetTraitImage(traitName) {
-      // console.log(traitName.toLowerCase());
-      const exceptionNone = ['assassin', 'shapeshifter'];
-      const exceptionStage2 = ['lagoon', 'monolith', 'darkflight', 'prodigy'];
-      const exception2 = ['mage', 'mystic'];
-      if (exceptionNone.includes(traitName.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${traitName.toLowerCase()}.png`;
-      } else if (exceptionStage2.includes(traitName.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_${traitName.toLowerCase()}.tft_set7_stage2.png`;
-      } else if (traitName.toLowerCase() === 'bruiser') {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png`;
-      } else if (exception2.includes(traitName.toLowerCase())) {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${traitName.toLowerCase()}.png`;
-      } else if (traitName.toLowerCase() === 'scalescorn') {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_dragonbane.png`;
-      } else if (traitName.toLowerCase() === 'cavalier') {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cavalry.png`;
-      } else if (traitName.toLowerCase() === 'spelltheif') {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_spellthief.png`;
-      } else if (traitName.toLowerCase() === 'cannoneer') {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
-      } else {
-        return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${traitName.toLowerCase()}.png`;
       let temp = [];
       for (let i in this.newdata.setData[0].traits) {
         temp.push(this.newdata.setData[0].traits[i].name);
