@@ -94,10 +94,6 @@ export default {
       this.traits = traits;
     },
   },
-  updated() {
-    this.changeCost();
-    this.changeTrait();
-  },
 };
 </script>
 
