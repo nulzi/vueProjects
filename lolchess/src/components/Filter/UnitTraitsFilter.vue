@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       newdata,
+      traitsdata,
       isClicked: [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0,
@@ -58,13 +59,6 @@ export default {
       }
     },
     GetTraitName() {
-      for (let i = 0; i < traitsdata.length; i++) {
-        if (traitsdata[i].set === 'TFTSet7') {
-          this.traitNames.push(traitsdata[i].display_name);
-        }
-      }
-      // console.log(this.traitNames);
-    },
     GetTraitImage(traitName) {
       // console.log(traitName.toLowerCase());
       const exceptionNone = ['assassin', 'shapeshifter'];
@@ -88,7 +82,13 @@ export default {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_5_cannoneer.png`;
       } else {
         return `https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_7_${traitName.toLowerCase()}.png`;
+      let temp = [];
+      for (let i in this.newdata.setData[0].traits) {
+        temp.push(this.newdata.setData[0].traits[i].name);
       }
+      temp.sort();
+      // console.log(temp);
+      return temp;
     },
     changeTrait(index) {
       if (this.isClicked[index] === 1) {
@@ -101,7 +101,7 @@ export default {
     },
   },
   created() {
-    this.GetTraitName();
+    this.traitNames = this.GetTraitName();
   },
   updated() {
     this.reset();
