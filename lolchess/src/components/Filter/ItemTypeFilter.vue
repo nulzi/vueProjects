@@ -36,7 +36,6 @@ export default {
   methods: {
     reset() {
       for (let i = 0; i < this.isClicked.length; i++) {
-        // console.log(item);
         if (this.isClicked[i] === 1) {
           const classList = document.getElementById(this.types[i]).classList;
           classList.replace('clicked', 'unclicked');
@@ -67,11 +66,6 @@ export default {
       // filter off
       if (classList.contains('clicked')) {
         this.isClicked[index] = 0;
-        // for (let i in this.filter) {
-        //   if (this.filter[i] === word[index]) {
-        //     this.filter.splice(i, 1);
-        //   }
-        // }
         this.filter = this.filter.filter((type) => type != word[index]);
         classList.replace('clicked', 'unclicked');
       } else {
@@ -80,15 +74,12 @@ export default {
         this.filter.push(word[index]);
         classList.replace('unclicked', 'clicked');
       }
-      // console.log(`filter array ${this.filter}`);
       this.filteredItems = this.typesFilter(this.filter);
       this.excute();
       this.$emit('type', index);
     },
     typesFilter(filter) {
       this.initItems();
-      // console.log(this.filteredItems);
-      // console.log('test', this.filter);
       let result = [];
       if (filter.length === 0) result = this.filteredItems;
       for (let i in filter) {
@@ -97,11 +88,9 @@ export default {
       return result;
     },
     typeFilter(type) {
-      // console.log(`type ${type}`);
       let result = [];
       result = this.filteredItems.filter((item) => item.icon.includes(type));
       return result;
-      // console.log(`filtered ${this.filteredItems}`);
     },
     excute() {
       this.$store.commit('SetItems', this.filteredItems);
@@ -109,9 +98,7 @@ export default {
   },
   created() {
     this.initItems();
-    console.log(this.filteredItems);
     this.excute();
-    console.log(this.$store.state.items);
   },
   updated() {
     this.reset();
