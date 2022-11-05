@@ -70,27 +70,36 @@ export default {
       // console.log(`champName: ${this.champName}`);
     },
     reset() {
-      console.log('reset');
+      // console.log('reset');
       this.container = 0;
       this.type = [0, 0, 0, 0, 0];
       this.base = 0;
     },
     changeContent(content) {
-      console.log(`content${content}`);
+      // console.log(`content${content}`);
       this.container = content;
     },
-    changeType(type) {
-      console.log(`type${type}`);
-      this.type[type - 1] = 1;
+    changeType(index) {
+      // this.type[index - 1] = 1;
+      if (this.type[index] === 0) this.type.splice(index, 1, 1);
+      else this.type.splice(index, 1, 0);
+      // if (this.type[index] === 0) this.$set(this.type, index, 1);
+      // else this.$set(this.type, index, 0);
+      // if (this.type[index] === 0) this.type[index].push(1);
+      // else this.type[index].push(0);
+      // this.type[index].push(1);
+      // this.type.splice(index, 1, 1);
+      // console.log(`type${this.type}`);
+      console.log(this.type);
     },
     changeBase(base) {
-      console.log(`base${base}`);
+      // console.log(`base${base}`);
       this.base = base;
     },
   },
-  updated() {
-    // this.changeBase();
-    // console.log(this.base);
+  beforeUpdate() {
+    console.log('update type', this.type);
+    console.log('update base', this.base);
   },
 };
 </script>
