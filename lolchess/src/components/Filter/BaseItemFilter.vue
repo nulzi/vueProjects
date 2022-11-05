@@ -78,34 +78,6 @@ export default {
       // console.log(this.isClicked);
       this.$emit('base', this.isClicked);
     },
-    GetItemUrl(item) {
-      // console.log(item);
-      // for (let j in newdata.items) {
-      //   if (item == newdata.items[j].id) {
-      //     console.log(
-      //       `https://raw.communitydragon.org/latest/game/${newdata.items[j].icon
-      //         .toLowerCase()
-      //         .slice(0, -4)}.png`
-      //     );
-      //     return `https://raw.communitydragon.org/latest/game/${newdata.items[
-      //       j
-      //     ].icon
-      //       .toLowerCase()
-      //       .slice(0, -4)}.png`;
-      //   }
-      // }
-      // console.log(item)
-      for (let j in this.newdata.items) {
-        if (item == this.newdata.items[j].id) {
-          // console.log(this.newdata.items[j].icon.toLowerCase().split('.'));
-          let temp = this.newdata.items[j].icon
-            .toLowerCase()
-            .split('.')
-            .slice(0, -1);
-          return `https://raw.communitydragon.org/latest/game/${temp.join(
-            '.'
-          )}.png`;
-        }
       }
     },
   },
