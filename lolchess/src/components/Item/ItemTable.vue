@@ -1,17 +1,16 @@
 <template>
   <div class="table-container">
-    toptype {{ pagetype }}
-    <!-- {{ this.items.filter((item) => item.icon.includes('Standard/')).length }} -->
+    <div class="table-header">
+      <div class="table-item">Item</div>
+      <div class="table-tier">Tier</div>
+      <div class="table-avg">Avg Place</div>
+      <div class="table-winrate">Winrate</div>
+      <div class="table-frequency">Frequency</div>
+    </div>
+    <hr />
     <table>
-      <thead>
-        <th><div class="table-item">Item</div></th>
-        <th><div class="table-tier">Tier</div></th>
-        <th><div class="table-avg">Avg Place</div></th>
-        <th><div class="table-winrate">Winrate</div></th>
-        <th><div class="table-frequency">Frequency</div></th>
-      </thead>
       <tbody>
-        <tr v-for="item in items" :key="item">
+        <tr v-for="item in this.$store.state.items" :key="item">
           <td>
             <div class="table-item">
               <div class="help-tip">
@@ -70,7 +69,6 @@
 </template>
 
 <script>
-// import alldata from '../../assets/data.json';
 import newdata from '../../assets/newdata.json';
 
 export default {
@@ -84,26 +82,9 @@ export default {
   },
   methods: {
     showModal(id) {
-      // console.log(`emit:${name}`);
       this.$emit('open', 1, id);
     },
     GetItemUrl(item) {
-      // console.log(item);
-      // for (let j in newdata.items) {
-      //   if (item == newdata.items[j].id) {
-      //     console.log(
-      //       `https://raw.communitydragon.org/latest/game/${newdata.items[j].icon
-      //         .toLowerCase()
-      //         .slice(0, -4)}.png`
-      //     );
-      //     return `https://raw.communitydragon.org/latest/game/${newdata.items[
-      //       j
-      //     ].icon
-      //       .toLowerCase()
-      //       .slice(0, -4)}.png`;
-      //   }
-      // }
-      // console.log(item)
       for (let j in newdata.items) {
         if (item == newdata.items[j].id) {
           // console.log(newdata.items[j].icon.toLowerCase().split('.'));
@@ -118,14 +99,15 @@ export default {
       }
     },
     GetItems() {
+      // get items from newdata.json
       const temp = [];
-      for (let i = 0; i < newdata.items.length; i++) {
-        temp.push(newdata.items[i]);
+      for (let i = 0; i < this.newdata.items.length; i++) {
+        temp.push(this.newdata.items[i]);
       }
-      // console.log(this.items);
       return temp;
     },
     GetItemsByJson(datas) {
+      // get items from tierItem.json
       const temp = [];
       for (let i = 0; i < this.newdata.items.length; i++) {
         for (let j in datas.items.length) {
@@ -133,10 +115,10 @@ export default {
             temp.push(this.newdata.items[i]);
         }
       }
-      // console.log(this.items);
       return temp;
     },
     isEmptyArr(arr) {
+      // check array empty
       if (Array.isArray(arr) && arr.length === 0) {
         return true;
       }
@@ -164,25 +146,23 @@ export default {
     totalFilter() {
       let result = [];
       if (this.pagebase != 0 && this.pagetype.includes(1)) {
+        console.log('together');
         result = this.tempItems
           .filter((item) => this.baseFilter(item))
           .filter((item) => this.typeFilter(item));
-      } else if (this.pagebase != 0) {
+      } else if (this.pagebase == 0 && !this.pagetype.includes(1)) {
+        console.log('reset');
+        result = this.GetItems();
+      } else if (this.pagebase != 0 && !this.pagetype.includes(1)) {
+        console.log('base');
         result = this.tempItems.filter((item) => this.baseFilter(item));
-      } else if (this.pagetype.includes(1)) {
+      } else if (this.pagebase == 0 && this.pagetype.includes(1)) {
+        console.log('typefilter');
         result = this.tempItems.filter((item) => this.typeFilter(item));
-      } else result = this.GetItems();
+      }
 
       return result;
     },
-  },
-  created() {
-    this.items = this.GetItems();
-    this.tempItems = this.items;
-  },
-  beforeUpdate() {
-    this.items = this.totalFilter();
-    // console.log(this.items);
   },
 };
 </script>
