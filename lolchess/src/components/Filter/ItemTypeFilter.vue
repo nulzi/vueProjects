@@ -50,9 +50,10 @@ export default {
     },
     GetItems() {
       const temp = [];
-      for (let i = 0; i < this.tierItem.items.length; i++) {
-        temp.push(this.tierItem.items[i]);
+      for (let i = 0; i < newdata.items.length; i++) {
+        temp.push(newdata.items[i]);
       }
+      // console.log(this.items);
       return temp;
     },
     changeType(type, index) {
@@ -98,8 +99,8 @@ export default {
     },
   },
   created() {
-    this.initItems();
-    this.excute();
+    // this.initItems();
+    // this.excute();
   },
   updated() {
     this.reset();

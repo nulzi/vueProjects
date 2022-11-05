@@ -75,9 +75,11 @@ export default {
       return temp;
     },
     excute() {
-      this.$store.commit('SetItems', this.filteredItems);
+      this.$store.commit('SetBaseFilter', this.isClicked);
+      console.log('excute() in baseitemfilter', this.$store.state.baseFilter);
     },
     changeBase(item) {
+      console.log('changeBase()');
       const classList = document.getElementById(item.name).classList;
       const isExist = document.getElementsByClassName(
         'filter-item-img clicked'
@@ -86,21 +88,25 @@ export default {
       if (isExist.length === 0) {
         this.isClicked = item.id;
         classList.replace('unclicked', 'clicked');
+        this.emitter.emit('baseFilter', item.id);
       } else {
         //filter off
         if (classList.contains('clicked')) {
           this.isClicked = 0;
           classList.replace('clicked', 'unclicked');
+          this.emitter.emit('baseFilter', 0);
         } else {
           //filter off
           isExist.item(0).classList.replace('clicked', 'unclicked');
           //filter on
           this.isClicked = item.id;
           classList.replace('unclicked', 'clicked');
+          this.emitter.emit('baseFilter', item.id);
         }
       }
-      this.baseFilter();
-      this.excute();
+      // this.baseFilter();
+      // this.excute();
+      // console.log(`store basefilter: ${this.$store.state.baseFilter}`);
       this.$emit('base', this.isClicked);
     },
     baseFilter() {
@@ -115,8 +121,8 @@ export default {
     },
   },
   created() {
-    this.initItems();
-    this.excute();
+    // this.initItems();
+    // this.excute();
   },
   updated() {
     this.reset(this.middlebase);

@@ -78,6 +78,7 @@ export default {
       newdata,
       items: [],
       tempItems: [],
+      filteredItems: [],
     };
   },
   methods: {
@@ -125,11 +126,11 @@ export default {
 
       return false;
     },
-    baseFilter(item) {
+    baseFilterT(item) {
       if (item.from.includes(this.pagebase) || item.id == this.pagebase)
         return true;
     },
-    typeFilter(item) {
+    typeFilterT(item) {
       const word = [
         'Standard/',
         'Emblem',
@@ -143,7 +144,7 @@ export default {
         }
       }
     },
-    totalFilter() {
+    totalFilterT() {
       let result = [];
       if (this.pagebase != 0 && this.pagetype.includes(1)) {
         console.log('together');
@@ -163,6 +164,37 @@ export default {
 
       return result;
     },
+    initItems() {
+      console.log('initItems()');
+      this.filteredItems = this.GetItems();
+    },
+    excute() {
+      console.log('excute()');
+      this.$store.commit('SetItems', this.filteredItems);
+    },
+    baseFilter(e) {
+      console.log('baseFilter()');
+      this.initItems();
+      if (e == 0) {
+        this.excute();
+        return;
+      }
+      this.filteredItems = this.filteredItems.filter(
+        (item) => item.from.includes(e) || item.id == e
+      );
+      console.log('filtered', this.filteredItems);
+      this.excute();
+    },
+  },
+  created() {
+    this.initItems();
+    this.excute();
+  },
+  mounted() {
+    this.emitter.on('baseFilter', (e) => {
+      console.log('emitter', e);
+      this.baseFilter(e);
+    });
   },
 };
 </script>
