@@ -11,6 +11,7 @@ const store = createStore({
       matchData3: [],
       matchData4: [],
       matchData5: [],
+      items: [],
     };
   },
   mutations: {
@@ -34,6 +35,9 @@ const store = createStore({
     },
     SetMatchData5(state, inputValue) {
       state.SetMatchData5 = inputValue;
+    },
+    SetItems(state, inputValue) {
+      state.items = inputValue;
     },
   },
   // ajax 요청 받는거
