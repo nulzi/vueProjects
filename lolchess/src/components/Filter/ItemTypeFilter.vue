@@ -1,26 +1,26 @@
 <template>
   <div class="filter1">
+    <!-- {{ this.filter }} -->
     <button
       v-for="(type, index) in types"
       :key="index"
-      :class="[
-        isClicked[index] === 1
-          ? 'filter-type clicked'
-          : 'filter-type unclicked',
-      ]"
-      @click="changeType(index)"
+      :id="type"
+      class="filter-type unclicked"
+      @click="changeType(type, index)"
     >
       {{ type }}
     </button>
   </div>
-  middletype{{ middletype }}
 </template>
 
 <script>
+import newdata from '../../assets/newdata.json';
+
 export default {
   props: ['middletype'],
   data() {
     return {
+      newdata,
       types: [
         'normal(일반)',
         'emblem(상징)',
@@ -29,20 +29,89 @@ export default {
         'shimmerscale(빛비늘)',
       ],
       isClicked: [0, 0, 0, 0, 0],
+      filter: [],
+      filteredItems: [],
     };
   },
   methods: {
     reset() {
+      for (let i = 0; i < this.isClicked.length; i++) {
+        // console.log(item);
+        if (this.isClicked[i] === 1) {
+          const classList = document.getElementById(this.types[i]).classList;
+          classList.replace('clicked', 'unclicked');
+        }
+      }
       this.isClicked = this.middletype;
     },
-    changeType(i) {
-      if (this.isClicked[i] === 1) {
-        this.isClicked[i] = 0;
-      } else {
-        this.isClicked[i] = 1;
-        this.$emit('type', i + 1);
-      }
+    initItems() {
+      this.filteredItems = this.GetItems();
     },
+    GetItems() {
+      const temp = [];
+      for (let i = 0; i < newdata.items.length; i++) {
+        temp.push(newdata.items[i]);
+      }
+      // console.log(this.items);
+      return temp;
+    },
+    changeType(type, index) {
+      const classList = document.getElementById(type).classList;
+      const word = [
+        'Standard/',
+        'Emblem',
+        'Ornn_',
+        'Radiant/',
+        'Shimmerscale/',
+      ];
+      // filter off
+      if (classList.contains('clicked')) {
+        this.isClicked[index] = 0;
+        // for (let i in this.filter) {
+        //   if (this.filter[i] === word[index]) {
+        //     this.filter.splice(i, 1);
+        //   }
+        // }
+        this.filter = this.filter.filter((type) => type != word[index]);
+        classList.replace('clicked', 'unclicked');
+      } else {
+        //filter on
+        this.isClicked[index] = 1;
+        this.filter.push(word[index]);
+        classList.replace('unclicked', 'clicked');
+      }
+      // console.log(`filter array ${this.filter}`);
+      this.filteredItems = this.typesFilter(this.filter);
+      this.excute();
+      this.$emit('type', index);
+    },
+    typesFilter(filter) {
+      this.initItems();
+      // console.log(this.filteredItems);
+      // console.log('test', this.filter);
+      let result = [];
+      if (filter.length === 0) result = this.filteredItems;
+      for (let i in filter) {
+        result = result.concat(this.typeFilter(filter[i]));
+      }
+      return result;
+    },
+    typeFilter(type) {
+      // console.log(`type ${type}`);
+      let result = [];
+      result = this.filteredItems.filter((item) => item.icon.includes(type));
+      return result;
+      // console.log(`filtered ${this.filteredItems}`);
+    },
+    excute() {
+      this.$store.commit('SetItems', this.filteredItems);
+    },
+  },
+  created() {
+    this.initItems();
+    console.log(this.filteredItems);
+    this.excute();
+    console.log(this.$store.state.items);
   },
   updated() {
     this.reset();
