@@ -1,6 +1,5 @@
 <template>
   <div class="filter2">
-    middlebase {{ middlebase }}
     <img
       v-for="item in items"
       :key="item"
@@ -33,6 +32,7 @@ export default {
         { name: 'spatula', id: 8 },
       ],
       isClicked: 0,
+      filteredItems: [],
     };
   },
   methods: {
@@ -49,6 +49,34 @@ export default {
       }
       this.isClicked = base;
     },
+    GetItemUrl(item) {
+      for (let j in this.newdata.items) {
+        if (item == this.newdata.items[j].id) {
+          // console.log(this.newdata.items[j].icon.toLowerCase().split('.'));
+          let temp = this.newdata.items[j].icon
+            .toLowerCase()
+            .split('.')
+            .slice(0, -1);
+          return `https://raw.communitydragon.org/latest/game/${temp.join(
+            '.'
+          )}.png`;
+        }
+      }
+    },
+    initItems() {
+      this.filteredItems = this.GetItems();
+    },
+    GetItems() {
+      const temp = [];
+      for (let i = 0; i < newdata.items.length; i++) {
+        temp.push(newdata.items[i]);
+      }
+      // console.log(this.items);
+      return temp;
+    },
+    excute() {
+      this.$store.commit('SetItems', this.filteredItems);
+    },
     changeBase(item) {
       const classList = document.getElementById(item.name).classList;
       const isExist = document.getElementsByClassName(
@@ -56,30 +84,39 @@ export default {
       );
 
       if (isExist.length === 0) {
-        //선택된 필터가 없는 경우
         this.isClicked = item.id;
         classList.replace('unclicked', 'clicked');
       } else {
-        //선택된 필터가 이미 있는 경우
-
-        //이미 선택된 것을 끄고 싶을 경우
+        //filter off
         if (classList.contains('clicked')) {
           this.isClicked = 0;
           classList.replace('clicked', 'unclicked');
         } else {
-          //다른 것을 선택한 경우
-          //선택된 필터를 끄기
+          //filter off
           isExist.item(0).classList.replace('clicked', 'unclicked');
-          //선택한 필터 켜기
+          //filter on
           this.isClicked = item.id;
           classList.replace('unclicked', 'clicked');
         }
       }
-      // console.log(this.isClicked);
+      this.baseFilter();
+      this.excute();
       this.$emit('base', this.isClicked);
     },
+    baseFilter() {
+      this.initItems();
+      if (this.isClicked == 0) {
+        return;
       }
+      this.filteredItems = this.filteredItems.filter(
+        (item) =>
+          item.from.includes(this.isClicked) || item.id == this.isClicked
+      );
     },
+  },
+  created() {
+    this.initItems();
+    this.excute();
   },
   updated() {
     this.reset(this.middlebase);
