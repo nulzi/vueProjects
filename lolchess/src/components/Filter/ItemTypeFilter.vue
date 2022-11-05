@@ -15,6 +15,7 @@
 
 <script>
 import newdata from '../../assets/newdata.json';
+import tierItem from '../../assets/tierItem.json';
 
 export default {
   props: ['middletype'],
@@ -29,6 +30,7 @@ export default {
         'shimmerscale(빛비늘)',
       ],
       isClicked: [0, 0, 0, 0, 0],
+      tierItem,
       filter: [],
       filteredItems: [],
     };
@@ -48,10 +50,9 @@ export default {
     },
     GetItems() {
       const temp = [];
-      for (let i = 0; i < newdata.items.length; i++) {
-        temp.push(newdata.items[i]);
+      for (let i = 0; i < this.tierItem.items.length; i++) {
+        temp.push(this.tierItem.items[i]);
       }
-      // console.log(this.items);
       return temp;
     },
     changeType(type, index) {
