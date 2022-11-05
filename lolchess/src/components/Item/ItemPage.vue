@@ -1,38 +1,40 @@
 <template>
-  <ItemInfo
-    v-if="modalOpen"
-    @close="modalOpen = 0"
-    :itemID="this.itemID"
-  ></ItemInfo>
-  <div class="app_container">
-    <div class="header-content">
-      <Header></Header>
-    </div>
-    <div class="sidebar-a"></div>
-    <div class="sidebar-b"></div>
-    <div class="filter-content">
-      <Filter
-        :content="this.container"
-        :toptype="this.type"
-        :topbase="this.base"
-        @reset="reset"
-        @content="changeContent"
-        @type="changeType"
-        @base="changeBase"
-      ></Filter>
-      <div class="item-content">
-        toptype {{ type }}
-        <ItemTable
-          v-if="container === 0"
-          :pagetype="this.type"
-          :pagebase="this.base"
-          @open="showModal"
-        ></ItemTable>
-        <ItemApex v-if="container === 1"></ItemApex>
+  <div>
+    <ItemInfo
+      v-if="modalOpen"
+      @close="modalOpen = 0"
+      :itemID="this.itemID"
+    ></ItemInfo>
+    <div class="app_container">
+      <div class="header-content">
+        <Header></Header>
       </div>
-    </div>
-    <div class="footer-content">
-      <Footer></Footer>
+      <div class="sidebar-a"></div>
+      <div class="sidebar-b"></div>
+      <div class="filter-content">
+        <Filter
+          :content="this.container"
+          :toptype="this.type"
+          :topbase="this.base"
+          @reset="reset"
+          @content="changeContent"
+          @type="changeType"
+          @base="changeBase"
+        ></Filter>
+        <div class="item-content">
+          <!-- {{ this.type }} -->
+          <ItemTable
+            v-if="container === 0"
+            :pagetype="this.type"
+            :pagebase="this.base"
+            @open="showModal"
+          ></ItemTable>
+          <ItemApex v-if="container === 1"></ItemApex>
+        </div>
+      </div>
+      <div class="footer-content">
+        <Footer></Footer>
+      </div>
     </div>
   </div>
 </template>
