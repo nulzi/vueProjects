@@ -13,6 +13,7 @@ const store = createStore({
       matchData5: [],
       items: [],
       filteredItems: [],
+      itemFilter: { base: 0, type: [] },
       baseFilter: 0,
     };
   },
@@ -47,6 +48,12 @@ const store = createStore({
     SetBase(state, inputValue) {
       state.baseFilter = inputValue;
     },
+    SetItemFilterBase(state, inputValue) {
+      state.itemFilter.base = inputValue;
+    },
+    SetItemFilterType(state, inputValue) {
+      state.itemFilter.type = inputValue;
+    },
   },
   // ajax 요청 받는거
   actions: {
@@ -64,9 +71,23 @@ const store = createStore({
       console.log(`store.origin:${this.state.items}`);
       console.log(`store.filtered:${this.state.filteredItems}`);
     },
+    filterItems(context, filter) {
+      console.log('store.filterItems()');
+      // base button only
+      if (typeof filter == 'number' && this.state.itemFilter.type.length == 0) {
+        this.dispatch('initItems', this.state.items);
+        context.commit('SetItemFilterBase', filter);
+        this.dispatch('baseFilter', filter);
+      }
+      // type button only
+      if (Array.isArray(filter) && this.state.itemFilter.base == 0) {
+        this.dispatch('initItems', this.state.items);
+        context.commit('SetItemFilterType', filter);
+        this.dispatch('typesFilter', filter);
+      }
+    },
     baseFilter(context, base) {
       console.log('store.baseFilter()');
-      this.dispatch('initItems', this.state.items);
       if (base == 0) {
         console.log(`store.base:${base}`);
         return;
@@ -74,9 +95,29 @@ const store = createStore({
       console.log(`store.base:${base}`);
       context.commit(
         'SetFilteredItems',
-        this.state.items.filter(
+        this.state.filteredItems.filter(
           (item) => item.from.includes(base) || item.id == base
         )
+      );
+    },
+    typesFilter(context, types) {
+      console.log('store.typesFilter()');
+      if (types.length === 0) {
+        console.log(`store.types.length:${types.length}`);
+        return;
+      }
+      console.log(`store.types.length:${types.length}`);
+      console.log('store.types:', types);
+      for (let i in types) {
+        this.dispatch('typeFilter', types[i]);
+      }
+    },
+    typeFilter(context, type) {
+      console.log('store.typeFilter()');
+      console.log(`store.type:${type}`);
+      context.commit(
+        'SetFilteredItems',
+        this.state.filteredItems.filter((item) => item.icon.includes(type))
       );
     },
     GetMatchHistory(context, name) {

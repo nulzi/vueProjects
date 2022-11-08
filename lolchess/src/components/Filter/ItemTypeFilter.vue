@@ -59,26 +59,27 @@ export default {
     changeType(type, index) {
       console.log('changeType()');
       const classList = document.getElementById(type).classList;
-      // const word = [
-      //   'Standard/',
-      //   'Emblem',
-      //   'Ornn_',
-      //   'Radiant/',
-      //   'Shimmerscale/',
-      // ];
+      const word = [
+        'Standard/',
+        'Emblem',
+        'Ornn_',
+        'Radiant/',
+        'Shimmerscale/',
+      ];
       // filter off
       if (classList.contains('clicked')) {
         this.isClicked[index] = 0;
-        // this.filter = this.filter.filter((type) => type != word[index]);
+        this.filter = this.filter.filter((type) => type != word[index]);
         classList.replace('clicked', 'unclicked');
       } else {
         //filter on
         this.isClicked[index] = 1;
-        // this.filter.push(word[index]);
+        this.filter.push(word[index]);
         classList.replace('unclicked', 'clicked');
       }
       // this.filteredItems = this.typesFilter(this.filter);
       // this.excute();
+      this.$store.dispatch('filterItems', this.filter);
       this.$emit('type', index);
     },
     typesFilter(filter) {
