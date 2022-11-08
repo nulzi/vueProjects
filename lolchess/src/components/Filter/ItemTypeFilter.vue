@@ -45,9 +45,9 @@ export default {
       }
       this.isClicked = this.middletype;
     },
-    initItems() {
-      this.filteredItems = this.GetItems();
-    },
+    // initItems() {
+    //   this.filteredItems = this.GetItems();
+    // },
     GetItems() {
       const temp = [];
       for (let i = 0; i < newdata.items.length; i++) {
@@ -58,45 +58,46 @@ export default {
     },
     changeType(type, index) {
       const classList = document.getElementById(type).classList;
-      const word = [
-        'Standard/',
-        'Emblem',
-        'Ornn_',
-        'Radiant/',
-        'Shimmerscale/',
-      ];
+      // const word = [
+      //   'Standard/',
+      //   'Emblem',
+      //   'Ornn_',
+      //   'Radiant/',
+      //   'Shimmerscale/',
+      // ];
       // filter off
       if (classList.contains('clicked')) {
         this.isClicked[index] = 0;
-        this.filter = this.filter.filter((type) => type != word[index]);
+        // this.filter = this.filter.filter((type) => type != word[index]);
         classList.replace('clicked', 'unclicked');
       } else {
         //filter on
         this.isClicked[index] = 1;
-        this.filter.push(word[index]);
+        // this.filter.push(word[index]);
         classList.replace('unclicked', 'clicked');
       }
-      this.filteredItems = this.typesFilter(this.filter);
-      this.excute();
-      this.$emit('type', index);
+      // this.filteredItems = this.typesFilter(this.filter);
+      // this.excute();
+      if (!this.isClicked.includes(1)) this.$emit('type', 0);
+      else this.$emit('type', index + 1);
     },
-    typesFilter(filter) {
-      this.initItems();
-      let result = [];
-      if (filter.length === 0) result = this.filteredItems;
-      for (let i in filter) {
-        result = result.concat(this.typeFilter(filter[i]));
-      }
-      return result;
-    },
-    typeFilter(type) {
-      let result = [];
-      result = this.filteredItems.filter((item) => item.icon.includes(type));
-      return result;
-    },
-    excute() {
-      this.$store.commit('SetItems', this.filteredItems);
-    },
+    // typesFilter(filter) {
+    //   this.initItems();
+    //   let result = [];
+    //   if (filter.length === 0) result = this.filteredItems;
+    //   for (let i in filter) {
+    //     result = result.concat(this.typeFilter(filter[i]));
+    //   }
+    //   return result;
+    // },
+    // typeFilter(type) {
+    //   let result = [];
+    //   result = this.filteredItems.filter((item) => item.icon.includes(type));
+    //   return result;
+    // },
+    // excute() {
+    //   this.$store.commit('SetItems', this.filteredItems);
+    // },
   },
   created() {
     // this.initItems();

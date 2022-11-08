@@ -187,8 +187,8 @@ export default {
     },
   },
   created() {
-    this.initItems();
-    this.excute();
+    // this.initItems();
+    // this.excute();
   },
   mounted() {
     this.emitter.on('baseFilter', (e) => {

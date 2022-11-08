@@ -25,7 +25,7 @@ export default {
     Base,
   },
   data() {
-    return { newdata };
+    return { newdata, filteredItems: [], tempItems: [] };
   },
   methods: {
     reset() {
@@ -37,28 +37,16 @@ export default {
       this.$emit('content', content);
     },
     changeType(type) {
-      // console.log(`fileter: ${content}`);
+      console.log(`type: ${type}`);
+      // this.initItems();
+      // if (type == 0) return;
+      this.typesFilter();
+      this.excute();
       this.$emit('type', type);
     },
     changeBase(itemID) {
       // console.log(`fileter: ${itemID}`);
       this.$emit('base', itemID);
-    },
-    baseFilter() {
-      const itemID = 1;
-      let itemArray = [];
-      for (let i in this.newdata.items) {
-        if (
-          this.newdata.items[i].from.includes(itemID) ||
-          this.newdata.items[i].id == itemID
-        ) {
-          const temp = this.newdata.items[i].id;
-          // console.log(temp);
-          itemArray.push(temp);
-        }
-      }
-      // console.log(itemArray);
-      return itemArray;
     },
     GetItemUrl(item) {
       for (let j in newdata.items) {
@@ -74,33 +62,45 @@ export default {
         }
       }
     },
-    typeFilter() {
-      let itemArray = [];
-      for (let i in this.newdata.items) {
-        // if (
-        //   !this.newdata.items[i].apiName.includes('Augment') &&
-        //   this.newdata.items[i].apiName.includes('Emblem')
-        // ) {
-        //   const temp = this.newdata.items[i].id;
-        //   console.log(temp);
-        //   itemArray.push(temp);
-        // }
-        const word = 'Shimmerscale/';
-        // Ornn
-        // Radiant/
-        // Standard/ need exception
-        // Shimmerscale/ duplicate id 3000, 3010
-        // Emblem
-        // console.log(this.newdata.items[i].name.includes(word));
-        // if (this.newdata.items[i].name === '') continue;
-        // else
-        if (this.newdata.items[i].icon.includes(word)) {
-          const temp = this.newdata.items[i].id;
-          console.log(temp);
-          itemArray.push(temp);
-        }
+    initItems() {
+      console.log('container init()');
+      this.filteredItems = this.GetItems();
+    },
+    GetItems() {
+      const temp = [];
+      for (let i = 0; i < newdata.items.length; i++) {
+        temp.push(newdata.items[i]);
       }
-      return itemArray;
+      // console.log(this.items);
+      return temp;
+    },
+    typesFilter(filter) {
+      this.initItems();
+      if (filter.length === 0) return;
+      for (let i in filter) {
+        this.filteredItems = this.filteredItems.concat(
+          this.typeFilter(filter[i])
+        );
+      }
+    },
+    typeFilter(type) {
+      let result = [];
+      result = this.filteredItems.filter((item) => item.icon.includes(type));
+      return result;
+    },
+    baseFilter() {
+      this.initItems();
+      if (this.isClicked == 0) {
+        return;
+      }
+      this.filteredItems = this.filteredItems.filter(
+        (item) =>
+          item.from.includes(this.isClicked) || item.id == this.isClicked
+      );
+    },
+    excute() {
+      console.log('container excute()');
+      this.$store.commit('SetItems', this.filteredItems);
     },
   },
 };

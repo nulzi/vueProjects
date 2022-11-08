@@ -63,9 +63,9 @@ export default {
         }
       }
     },
-    initItems() {
-      this.filteredItems = this.GetItems();
-    },
+    // initItems() {
+    //   this.filteredItems = this.GetItems();
+    // },
     GetItems() {
       const temp = [];
       for (let i = 0; i < newdata.items.length; i++) {
@@ -74,10 +74,10 @@ export default {
       // console.log(this.items);
       return temp;
     },
-    excute() {
-      this.$store.commit('SetBaseFilter', this.isClicked);
-      console.log('excute() in baseitemfilter', this.$store.state.baseFilter);
-    },
+    // excute() {
+    //   this.$store.commit('SetBaseFilter', this.isClicked);
+    //   console.log('excute() in baseitemfilter', this.$store.state.baseFilter);
+    // },
     changeBase(item) {
       console.log('changeBase()');
       const classList = document.getElementById(item.name).classList;
@@ -109,16 +109,16 @@ export default {
       // console.log(`store basefilter: ${this.$store.state.baseFilter}`);
       this.$emit('base', this.isClicked);
     },
-    baseFilter() {
-      this.initItems();
-      if (this.isClicked == 0) {
-        return;
-      }
-      this.filteredItems = this.filteredItems.filter(
-        (item) =>
-          item.from.includes(this.isClicked) || item.id == this.isClicked
-      );
-    },
+    // baseFilter() {
+    //   this.initItems();
+    //   if (this.isClicked == 0) {
+    //     return;
+    //   }
+    //   this.filteredItems = this.filteredItems.filter(
+    //     (item) =>
+    //       item.from.includes(this.isClicked) || item.id == this.isClicked
+    //   );
+    // },
   },
   created() {
     // this.initItems();
