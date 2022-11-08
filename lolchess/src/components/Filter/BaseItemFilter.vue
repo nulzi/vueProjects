@@ -88,22 +88,23 @@ export default {
       if (isExist.length === 0) {
         this.isClicked = item.id;
         classList.replace('unclicked', 'clicked');
-        this.emitter.emit('baseFilter', item.id);
+        // this.emitter.emit('baseFilter', item.id);
       } else {
         //filter off
         if (classList.contains('clicked')) {
           this.isClicked = 0;
           classList.replace('clicked', 'unclicked');
-          this.emitter.emit('baseFilter', 0);
+          // this.emitter.emit('baseFilter', 0);
         } else {
           //filter off
           isExist.item(0).classList.replace('clicked', 'unclicked');
           //filter on
           this.isClicked = item.id;
           classList.replace('unclicked', 'clicked');
-          this.emitter.emit('baseFilter', item.id);
+          // this.emitter.emit('baseFilter', item.id);
         }
       }
+      this.$store.dispatch('filterBase', this.isClicked);
       // this.baseFilter();
       // this.excute();
       // console.log(`store basefilter: ${this.$store.state.baseFilter}`);

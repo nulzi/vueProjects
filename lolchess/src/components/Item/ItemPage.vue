@@ -92,7 +92,7 @@ export default {
       // this.type[index].push(1);
       // this.type.splice(index, 1, 1);
       // console.log(`type${this.type}`);
-      console.log(this.type);
+      // console.log(this.type);
     },
     changeBase(base) {
       // console.log(`base${base}`);
@@ -100,8 +100,8 @@ export default {
     },
   },
   beforeUpdate() {
-    console.log('update type', this.type);
-    console.log('update base', this.base);
+    // console.log('update type', this.type);
+    // console.log('update base', this.base);
   },
 };
 </script>

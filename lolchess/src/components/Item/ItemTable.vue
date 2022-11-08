@@ -126,44 +126,44 @@ export default {
 
       return false;
     },
-    baseFilterT(item) {
-      if (item.from.includes(this.pagebase) || item.id == this.pagebase)
-        return true;
-    },
-    typeFilterT(item) {
-      const word = [
-        'Standard/',
-        'Emblem',
-        'Ornn_',
-        'Radiant/',
-        'Shimmerscale/',
-      ];
-      for (let j in this.pagetype) {
-        if (this.pagetype[j] === 1) {
-          if (item.icon.includes(word[j])) return true;
-        }
-      }
-    },
-    totalFilterT() {
-      let result = [];
-      if (this.pagebase != 0 && this.pagetype.includes(1)) {
-        console.log('together');
-        result = this.tempItems
-          .filter((item) => this.baseFilter(item))
-          .filter((item) => this.typeFilter(item));
-      } else if (this.pagebase == 0 && !this.pagetype.includes(1)) {
-        console.log('reset');
-        result = this.GetItems();
-      } else if (this.pagebase != 0 && !this.pagetype.includes(1)) {
-        console.log('base');
-        result = this.tempItems.filter((item) => this.baseFilter(item));
-      } else if (this.pagebase == 0 && this.pagetype.includes(1)) {
-        console.log('typefilter');
-        result = this.tempItems.filter((item) => this.typeFilter(item));
-      }
+    // baseFilterT(item) {
+    //   if (item.from.includes(this.pagebase) || item.id == this.pagebase)
+    //     return true;
+    // },
+    // typeFilterT(item) {
+    //   const word = [
+    //     'Standard/',
+    //     'Emblem',
+    //     'Ornn_',
+    //     'Radiant/',
+    //     'Shimmerscale/',
+    //   ];
+    //   for (let j in this.pagetype) {
+    //     if (this.pagetype[j] === 1) {
+    //       if (item.icon.includes(word[j])) return true;
+    //     }
+    //   }
+    // },
+    // totalFilterT() {
+    //   let result = [];
+    //   if (this.pagebase != 0 && this.pagetype.includes(1)) {
+    //     console.log('together');
+    //     result = this.tempItems
+    //       .filter((item) => this.baseFilter(item))
+    //       .filter((item) => this.typeFilter(item));
+    //   } else if (this.pagebase == 0 && !this.pagetype.includes(1)) {
+    //     console.log('reset');
+    //     result = this.GetItems();
+    //   } else if (this.pagebase != 0 && !this.pagetype.includes(1)) {
+    //     console.log('base');
+    //     result = this.tempItems.filter((item) => this.baseFilter(item));
+    //   } else if (this.pagebase == 0 && this.pagetype.includes(1)) {
+    //     console.log('typefilter');
+    //     result = this.tempItems.filter((item) => this.typeFilter(item));
+    //   }
 
-      return result;
-    },
+    //   return result;
+    // },
     initItems() {
       console.log('initItems()');
       this.filteredItems = this.GetItems();
@@ -172,29 +172,29 @@ export default {
       console.log('excute()');
       this.$store.commit('SetItems', this.filteredItems);
     },
-    baseFilter(e) {
-      console.log('baseFilter()');
-      this.initItems();
-      if (e == 0) {
-        this.excute();
-        return;
-      }
-      this.filteredItems = this.filteredItems.filter(
-        (item) => item.from.includes(e) || item.id == e
-      );
-      console.log('filtered', this.filteredItems);
-      this.excute();
-    },
+    // baseFilter(e) {
+    //   console.log('baseFilter()');
+    //   this.initItems();
+    //   if (e == 0) {
+    //     this.excute();
+    //     return;
+    //   }
+    //   this.filteredItems = this.filteredItems.filter(
+    //     (item) => item.from.includes(e) || item.id == e
+    //   );
+    //   console.log('filtered', this.filteredItems);
+    //   this.excute();
+    // },
   },
   created() {
     this.initItems();
     this.excute();
   },
   mounted() {
-    this.emitter.on('baseFilter', (e) => {
-      console.log('emitter', e);
-      this.baseFilter(e);
-    });
+    // this.emitter.on('baseFilter', (e) => {
+    //   console.log('emitter', e);
+    //   this.baseFilter(e);
+    // });
   },
 };
 </script>
