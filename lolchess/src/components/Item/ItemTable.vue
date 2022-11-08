@@ -10,7 +10,7 @@
     <hr />
     <table>
       <tbody>
-        <tr v-for="item in this.$store.state.items" :key="item">
+        <tr v-for="item in this.$store.state.filteredItems" :key="item">
           <td>
             <div class="table-item">
               <div class="help-tip">
@@ -167,6 +167,7 @@ export default {
     initItems() {
       console.log('initItems()');
       this.filteredItems = this.GetItems();
+      this.$store.commit('SetFilteredItems', this.filteredItems);
     },
     excute() {
       console.log('excute()');

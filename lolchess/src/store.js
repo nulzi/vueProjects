@@ -4,7 +4,7 @@ import axios from 'axios';
 const store = createStore({
   state() {
     return {
-      page: 2,
+      page: 0,
       name: '',
       matchData: [],
       matchData2: [],
@@ -12,6 +12,8 @@ const store = createStore({
       matchData4: [],
       matchData5: [],
       items: [],
+      filteredItems: [],
+      baseFilter: 0,
     };
   },
   mutations: {
@@ -39,9 +41,44 @@ const store = createStore({
     SetItems(state, inputValue) {
       state.items = inputValue;
     },
+    SetFilteredItems(state, inputValue) {
+      state.filteredItems = inputValue;
+    },
+    SetBase(state, inputValue) {
+      state.baseFilter = inputValue;
+    },
   },
   // ajax 요청 받는거
   actions: {
+    initItems(context, origin) {
+      // copy origin(items)
+      console.log('store.initItems()');
+      context.commit('SetFilteredItems', origin);
+    },
+    filterBase(context, base) {
+      console.log('store.filterBase()');
+      console.log(`base:${base}`);
+      context.commit('SetBase', base);
+      console.log(`store.base:${this.state.baseFilter}`);
+      this.dispatch('baseFilter', base);
+      console.log(`store.origin:${this.state.items}`);
+      console.log(`store.filtered:${this.state.filteredItems}`);
+    },
+    baseFilter(context, base) {
+      console.log('store.baseFilter()');
+      this.dispatch('initItems', this.state.items);
+      if (base == 0) {
+        console.log(`store.base:${base}`);
+        return;
+      }
+      console.log(`store.base:${base}`);
+      context.commit(
+        'SetFilteredItems',
+        this.state.items.filter(
+          (item) => item.from.includes(base) || item.id == base
+        )
+      );
+    },
     GetMatchHistory(context, name) {
       console.log(`/GetMatchHistory/${name}`);
       axios
