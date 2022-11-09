@@ -76,9 +76,9 @@ export default {
   data() {
     return {
       newdata,
-      items: [],
-      tempItems: [],
-      filteredItems: [],
+      // items: [],
+      // tempItems: [],
+      // filteredItems: [],
     };
   },
   methods: {
@@ -120,10 +120,7 @@ export default {
     },
     isEmptyArr(arr) {
       // check array empty
-      if (Array.isArray(arr) && arr.length === 0) {
-        return true;
-      }
-
+      if (Array.isArray(arr) && arr.length === 0) return true;
       return false;
     },
     // baseFilterT(item) {
@@ -165,13 +162,13 @@ export default {
     //   return result;
     // },
     initItems() {
-      console.log('initItems()');
-      this.filteredItems = this.GetItems();
-      this.$store.commit('SetFilteredItems', this.filteredItems);
+      // console.log('initItems()');
+      // this.filteredItems = this.GetItems();
+      this.$store.commit('SetFilteredItems', this.GetItems());
     },
     excute() {
-      console.log('excute()');
-      this.$store.commit('SetItems', this.filteredItems);
+      // console.log('excute()');
+      this.$store.commit('SetItems', this.GetItems());
     },
     // baseFilter(e) {
     //   console.log('baseFilter()');
@@ -191,12 +188,12 @@ export default {
     this.initItems();
     this.excute();
   },
-  mounted() {
-    // this.emitter.on('baseFilter', (e) => {
-    //   console.log('emitter', e);
-    //   this.baseFilter(e);
-    // });
-  },
+  // mounted() {
+  // this.emitter.on('baseFilter', (e) => {
+  //   console.log('emitter', e);
+  //   this.baseFilter(e);
+  // });
+  // },
 };
 </script>
 

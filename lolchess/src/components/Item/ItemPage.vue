@@ -81,23 +81,23 @@ export default {
       // console.log(`content${content}`);
       this.container = content;
     },
-    changeType(index) {
-      // this.type[index - 1] = 1;
-      if (this.type[index] === 0) this.type.splice(index, 1, 1);
-      else this.type.splice(index, 1, 0);
-      // if (this.type[index] === 0) this.$set(this.type, index, 1);
-      // else this.$set(this.type, index, 0);
-      // if (this.type[index] === 0) this.type[index].push(1);
-      // else this.type[index].push(0);
-      // this.type[index].push(1);
-      // this.type.splice(index, 1, 1);
-      // console.log(`type${this.type}`);
-      // console.log(this.type);
-    },
-    changeBase(base) {
-      // console.log(`base${base}`);
-      this.base = base;
-    },
+    // changeType(index) {
+    // this.type[index - 1] = 1;
+    // if (this.type[index] === 0) this.type.splice(index, 1, 1);
+    // else this.type.splice(index, 1, 0);
+    // if (this.type[index] === 0) this.$set(this.type, index, 1);
+    // else this.$set(this.type, index, 0);
+    // if (this.type[index] === 0) this.type[index].push(1);
+    // else this.type[index].push(0);
+    // this.type[index].push(1);
+    // this.type.splice(index, 1, 1);
+    // console.log(`type${this.type}`);
+    // console.log(this.type);
+    // },
+    // changeBase(base) {
+    // console.log(`base${base}`);
+    // this.base = base;
+    // },
   },
   beforeUpdate() {
     // console.log('update type', this.type);

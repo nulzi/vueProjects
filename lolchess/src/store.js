@@ -14,7 +14,7 @@ const store = createStore({
       items: [],
       filteredItems: [],
       itemFilter: { base: 0, type: [] },
-      baseFilter: 0,
+      // baseFilter: 0,
     };
   },
   mutations: {
@@ -45,9 +45,9 @@ const store = createStore({
     SetFilteredItems(state, inputValue) {
       state.filteredItems = inputValue;
     },
-    SetBase(state, inputValue) {
-      state.baseFilter = inputValue;
-    },
+    // SetBase(state, inputValue) {
+    //   state.baseFilter = inputValue;
+    // },
     SetItemFilterBase(state, inputValue) {
       state.itemFilter.base = inputValue;
     },
@@ -59,18 +59,18 @@ const store = createStore({
   actions: {
     initItems(context, origin) {
       // copy origin(items)
-      console.log('store.initItems()');
+      // console.log('store.initItems()');
       context.commit('SetFilteredItems', origin);
     },
-    filterBase(context, base) {
-      console.log('store.filterBase()');
-      console.log(`base:${base}`);
-      context.commit('SetBase', base);
-      console.log(`store.base:${this.state.baseFilter}`);
-      this.dispatch('baseFilter', base);
-      console.log(`store.origin:${this.state.items}`);
-      console.log(`store.filtered:${this.state.filteredItems}`);
-    },
+    // filterBase(context, base) {
+    //   console.log('store.filterBase()');
+    //   console.log(`base:${base}`);
+    //   context.commit('SetBase', base);
+    //   console.log(`store.base:${this.state.baseFilter}`);
+    //   this.dispatch('baseFilter', base);
+    //   console.log(`store.origin:${this.state.items}`);
+    //   console.log(`store.filtered:${this.state.filteredItems}`);
+    // },
     filterItems(context, filter) {
       console.log('store.filterItems()');
       // // base button only
@@ -85,18 +85,17 @@ const store = createStore({
       //   context.commit('SetItemFilterType', filter);
       //   this.dispatch('typesFilter', filter);
       // }
-        this.dispatch('initItems', this.state.items);
-        this.dispatch('typesFilter', filter.type);
-        this.dispatch('baseFilter', filter.base);
-
+      this.dispatch('initItems', this.state.items);
+      this.dispatch('typesFilter', filter.type);
+      this.dispatch('baseFilter', filter.base);
     },
     baseFilter(context, base) {
-      console.log('store.baseFilter()');
+      // console.log('store.baseFilter()');
       if (base == 0) {
-        console.log(`store.base:${base}`);
+        // console.log(`store.base:${base}`);
         return;
       }
-      console.log(`store.base:${base}`);
+      // console.log(`store.base:${base}`);
       context.commit(
         'SetFilteredItems',
         this.state.filteredItems.filter(
@@ -105,20 +104,21 @@ const store = createStore({
       );
     },
     typesFilter(context, types) {
-      console.log('store.typesFilter()');
+      // console.log('store.typesFilter()');
       if (types.length === 0) {
-        console.log(`store.types.length:${types.length}`);
+        // console.log(`store.types.length:${types.length}`);
         return;
       }
-      console.log(`store.types.length:${types.length}`);
-      console.log('store.types:', types);
-      let temp = []
+      // console.log(`store.types.length:${types.length}`);
+      // console.log('store.types:', types);
+      let temp = [];
       for (let i in types) {
-        temp = temp.concat(store.state.items.filter(el=>el.icon.includes(types[i])))
+        temp = temp.concat(
+          this.state.items.filter((el) => el.icon.includes(types[i]))
+        );
       }
-      this.commit('SetFilteredItems',temp);
+      this.commit('SetFilteredItems', temp);
     },
-    
     GetMatchHistory(context, name) {
       console.log(`/GetMatchHistory/${name}`);
       axios

@@ -32,7 +32,7 @@ export default {
       isClicked: [0, 0, 0, 0, 0],
       tierItem,
       filter: [],
-      filteredItems: [],
+      // filteredItems: [],
     };
   },
   methods: {
@@ -45,17 +45,17 @@ export default {
       }
       this.isClicked = this.middletype;
     },
-    initItems() {
-      this.filteredItems = this.GetItems();
-    },
-    GetItems() {
-      const temp = [];
-      for (let i = 0; i < newdata.items.length; i++) {
-        temp.push(newdata.items[i]);
-      }
-      // console.log(this.items);
-      return temp;
-    },
+    // initItems() {
+    //   this.filteredItems = this.GetItems();
+    // },
+    // GetItems() {
+    //   const temp = [];
+    //   for (let i = 0; i < newdata.items.length; i++) {
+    //     temp.push(newdata.items[i]);
+    //   }
+    //   // console.log(this.items);
+    //   return temp;
+    // },
     changeType(type, index) {
       console.log('changeType()');
       const classList = document.getElementById(type).classList;
@@ -82,25 +82,25 @@ export default {
 
       this.$store.commit('SetItemFilterType', this.filter);
       this.$store.dispatch('filterItems', this.$store.state.itemFilter);
-      this.$emit('type', index);
+      // this.$emit('type', index);
     },
-    typesFilter(filter) {
-      this.initItems();
-      let result = [];
-      if (filter.length === 0) result = this.filteredItems;
-      for (let i in filter) {
-        result = result.concat(this.typeFilter(filter[i]));
-      }
-      return result;
-    },
-    typeFilter(type) {
-      let result = [];
-      result = this.filteredItems.filter((item) => item.icon.includes(type));
-      return result;
-    },
-    excute() {
-      this.$store.commit('SetItems', this.filteredItems);
-    },
+    // typesFilter(filter) {
+    //   this.initItems();
+    //   let result = [];
+    //   if (filter.length === 0) result = this.filteredItems;
+    //   for (let i in filter) {
+    //     result = result.concat(this.typeFilter(filter[i]));
+    //   }
+    //   return result;
+    // },
+    // typeFilter(type) {
+    //   let result = [];
+    //   result = this.filteredItems.filter((item) => item.icon.includes(type));
+    //   return result;
+    // },
+    // excute() {
+    //   this.$store.commit('SetItems', this.filteredItems);
+    // },
   },
   created() {
     // this.initItems();

@@ -16,7 +16,7 @@
 import newdata from '../../assets/newdata.json';
 
 export default {
-  props: ['middlebase'],
+  // props: ['middlebase'],
   data() {
     return {
       newdata,
@@ -32,7 +32,7 @@ export default {
         { name: 'spatula', id: 8 },
       ],
       isClicked: 0,
-      filteredItems: [],
+      // filteredItems: [],
     };
   },
   methods: {
@@ -63,23 +63,23 @@ export default {
         }
       }
     },
-    initItems() {
-      this.filteredItems = this.GetItems();
-    },
-    GetItems() {
-      const temp = [];
-      for (let i = 0; i < newdata.items.length; i++) {
-        temp.push(newdata.items[i]);
-      }
-      // console.log(this.items);
-      return temp;
-    },
-    excute() {
-      this.$store.commit('SetBaseFilter', this.isClicked);
-      console.log('excute() in baseitemfilter', this.$store.state.baseFilter);
-    },
+    // initItems() {
+    //   this.filteredItems = this.GetItems();
+    // },
+    // GetItems() {
+    //   const temp = [];
+    //   for (let i = 0; i < newdata.items.length; i++) {
+    //     temp.push(newdata.items[i]);
+    //   }
+    //   // console.log(this.items);
+    //   return temp;
+    // },
+    // excute() {
+    //   this.$store.commit('SetBaseFilter', this.isClicked);
+    //   console.log('excute() in baseitemfilter', this.$store.state.baseFilter);
+    // },
     changeBase(item) {
-      console.log('changeBase()');
+      // console.log('changeBase()');
       const classList = document.getElementById(item.name).classList;
       const isExist = document.getElementsByClassName(
         'filter-item-img clicked'
@@ -106,26 +106,26 @@ export default {
       }
       this.$store.commit('SetItemFilterBase', this.isClicked);
       this.$store.dispatch('filterItems', this.$store.state.itemFilter);
-      this.$emit('base', this.isClicked);
+      // this.$emit('base', this.isClicked);
     },
-    baseFilter() {
-      this.initItems();
-      if (this.isClicked == 0) {
-        return;
-      }
-      this.filteredItems = this.filteredItems.filter(
-        (item) =>
-          item.from.includes(this.isClicked) || item.id == this.isClicked
-      );
-    },
+    // baseFilter() {
+    //   this.initItems();
+    //   if (this.isClicked == 0) {
+    //     return;
+    //   }
+    //   this.filteredItems = this.filteredItems.filter(
+    //     (item) =>
+    //       item.from.includes(this.isClicked) || item.id == this.isClicked
+    //   );
+    // },
   },
-  created() {
-    // this.initItems();
-    // this.excute();
-  },
-  updated() {
-    this.reset(this.middlebase);
-  },
+  // created() {
+  // this.initItems();
+  // this.excute();
+  // },
+  // updated() {
+  //   this.reset(this.middlebase);
+  // },
 };
 </script>
 
