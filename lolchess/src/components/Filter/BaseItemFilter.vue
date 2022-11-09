@@ -104,10 +104,8 @@ export default {
           // this.emitter.emit('baseFilter', item.id);
         }
       }
-      this.$store.dispatch('filterItems', this.isClicked);
-      // this.baseFilter();
-      // this.excute();
-      // console.log(`store basefilter: ${this.$store.state.baseFilter}`);
+      this.$store.commit('SetItemFilterBase', this.isClicked);
+      this.$store.dispatch('filterItems', this.$store.state.itemFilter);
       this.$emit('base', this.isClicked);
     },
     baseFilter() {

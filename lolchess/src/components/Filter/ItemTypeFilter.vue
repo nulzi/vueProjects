@@ -79,7 +79,9 @@ export default {
       }
       // this.filteredItems = this.typesFilter(this.filter);
       // this.excute();
-      this.$store.dispatch('filterItems', this.filter);
+
+      this.$store.commit('SetItemFilterType', this.filter);
+      this.$store.dispatch('filterItems', this.$store.state.itemFilter);
       this.$emit('type', index);
     },
     typesFilter(filter) {

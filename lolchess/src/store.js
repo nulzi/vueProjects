@@ -73,18 +73,22 @@ const store = createStore({
     },
     filterItems(context, filter) {
       console.log('store.filterItems()');
-      // base button only
-      if (typeof filter == 'number' && this.state.itemFilter.type.length == 0) {
+      // // base button only
+      // if (typeof filter == 'number' && this.state.itemFilter.type.length == 0) {
+      //   this.dispatch('initItems', this.state.items);
+      //   context.commit('SetItemFilterBase', filter);
+      //   this.dispatch('baseFilter', filter);
+      // }
+      // // type button only
+      // if (Array.isArray(filter) && this.state.itemFilter.base == 0) {
+      //   this.dispatch('initItems', this.state.items);
+      //   context.commit('SetItemFilterType', filter);
+      //   this.dispatch('typesFilter', filter);
+      // }
         this.dispatch('initItems', this.state.items);
-        context.commit('SetItemFilterBase', filter);
-        this.dispatch('baseFilter', filter);
-      }
-      // type button only
-      if (Array.isArray(filter) && this.state.itemFilter.base == 0) {
-        this.dispatch('initItems', this.state.items);
-        context.commit('SetItemFilterType', filter);
-        this.dispatch('typesFilter', filter);
-      }
+        this.dispatch('typesFilter', filter.type);
+        this.dispatch('baseFilter', filter.base);
+
     },
     baseFilter(context, base) {
       console.log('store.baseFilter()');
@@ -108,18 +112,13 @@ const store = createStore({
       }
       console.log(`store.types.length:${types.length}`);
       console.log('store.types:', types);
+      let temp = []
       for (let i in types) {
-        this.dispatch('typeFilter', types[i]);
+        temp = temp.concat(store.state.items.filter(el=>el.icon.includes(types[i])))
       }
+      this.commit('SetFilteredItems',temp);
     },
-    typeFilter(context, type) {
-      console.log('store.typeFilter()');
-      console.log(`store.type:${type}`);
-      context.commit(
-        'SetFilteredItems',
-        this.state.filteredItems.filter((item) => item.icon.includes(type))
-      );
-    },
+    
     GetMatchHistory(context, name) {
       console.log(`/GetMatchHistory/${name}`);
       axios
