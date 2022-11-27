@@ -17,9 +17,9 @@
         <div class="info_start"><div class="text">사당</div></div>
         <div class="info_arrow"></div>
         <div class="info_end"><div class="text">강남</div></div>
-        <!-- <div class="info_startbox"></div> -->
+        <div class="info_startbox"></div>
         <div class="info_colbar"></div>
-        <!-- <div class="info_endbox"></div> -->
+        <div class="info_endbox"></div>
       </div>
     </div>
   </div>
@@ -30,6 +30,12 @@ export default {};
 </script>
 
 <style scoped>
+.first_container {
+  width: 100%;
+  height: 100%;
+  background-image: url('@/assets/img/load.png');
+  background-color: transparent;
+}
 .station_container {
   position: relative;
   /* Layout Properties */
@@ -113,7 +119,8 @@ export default {};
   /* Layout Properties */
   top: 231px;
   /* bottom: 0px; */
-  left: 0px;
+  /* left: 0px; */
+  margin: 0 auto;
   /* width: 420px; */
   width: auto;
   height: 200px;
