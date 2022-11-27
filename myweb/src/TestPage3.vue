@@ -63,10 +63,10 @@ export default {};
 
 <style scoped>
 .first_container {
-  background-image: url("@/assets/img/load.png");
+  /* background-image: url("@/assets/img/load.png"); */
   /* background-color: transparent; */
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw; */
+  /* height: 100vh; */
 }
 .top_menu {
   position: fixed;
@@ -184,6 +184,7 @@ export default {};
 }
 .close_btn {
   margin-right: 10px;
+  margin-left: 17px;
   /* Layout Properties */
   /* top: 5px; */
   /* right: 10px; */
