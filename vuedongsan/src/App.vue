@@ -1,9 +1,11 @@
 <template>
-  <Modal
-    :oneroom="onerooms[roomIndex]"
-    :isOpen="modalOpen"
-    @closeModal="modalOpen = false"
-  />
+  <div class="start" :class="{ end: modalOpen }">
+    <Modal
+      :oneroom="onerooms[roomIndex]"
+      :isOpen="modalOpen"
+      @closeModal="modalOpen = false"
+    />
+  </div>
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
@@ -78,5 +80,12 @@ div {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+.start {
+  opacity: 0;
+  transition: all 1s;
+}
+.end {
+  opacity: 1;
 }
 </style>
