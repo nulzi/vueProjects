@@ -1,11 +1,11 @@
 <template>
-  <div class="start" :class="{ end: modalOpen }">
+  <transition name="fade">
     <Modal
       :oneroom="onerooms[roomIndex]"
       :isOpen="modalOpen"
       @closeModal="modalOpen = false"
     />
-  </div>
+  </transition>
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
@@ -81,11 +81,22 @@ div {
   width: 100%;
   margin-top: 40px;
 }
-.start {
+.fade-enter-from {
   opacity: 0;
+}
+.fade-enter-active {
   transition: all 1s;
 }
-.end {
+.fade-enter-to {
   opacity: 1;
+}
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
