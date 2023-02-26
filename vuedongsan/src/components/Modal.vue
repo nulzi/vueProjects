@@ -3,8 +3,9 @@
     <div class="white-bg">
       <h4>{{ oneroom.title }}</h4>
       <img :src="oneroom.image" class="room-img" />
-      <p>{{ oneroom.price }} 원</p>
       <p>{{ oneroom.content }}</p>
+      <input v-model="month" />
+      <p>{{ month }} 개월 선택함 {{ oneroom.price * month }} 원</p>
       <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
@@ -14,6 +15,11 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Modal",
+  data() {
+    return {
+      month: 1,
+    };
+  },
   props: {
     oneroom: Object,
     isOpen: Boolean,
