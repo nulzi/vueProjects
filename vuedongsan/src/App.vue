@@ -1,5 +1,5 @@
 <template>
-  <Modal />
+  <Modal :oneroom="onerooms[roomIndex]" :isOpen="modalOpen" />
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
@@ -7,24 +7,21 @@
 
   <Discount />
 
-  <div v-for="(oneroom, i) in onerooms" :key="oneroom.id">
-    <img :src="oneroom.image" class="room-img" />
-    <h4
-      @click="
-        modalOpen = true;
-        roomIndex = i;
-      "
-    >
-      {{ oneroom.title }}
-    </h4>
-    <p>{{ oneroom.price }}원</p>
-  </div>
+  <Card
+    v-for="(data, i) in onerooms"
+    :key="data.id"
+    :oneroom="data"
+    :isOpen="modalOpen"
+    :roomIndex="roomIndex"
+    :index="i"
+  />
 </template>
 
 <script>
 import data from "./assets/oneroom";
 import Discount from "./components/Discount.vue";
 import Modal from "./components/Modal.vue";
+import Card from "./components/Card.vue";
 
 export default {
   name: "App",
@@ -46,6 +43,7 @@ export default {
   components: {
     Discount,
     Modal,
+    Card,
   },
 };
 </script>

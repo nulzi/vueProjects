@@ -14,6 +14,10 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Modal",
+  props: {
+    oneroom: Object,
+    isOpen: Boolean,
+  },
 };
 </script>
 
