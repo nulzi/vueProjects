@@ -11,9 +11,11 @@
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
 
-  <Discount />
+  <Discount v-if="showDiscount" />
+
   <button @click="priceSort">가격순정렬</button>
   <button @click="sortBack">되돌리기</button>
+
   <Card
     v-for="data in onerooms"
     :key="data.id"
@@ -35,6 +37,7 @@ export default {
   name: "App",
   data() {
     return {
+      showDiscount: true,
       originOnerooms: [...data],
       roomIndex: 0,
       onerooms: data,
@@ -55,6 +58,12 @@ export default {
     sortBack() {
       this.onerooms = [...this.originOnerooms];
     },
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.showDiscount = false;
+    }, 2000);
   },
   components: {
     Discount,
