@@ -1,17 +1,11 @@
 <template>
-  <div class="black-bg" v-if="modalOpen">
-    <div class="white-bg">
-      <h4>{{ onerooms[roomIndex].title }}</h4>
-      <img :src="onerooms[roomIndex].image" />
-      <p>{{ onerooms[roomIndex].price }}</p>
-      <p>{{ onerooms[roomIndex].content }}</p>
-      <button @click="modalOpen = false">닫기</button>
-    </div>
-  </div>
+  <Modal />
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
+
+  <Discount />
 
   <div v-for="(oneroom, i) in onerooms" :key="oneroom.id">
     <img :src="oneroom.image" class="room-img" />
@@ -29,6 +23,8 @@
 
 <script>
 import data from "./assets/oneroom";
+import Discount from "./components/Discount.vue";
+import Modal from "./components/Modal.vue";
 
 export default {
   name: "App",
@@ -47,7 +43,10 @@ export default {
       this.reportNum[index]++;
     },
   },
-  components: {},
+  components: {
+    Discount,
+    Modal,
+  },
 };
 </script>
 
