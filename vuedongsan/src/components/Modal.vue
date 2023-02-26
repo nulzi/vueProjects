@@ -20,6 +20,22 @@ export default {
       month: 1,
     };
   },
+  watch: {
+    month(data) {
+      const numReg = /[^0-9]/g;
+      if (data >= 13) alert("13이상 입력하지 마세요");
+      if (numReg.test(data)) {
+        alert("숫자만 입력하라");
+        this.month = 1;
+      }
+      //간단한 풀이
+      //하지만 공백은 잡을 수가 없음
+      // if(isNaN(data) == true){
+      //   alert('only number')
+      //   this.month = 1
+      // }
+    },
+  },
   props: {
     oneroom: Object,
     isOpen: Boolean,
