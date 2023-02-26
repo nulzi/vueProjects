@@ -12,7 +12,8 @@
   </div>
 
   <Discount />
-
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="sortBack">되돌리기</button>
   <Card
     v-for="data in onerooms"
     :key="data.id"
@@ -34,6 +35,7 @@ export default {
   name: "App",
   data() {
     return {
+      originOnerooms: [...data],
       roomIndex: 0,
       onerooms: data,
       modalOpen: false,
@@ -44,6 +46,14 @@ export default {
   methods: {
     increase(index) {
       this.reportNum[index]++;
+    },
+    priceSort() {
+      this.onerooms.sort((a, b) => {
+        return a.price - b.price;
+      });
+    },
+    sortBack() {
+      this.onerooms = [...this.originOnerooms];
     },
   },
   components: {
