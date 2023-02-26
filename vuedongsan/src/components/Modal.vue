@@ -1,11 +1,11 @@
 <template>
-  <div class="black-bg" v-if="modalOpen">
+  <div class="black-bg" v-if="isOpen">
     <div class="white-bg">
-      <h4>{{ onerooms[roomIndex].title }}</h4>
-      <img :src="onerooms[roomIndex].image" />
-      <p>{{ onerooms[roomIndex].price }} 원</p>
-      <p>{{ onerooms[roomIndex].content }}</p>
-      <button @click="modalOpen = false">닫기</button>
+      <h4>{{ oneroom.title }}</h4>
+      <img :src="oneroom.image" class="room-img" />
+      <p>{{ oneroom.price }} 원</p>
+      <p>{{ oneroom.content }}</p>
+      <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
 </template>
@@ -21,4 +21,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+</style>

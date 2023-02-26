@@ -1,5 +1,9 @@
 <template>
-  <Modal :oneroom="onerooms[roomIndex]" :isOpen="modalOpen" />
+  <Modal
+    :oneroom="onerooms[roomIndex]"
+    :isOpen="modalOpen"
+    @closeModal="modalOpen = false"
+  />
 
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
@@ -8,12 +12,13 @@
   <Discount />
 
   <Card
-    v-for="(data, i) in onerooms"
+    v-for="data in onerooms"
     :key="data.id"
     :oneroom="data"
-    :isOpen="modalOpen"
-    :roomIndex="roomIndex"
-    :index="i"
+    @openModal="
+      modalOpen = true;
+      roomIndex = $event;
+    "
   />
 </template>
 
@@ -32,7 +37,6 @@ export default {
       modalOpen: false,
       menus: ["Home", "Shop", "About"],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
-      reportNum: [0, 0, 0],
     };
   },
   methods: {
@@ -54,19 +58,6 @@ body {
 }
 div {
   box-sizing: border-box;
-}
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
