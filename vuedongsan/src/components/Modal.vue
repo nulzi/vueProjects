@@ -20,6 +20,12 @@ export default {
       month: 1,
     };
   },
+  beforeUpdate() {
+    if (this.month === "2") {
+      alert("2개월 이상 계약합니다.");
+      this.month = 3;
+    }
+  },
   watch: {
     month(data) {
       const numReg = /[^0-9]/g;

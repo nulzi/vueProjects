@@ -11,7 +11,7 @@
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
 
-  <Discount v-if="showDiscount" />
+  <Discount v-if="showDiscount" @closeDiscount="showDiscount = false" />
 
   <button @click="priceSort">가격순정렬</button>
   <button @click="sortBack">되돌리기</button>
@@ -61,9 +61,9 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
-      this.showDiscount = false;
-    }, 2000);
+    // setTimeout(() => {
+    //   this.showDiscount = false;
+    // }, 2000);
   },
   components: {
     Discount,
