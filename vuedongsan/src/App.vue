@@ -1,44 +1,41 @@
 <template>
-  <div class="menu">
-    <a v-for="menu in menus" :key="menu">{{ menu }}</a>
-  </div>
-
   <div class="black-bg" v-if="modalOpen">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지임</p>
+      <h4>{{ onerooms[roomIndex].title }}</h4>
+      <img :src="onerooms[roomIndex].image" />
+      <p>{{ onerooms[roomIndex].price }}</p>
+      <p>{{ onerooms[roomIndex].content }}</p>
       <button @click="modalOpen = false">닫기</button>
     </div>
   </div>
 
-  <div>
-    <img src="./assets/images/room0.jpg" class="room-img" />
-    <h4 @click="modalOpen = true">{{ products[0] }}</h4>
-    <p>60 만원</p>
-    <button @click="increase(0)">허위매물신고</button>
-    <span>신고수 : {{ reportNum[0] }}</span>
+  <div class="menu">
+    <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
-  <div>
-    <img src="./assets/images/room1.jpg" class="room-img" />
-    <h4>{{ products[1] }}</h4>
-    <p>60 만원</p>
-    <button @click="increase(1)">허위매물신고</button>
-    <span>신고수 : {{ reportNum[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/images/room2.jpg" class="room-img" />
-    <h4>{{ products[2] }}</h4>
-    <p>60 만원</p>
-    <button @click="increase(2)">허위매물신고</button>
-    <span>신고수 : {{ reportNum[2] }}</span>
+
+  <div v-for="(oneroom, i) in onerooms" :key="oneroom.id">
+    <img :src="oneroom.image" class="room-img" />
+    <h4
+      @click="
+        modalOpen = true;
+        roomIndex = i;
+      "
+    >
+      {{ oneroom.title }}
+    </h4>
+    <p>{{ oneroom.price }}원</p>
   </div>
 </template>
 
 <script>
+import data from "./assets/oneroom";
+
 export default {
   name: "App",
   data() {
     return {
+      roomIndex: 0,
+      onerooms: data,
       modalOpen: false,
       menus: ["Home", "Shop", "About"],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
