@@ -4,6 +4,7 @@
     <h5>{{ blogList[$route.params.id].title }}</h5>
     <p>{{ blogList[$route.params.id].date }}</p>
     <p>{{ blogList[$route.params.id].content }}</p>
+    <router-view></router-view>
   </div>
 </template>
 
