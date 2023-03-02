@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">TEST</a>
+      <a class="navbar-brand" href="#"
+        ><router-link to="/">Vue-log</router-link></a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -16,10 +18,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#"
+              ><router-link to="/">Home</router-link></a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#"
+              ><router-link to="/list">List</router-link></a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
@@ -31,17 +37,14 @@
       </div>
     </div>
   </nav>
-
-  <div class="container mt-4">
-    <h5>React 개발자의 블로그입니다.</h5>
-    <p>- Vue로 만들었음 -</p>
+  <div class="mt-4">
+    <router-view :blogList="blogList"></router-view>
   </div>
 
-  <List :blogList="blogList" />
+  <!-- <List :blogList="blogList" /> -->
 </template>
 
 <script>
-import List from "./components/List.vue";
 import blog from "./assets/blog.js";
 
 export default {
@@ -51,9 +54,7 @@ export default {
       blogList: blog,
     };
   },
-  components: {
-    List: List,
-  },
+  components: {},
 };
 </script>
 
