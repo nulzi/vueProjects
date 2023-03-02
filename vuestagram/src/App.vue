@@ -10,6 +10,7 @@
   </div>
 
   <Container :postList="postList" />
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -22,16 +23,27 @@
 <script>
 import Container from "./components/Container.vue";
 import posts from "./assets/posts.js";
+import axios from "axios";
 
 export default {
   name: "App",
   data() {
     return {
+      postListOrigin: [...posts],
       postList: posts,
     };
   },
   components: {
     Container,
+  },
+  methods: {
+    more() {
+      axios
+        .get("https://codingapple1.github.io/vue/more0.json")
+        .then((result) => {
+          this.postList.push(result.data);
+        });
+    },
   },
 };
 </script>
