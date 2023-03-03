@@ -9,12 +9,19 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postList="postList" :step="step" />
+  <Container :postList="postList" :step="step" :urlList="urlList" />
   <button v-if="step == 0" @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input
+        @change="upload"
+        multiple
+        accept="image/*"
+        type="file"
+        id="file"
+        class="inputfile"
+      />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -33,6 +40,7 @@ export default {
       postListOrigin: [...posts],
       postList: posts,
       addPost: 0,
+      urlList: [],
     };
   },
   components: {
@@ -49,6 +57,19 @@ export default {
         .catch(() => {
           alert("더 이상 게시물이 존재하지 않습니다.");
         });
+    },
+    upload(e) {
+      let fileList = e.target.files; //object type
+      fileList = Object.entries(fileList);
+      if (fileList.every((file) => file[1].type === "image/png")) {
+        for (let i = 0; i < fileList.length; i++) {
+          let url = URL.createObjectURL(fileList[i][1]);
+          // url = url.slice(5);
+          //blob:을 지우려고 사용했지만 blob까지 있어야 이미지를 인식한다
+          this.urlList.push(url);
+        }
+        this.step = 1;
+      } else alert("png 확장자만 가능합니다.");
     },
   },
 };
