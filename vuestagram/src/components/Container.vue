@@ -27,7 +27,7 @@
       ></div>
       <div class="write">
         <textarea
-          @change="write"
+          @input="$emit('publish', $event.target.value)"
           class="write-box"
           placeholder="write!"
         ></textarea>
@@ -49,11 +49,6 @@ export default {
   },
   components: {
     Post,
-  },
-  methods: {
-    write(e) {
-      this.$emit("publish", e.target.value);
-    },
   },
 };
 </script>
