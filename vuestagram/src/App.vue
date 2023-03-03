@@ -9,8 +9,8 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postList="postList" />
-  <button @click="more">더보기</button>
+  <Container :postList="postList" :step="step" />
+  <button v-if="step == 0" @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -29,6 +29,7 @@ export default {
   name: "App",
   data() {
     return {
+      step: 0,
       postListOrigin: [...posts],
       postList: posts,
       addPost: 0,
