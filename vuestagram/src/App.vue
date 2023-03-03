@@ -31,6 +31,7 @@ export default {
     return {
       postListOrigin: [...posts],
       postList: posts,
+      addPost: 0,
     };
   },
   components: {
@@ -39,9 +40,13 @@ export default {
   methods: {
     more() {
       axios
-        .get("https://codingapple1.github.io/vue/more0.json")
+        .get(`https://codingapple1.github.io/vue/more${this.addPost}.json`)
         .then((result) => {
           this.postList.push(result.data);
+          this.addPost++;
+        })
+        .catch(() => {
+          alert("더 이상 게시물이 존재하지 않습니다.");
         });
     },
   },
