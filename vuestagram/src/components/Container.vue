@@ -26,7 +26,11 @@
         :style="`background-image:url(${urlList[0]})`"
       ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @change="write"
+          class="write-box"
+          placeholder="write!"
+        ></textarea>
       </div>
     </div>
   </div>
@@ -45,6 +49,11 @@ export default {
   },
   components: {
     Post,
+  },
+  methods: {
+    write(e) {
+      this.$emit("publish", e.target.value);
+    },
   },
 };
 </script>

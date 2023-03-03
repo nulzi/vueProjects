@@ -4,12 +4,18 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">Add</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postList="postList" :step="step" :urlList="urlList" />
+  <Container
+    :postList="postList"
+    :step="step"
+    :urlList="urlList"
+    @publish="content = $event"
+  />
   <button v-if="step == 0" @click="more">더보기</button>
 
   <div class="footer">
@@ -41,12 +47,27 @@ export default {
       postList: posts,
       addPost: 0,
       urlList: [],
+      content: "",
     };
   },
   components: {
     Container,
   },
   methods: {
+    publish() {
+      let myPost = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.urlList[0],
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.content,
+        filter: "perpetua",
+      };
+      this.postList.unshift(myPost);
+      this.step = 0;
+    },
     more() {
       axios
         .get(`https://codingapple1.github.io/vue/more${this.addPost}.json`)
@@ -68,7 +89,7 @@ export default {
           //blob:을 지우려고 사용했지만 blob까지 있어야 이미지를 인식한다
           this.urlList.push(url);
         }
-        this.step = 1;
+        this.step++;
       } else alert("png 확장자만 가능합니다.");
     },
   },
