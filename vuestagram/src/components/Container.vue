@@ -8,14 +8,17 @@
     <div v-if="step == 1">
       <div
         class="upload-image"
+        :class="selectedFilter"
         :style="`background-image:url(${urlList[0]})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-for="filter in filterList"
+          :key="filter"
+          :image="urlList[0]"
+          :filter="filter"
+          @changeFilter="selectedFilter = $event"
+        ></FilterBox>
       </div>
     </div>
 
@@ -23,6 +26,7 @@
     <div v-if="step == 2">
       <div
         class="upload-image"
+        :class="selectedFilter"
         :style="`background-image:url(${urlList[0]})`"
       ></div>
       <div class="write">
@@ -38,6 +42,7 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -47,8 +52,43 @@ export default {
     step: Number,
     urlList: Array,
   },
+  data() {
+    return {
+      filterList: [
+        "default",
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+      selectedFilter: "",
+    };
+  },
   components: {
     Post,
+    FilterBox,
   },
 };
 </script>
