@@ -18,7 +18,9 @@
           :image="urlList[0]"
           :filter="filter"
           @changeFilter="selectedFilter = $event"
-        ></FilterBox>
+        >
+          {{ filter }}
+        </FilterBox>
       </div>
     </div>
 

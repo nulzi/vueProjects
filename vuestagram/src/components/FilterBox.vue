@@ -5,7 +5,7 @@
     :style="`background-image:url(${image})`"
     @click="$emit('changeFilter', filter)"
   >
-    <p class="filter-name">{{ filter }}</p>
+    <slot></slot>
   </div>
 </template>
 
