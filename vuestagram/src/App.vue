@@ -48,7 +48,13 @@ export default {
       addPost: 0,
       urlList: [],
       content: "",
+      filter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("fire", (data) => {
+      this.filter = data;
+    });
   },
   components: {
     Container,
@@ -63,7 +69,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content,
-        filter: "perpetua",
+        filter: this.filter,
       };
       this.postList.unshift(myPost);
       this.step = 0;

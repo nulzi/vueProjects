@@ -3,9 +3,9 @@
     class="filter-item"
     :class="filter"
     :style="`background-image:url(${image})`"
-    @click="$emit('changeFilter', filter)"
   >
     <slot></slot>
+    <button @click="fire">버튼</button>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   props: {
     image: String,
     filter: String,
+  },
+  methods: {
+    fire() {
+      this.emitter.emit("fire", this.filter);
+    },
   },
 };
 </script>

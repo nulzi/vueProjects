@@ -17,7 +17,6 @@
           :key="filter"
           :image="urlList[0]"
           :filter="filter"
-          @changeFilter="selectedFilter = $event"
         >
           {{ filter }}
         </FilterBox>
@@ -87,6 +86,11 @@ export default {
       ],
       selectedFilter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("fire", (data) => {
+      this.selectedFilter = data;
+    });
   },
   components: {
     Post,
