@@ -9,7 +9,8 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-
+  {{ $store.state.more }}
+  <button v-if="step == 0" @click="$store.dispatch('more')">더보기</button>
   <Container
     :postList="postList"
     :step="step"
