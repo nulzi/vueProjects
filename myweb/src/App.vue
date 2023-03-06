@@ -1,16 +1,21 @@
 <template>
   <div>
-    <Home></Home>
+    <!-- <Home></Home> -->
+    <Test></Test>
   </div>
 </template>
 
 <script>
-import Home from "./components/HomePage.vue";
+// import Home from './components/HomePage.vue';
+// import Test from './TestPage.vue';
+// import Test from './TestPage2.vue';
+import Test from './TestPage3.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    Home,
+    // Home,
+    Test,
   },
 };
 </script>
