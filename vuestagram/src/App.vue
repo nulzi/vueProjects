@@ -44,12 +44,16 @@ export default {
     return {
       step: 0,
       postListOrigin: [...posts],
-      postList: posts,
+      postList: [],
       addPost: 0,
       urlList: [],
       content: "",
       filter: "",
     };
+  },
+  created() {
+    this.$store.commit("initPostList", posts);
+    this.postList = this.$store.state.postList;
   },
   mounted() {
     this.emitter.on("fire", (data) => {

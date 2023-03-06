@@ -11,6 +11,7 @@
       class="post-body"
       :class="post.filter"
       :style="`background-image:url(${post.postImage})`"
+      @click="$store.commit('setLikes', post)"
     ></div>
     <div class="post-content">
       <p>{{ post.likes }} Likes</p>

@@ -3,9 +3,9 @@
     class="filter-item"
     :class="filter"
     :style="`background-image:url(${image})`"
+    @click="fire"
   >
     <slot></slot>
-    <button @click="fire">버튼</button>
   </div>
 </template>
 
