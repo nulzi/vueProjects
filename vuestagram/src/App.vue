@@ -9,8 +9,7 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-  {{ $store.state.more }}
-  <button v-if="step == 0" @click="$store.dispatch('more')">더보기</button>
+
   <Container
     :postList="postList"
     :step="step"
@@ -43,7 +42,7 @@ export default {
   name: "App",
   data() {
     return {
-      step: 0,
+      step: 3,
       postListOrigin: [...posts],
       postList: [],
       addPost: 0,
@@ -183,5 +182,19 @@ ul {
   position: relative;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+}
+.profile {
+  width: 30px;
+  height: 30px;
+  background-size: 100%;
+  border-radius: 50%;
+  float: left;
+}
+.profile-name {
+  display: block;
+  float: left;
+  padding-left: 10px;
+  padding-top: 7px;
+  font-size: 14px;
 }
 </style>

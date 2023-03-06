@@ -38,12 +38,18 @@
         ></textarea>
       </div>
     </div>
+
+    <!-- 마이페이지 -->
+    <div v-if="step == 3">
+      <MyPage />
+    </div>
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import MyPage from "./MyPage.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -95,6 +101,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
 };
 </script>
