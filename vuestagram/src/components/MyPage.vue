@@ -28,16 +28,16 @@ export default {
     let followerList = ref([]);
     onMounted(() => {
       axios.get("/follower.json").then((result) => {
-        origin.value = result.data;
+        origin.value = [...result.data];
         followerList.value = result.data;
       });
     });
 
     function onSearch(word) {
-      if (!word) return (followerList.value = origin.value);
-      return (followerList.value = followerList.value.filter((v) =>
-        v.name.includes(word)
-      ));
+      let newFollower = origin.value.filter((a) => {
+        return a.name.indexOf(word) != -1;
+      });
+      followerList.value = [...newFollower];
     }
     return { followerList, onSearch };
   },
