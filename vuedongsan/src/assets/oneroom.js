@@ -17,7 +17,7 @@ export default [
     id: 2,
     title: "Geumsan Apartment Flat",
     image: "https://codingapple1.github.io/vue/room2.jpg",
-    content: "금산오거리 역세권 아파트입니다. 애완동물 불가능 ",
+    content: "금산오거리 역세권 아파트입니다. 애완동물 불가능 ?",
     price: 780000,
   },
   {

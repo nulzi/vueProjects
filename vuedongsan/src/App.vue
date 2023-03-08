@@ -1,79 +1,85 @@
 <template>
-  <!--모달창-->
-  <div class="black-bg" v-if="hasopen == 1">
-    <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
-      <button @click="hasopen = 0">닫기</button>
-    </div>
-  </div>
+  <transition name="fade">
+    <Modal
+      :oneroom="onerooms[roomIndex]"
+      :isOpen="modalOpen"
+      @closeModal="modalOpen = false"
+    />
+  </transition>
 
   <div class="menu">
-    <a v-for="(name, i) in menu" :key="(name, i)">{{ name }} {{ i }}</a>
+    <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
 
-  <!-- <div v-for="name in products" :key="name">
-    <h4>{{ name }}</h4>
-    <p>50 만원</p>
-  </div> -->
+  <Discount v-if="showDiscount" @closeDiscount="showDiscount = false" />
 
-  <!-- <div>
-    <img src="./assets/room0.jpg" class="room-img" />
-    <h4 @click="hasopen = 1">{{ products[0] }}</h4>
-    <p>50 만원</p>
-    <button @click="num[0]++">허위매물신고</button>
-    <span>신고수 : {{ num[0] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-img" />
-    <h4>{{ products[1] }}</h4>
-    <p>60 만원</p>
-    <button @click="num[1]++">허위매물신고</button>
-    <span>신고수 : {{ num[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-img" />
-    <h4>{{ products[2] }}</h4>
-    <p>70 만원</p>
-    <button @click="num[2]++">허위매물신고</button>
-    <span>신고수 : {{ num[2] }}</span>
-  </div> -->
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="sortBack">되돌리기</button>
 
-  <div v-for="(room, i) in rooms" :key="i">
-    <img :src="room.image" class="room-img" />
-    <h4>{{ room.title }}</h4>
-    <p>{{ room.price }}원</p>
-    <p>{{ room.content }}</p>
-  </div>
+  <Card
+    v-for="data in onerooms"
+    :key="data.id"
+    :oneroom="data"
+    @openModal="
+      modalOpen = true;
+      roomIndex = $event;
+    "
+  />
 </template>
 
 <script>
-import data from "./assets/oneroom.js";
+import data from "./assets/oneroom";
+import Discount from "./components/Discount.vue";
+import Modal from "./components/Modal.vue";
+import Card from "./components/Card.vue";
 
-// document.getElementById().innerHTML = ??
 export default {
   name: "App",
   data() {
     return {
-      hasopen: 1,
+      showDiscount: true,
+      originOnerooms: [...data],
+      roomIndex: 0,
+      onerooms: data,
+      modalOpen: false,
+      menus: ["Home", "Shop", "About"],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
-      menu: ["Home", "Shop", "About"],
-      num: [0, 0, 0],
-      rooms: data,
     };
   },
   methods: {
-    // increase() {
-    //   console.log("clicked");
-    //   this.num += 1;
-    //   console.log(this.num);
-    // },
+    increase(index) {
+      this.reportNum[index]++;
+    },
+    priceSort() {
+      this.onerooms.sort((a, b) => {
+        return a.price - b.price;
+      });
+    },
+    sortBack() {
+      this.onerooms = [...this.originOnerooms];
+    },
   },
-  components: {},
+
+  mounted() {
+    // setTimeout(() => {
+    //   this.showDiscount = false;
+    // }, 2000);
+  },
+  components: {
+    Discount,
+    Modal,
+    Card,
+  },
 };
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -82,7 +88,7 @@ export default {
   color: #2c3e50;
 }
 .menu {
-  background: darkslateblue;
+  background-color: darkslateblue;
   padding: 15px;
   border-radius: 5px;
 }
@@ -94,24 +100,22 @@ export default {
   width: 100%;
   margin-top: 40px;
 }
-body {
-  margin: 0;
+.fade-enter-from {
+  opacity: 0;
 }
-div {
-  box-sizing: border-box;
+.fade-enter-active {
+  transition: all 1s;
 }
-/*모달창*/
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
+.fade-enter-to {
+  opacity: 1;
 }
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

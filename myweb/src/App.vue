@@ -8,7 +8,8 @@
 <script>
 // import Home from './components/HomePage.vue';
 // import Test from './TestPage.vue';
-import Test from './TestPage2.vue';
+// import Test from './TestPage2.vue';
+import Test from './TestPage3.vue';
 
 export default {
   name: 'App',
